@@ -1,6 +1,8 @@
 package actionListeners;
 
+import fileManager.gameLoader;
 import fileManager.gameSaver;
+import testing.Main;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,14 +18,18 @@ public class SaveLoadListener implements ActionListener {
         if (e.getActionCommand() == "Save") {
 
             try {
-                gameSaver.saveEntities("test");
+                gameSaver.saveEntities(Main.saveTF.getText());
             } catch (FileNotFoundException e1) {
                 e1.printStackTrace();
             }
 
 
         } else if (e.getActionCommand() == "Load") {
-//            gameLoader.loadEntities();
+            try {
+                gameLoader.loadEntities(Main.loadTF.getText());
+            } catch (FileNotFoundException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 

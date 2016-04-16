@@ -15,10 +15,10 @@ public class TexturedModel {
 	 * @param model reference to the untextured model
 	 * @param texture texture applied
 	 */
-	public TexturedModel(RawModel model, ModelTexture texture) {
+	public TexturedModel(RawModel model, ModelTexture texture, int i) {
 		this.rawModel = model;
 		this.texture = texture;
-		//this.index = i;
+		this.index = i;
 	}
 	
 	public RawModel getRawModel() { return this.rawModel; }
