@@ -44,27 +44,26 @@ public class Terrains {
         
         texturePack1 = new TerrainTexturePack(backgroundTexture1, rTexture1, gTexture1, bTexture1);
         TerrainTexture blendMap1 = new TerrainTexture(loader.loadTexture("blendMap1"));
-        Light light1 = new Light(new Vector3f(1024, 500, -1024), new Vector3f(1, 1, 1));
+        Light light1 = new Light(new Vector3f(1024000, 500000, -1024000), new Vector3f(1, 1, 1));
         Terrain terrain1 = new Terrain("1 - Plain", 0, -1, loader, texturePack1, blendMap1, "heightMap1");
         Main.setTerrain(terrain1, 1);
         Main.setLight(light1, 1);
 
         TerrainTexture blendMap2 = new TerrainTexture(loader.loadTexture("blendMap2"));
         Terrain terrain2 = new Terrain("2 - Luna", 0, -1, loader, texturePack2, blendMap2, "heightMap2");
-        Light light2 = new Light(new Vector3f(1024, 500, -1024), new Vector3f(0.7f, 0.7f, 0.8f));
+        Light light2 = new Light(new Vector3f(1024000, 500000, -1024000), new Vector3f(0.7f, 0.7f, 0.8f));
         Main.setTerrain(terrain2, 2);
         Main.setLight(light2, 2);
 
         TerrainTexture blendMap3 = new TerrainTexture(loader.loadTexture("blendMap3"));
         Terrain terrain3 = new Terrain("3 - Hills", 0, -1, loader, texturePack3, blendMap3, "heightMap3");
-        Light light3 = new Light(new Vector3f(1024, 1024, -1024), new Vector3f(1, 1, 1));
+        Light light3 = new Light(new Vector3f(1024000, 1024000, -1024000), new Vector3f(1, 1, 1));
         Main.setTerrain(terrain3, 3);
         Main.setLight(light3, 3);
 
         TerrainTexture blendMap4 = new TerrainTexture(loader.loadTexture("blendMap4"));
         Terrain terrain4 = new Terrain("4 - Grid",0, -1, loader, texturePack4, blendMap4, "heightMap4");
-        Light light4 = new Light(new Vector3f(1024,1000,-1024), new Vector3f(1,1,1));
-
+        Light light4 = new Light(new Vector3f(1024000,1000000,-1024000), new Vector3f(1,1,1));
         Main.setTerrain(terrain4, 4);
         Main.setLight(light4, 4);
 
