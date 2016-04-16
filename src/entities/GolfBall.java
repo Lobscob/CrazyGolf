@@ -1,18 +1,15 @@
 package entities;
 
-import java.awt.Rectangle;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Area;
-
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.util.vector.Vector;
+import models.TexturedModel;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-
-import Testing.Main;
-import models.TexturedModel;
 import renderEngine.DisplayManager;
 import terrains.Terrain;
+import testing.Main;
+
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
 
 /**
  * This class represents the golf ball
@@ -99,7 +96,7 @@ public class GolfBall extends Entity {
 		}
 		Rectangle r1 = new Rectangle((int) (this.getPosition().x - GolfBall.RADIUS), 
 				(int)(this.getPosition().z - GolfBall.RADIUS), 
-				(int)GolfBall.RADIUS, (int)(this.RADIUS));
+				(int)GolfBall.RADIUS, (int)(RADIUS));
 		Rectangle r2 = new Rectangle((int) (entity.getPosition().x - entity.getCollisionZone().x/2), 
 				(int) (entity.getPosition().z - entity.getCollisionZone().z/2), 
 				(int)entity.getCollisionZone().x, 
@@ -123,7 +120,7 @@ public class GolfBall extends Entity {
 	}
 	
 	private Vector2f normalOfImpact(Entity entity) {
-		float theta = (float) (entity.getRotY());
+		float theta = entity.getRotY();
 		if(theta > 180) {
 			theta = theta - 180;
 		}

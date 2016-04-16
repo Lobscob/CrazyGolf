@@ -1,6 +1,6 @@
 package actionListeners;
 
-import Testing.Main;
+import testing.Main;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
