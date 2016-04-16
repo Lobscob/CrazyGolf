@@ -1,50 +1,29 @@
-package Testing;
-
-import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import org.lwjgl.LWJGLException;
-import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.util.vector.Vector2f;
-import org.lwjgl.util.vector.Vector3f;
+package testing;
 
 import GUIS.GuiRenderer;
 import GUIS.GuiTexture;
-import Shaders.StaticShader;
-import entities.Camera;
-import entities.Editor;
-import entities.Entity;
-import entities.GoalHole;
-import entities.GolfBall;
-import entities.Light;
-import entities.Player;
-import entities.TerrainEditor;
-import models.RawModel;
+import actionListeners.ModeListener;
+import actionListeners.SaveLoadListener;
+import actionListeners.TerrainListener;
+import entities.*;
 import models.TexturedModel;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.util.vector.Vector2f;
+import org.lwjgl.util.vector.Vector3f;
 import renderEngine.DisplayManager;
 import renderEngine.Loader;
 import renderEngine.MasterRenderer;
-import renderEngine.OBJLoader;
 import terrains.Terrain;
-import renderEngine.EntityRenderer;
-import textures.ModelTexture;
 import textures.TerrainTexture;
 import textures.TerrainTexturePack;
 import toolbox.MousePicker;
 
-import actionListeners.ModeListener;
-import actionListeners.TerrainListener;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * The main running class for Crazy Golf 
@@ -134,6 +113,10 @@ public class Main {
 		JButton editorButton = new JButton("Editor");
 		JButton terrainEditorButton = new JButton("Terrain Editor");
 		JButton playerButton = new JButton("Player");
+		JButton saveButton = new JButton("Save");
+		JButton loadButton = new JButton("Load");
+		JTextField saveTF = new JTextField("name");
+		JTextField loadTF = new JTextField("name");
 		JPanel panel = new JPanel();
 		JPanel resetPanel = new JPanel();
 	
@@ -150,14 +133,19 @@ public class Main {
 		
 		
 		JButton resetButton = new JButton("Reset Terrains");
-		resetPanel.add(resetButton); 
-		
+		JPanel savePanel = new JPanel();
+		resetPanel.add(saveButton);
+		resetPanel.add(saveTF);
+		resetPanel.add(loadButton);
+		resetPanel.add(loadTF);
+
 		terrainPanel.add(terrain1Button);
 		terrainPanel.add(terrain2Button);
 		terrainPanel.add(terrain3Button);
 		terrainPanel.add(terrain4Button);
 		frame.add(terrainPanel,BorderLayout.NORTH);
 		frame.add(panel,BorderLayout.CENTER);
+//		frame.add(savePanel);
 		frame.add(resetPanel,BorderLayout.SOUTH);
 		
 		while(running) {
@@ -166,12 +154,14 @@ public class Main {
 			Loader loader = new Loader();
 			loaderUsed = loader;
 		
-            Terrains.loadTerrains(loaderUsed);
+       		Terrains.loadTerrains(loaderUsed);
 
             Objects.loadObstacles(loaderUsed);
 			
 			ActionListener listener1 = new ModeListener();
 			ActionListener terrainListener = new TerrainListener();
+			ActionListener saveLoadListener = new SaveLoadListener();
+
 			editorButton.addActionListener(listener1);
 			terrainEditorButton.addActionListener(listener1);
 			playerButton.addActionListener(listener1);
@@ -180,7 +170,10 @@ public class Main {
 			terrain3Button.addActionListener(terrainListener);
 			terrain4Button.addActionListener(terrainListener);
 			resetButton.addActionListener(terrainListener);
-			
+
+			saveButton.addActionListener(saveLoadListener);
+			loadButton.addActionListener(saveLoadListener);
+
 			if(terrainChoice == null) {
 				currentTerrain.setText("Select a terrain");
 				terrainChoice = terrain1;
@@ -196,7 +189,7 @@ public class Main {
 			frame.setVisible(true);
 			
 			while(!isMenuChoiceMade()) {
-				
+				System.out.print("");
 			}
 			frame.setVisible(false);
 			
@@ -376,7 +369,7 @@ public class Main {
 			}else if(player2.getScore() < player1.getScore()){
 				System.out.println("PLAYER 2 WINS \\(*o*)/");
 			}else {
-				System.out.println("ITS A TIE ¯\\_(o.o)_/¯");
+				System.out.println("ITS A TIE ï¿½\\_(o.o)_/ï¿½");
 			}
 		}
 		
