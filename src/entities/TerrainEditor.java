@@ -1,12 +1,11 @@
 package entities;
 
-import Testing.Main;
 import models.TexturedModel;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector3f;
 import renderEngine.DisplayManager;
-import renderEngine.Loader;
 import terrains.Terrain;
+import testing.Main;
 
 import java.util.Random;
 
@@ -103,7 +102,6 @@ public class TerrainEditor extends Entity {
             this.currentTurnSpeed = -TURN_SPEED;
         } else if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
             this.currentTurnSpeed = TURN_SPEED;
-            ;
         } else {
             this.currentTurnSpeed = 0;
         }

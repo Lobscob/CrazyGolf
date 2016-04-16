@@ -1,11 +1,11 @@
 package entities;
 
-import Testing.Main;
 import models.TexturedModel;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector3f;
 import renderEngine.DisplayManager;
 import terrains.Terrain;
+import testing.Main;
 
 import java.util.Random;
 
@@ -112,7 +112,6 @@ public class Editor extends Entity {
             this.currentTurnSpeed = -TURN_SPEED;
         } else if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
             this.currentTurnSpeed = TURN_SPEED;
-            ;
         } else {
             this.currentTurnSpeed = 0;
         }
@@ -130,9 +129,9 @@ public class Editor extends Entity {
         		if(!Main.entities.isEmpty()) {
         			if(Main.entities.get(Main.entities.size()-1).getModel() == Main.wall) {
         				Entity last = Main.entities.get(Main.entities.size()-1);
-        				xConnect = last.getPosition().x + (float) ((last.getCollisionZone().x/2) * (Math.cos(Math.toRadians(last.getRotY())))); ;
-        				zConnect = last.getPosition().z - (float) ((last.getCollisionZone().x/2) * (Math.sin(Math.toRadians(last.getRotY()))));;
-        				wallCounter--;
+        				xConnect = last.getPosition().x + (float) ((last.getCollisionZone().x/2) * (Math.cos(Math.toRadians(last.getRotY()))));
+                        zConnect = last.getPosition().z - (float) ((last.getCollisionZone().x/2) * (Math.sin(Math.toRadians(last.getRotY()))));
+                        wallCounter--;
         			}
         			Main.entities.remove(Main.entities.size() - 1);
         		}

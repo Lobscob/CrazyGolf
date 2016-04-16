@@ -1,20 +1,15 @@
 package entities;
 
-import java.awt.Polygon;
-import java.awt.Rectangle;
-import java.awt.Shape;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.Area;
-import java.awt.geom.PathIterator;
-
+import models.TexturedModel;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector3f;
-
-import Testing.Main;
-import models.TexturedModel;
 import renderEngine.DisplayManager;
 import terrains.Terrain;
-import toolbox.Maths;
+import testing.Main;
+
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Area;
 
 /**
  * This class represents a player in the golf game
@@ -130,7 +125,7 @@ public class Player extends Entity{
 		float zDif = golfBall.getPosition().z - this.getPosition().z;
 		double distanceSquared = xDif * xDif + zDif * zDif;
 		
-		boolean collision = distanceSquared < (golfBall.getCollisionZone().x + this.RANGE) * (golfBall.getCollisionZone().z + this.RANGE);
+		boolean collision = distanceSquared < (golfBall.getCollisionZone().x + RANGE) * (golfBall.getCollisionZone().z + RANGE);
 		
 		return collision;
 		
@@ -195,8 +190,7 @@ public class Player extends Entity{
 	            this.currentTurnSpeed = -TURN_SPEED;
 	        } else if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
 	            this.currentTurnSpeed = TURN_SPEED;
-	            ;
-	        } else {
+			} else {
 	            this.currentTurnSpeed = 0;
 	        }
 
@@ -241,7 +235,7 @@ public class Player extends Entity{
     
 	public void hit() {
 		score++;
-		Vector3f forces = new Vector3f(this.HIT_FORCE_X, this.HIT_FORCE_Y, this.HIT_FORCE_Z);
+		Vector3f forces = new Vector3f(HIT_FORCE_X, HIT_FORCE_Y, HIT_FORCE_Z);
 		golfBall.manageHit(this, forces);
 	}
 }

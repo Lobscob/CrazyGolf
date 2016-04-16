@@ -1,6 +1,5 @@
-package Testing;
+package testing;
 
-import Testing.Main;
 import entities.GoalHole;
 import entities.GolfBall;
 import models.RawModel;
@@ -10,7 +9,7 @@ import renderEngine.Loader;
 import renderEngine.OBJLoader;
 import textures.ModelTexture;
 
-import static Testing.Main.*;
+import static testing.Main.*;
 
 /**
  * Created by Jeroen on 13/04/2016.

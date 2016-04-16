@@ -1,6 +1,5 @@
-package Testing;
+package testing;
 
-import Testing.Main;
 import entities.Light;
 import org.lwjgl.util.vector.Vector3f;
 import renderEngine.Loader;
