@@ -27,48 +27,48 @@ public class Objects {
     public static void loadObstacles(Loader loader) {
         RawModel playerModel = OBJLoader.loadObjModel("GolfStick", loader);
         ModelTexture playerTexture = new ModelTexture(loader.loadTexture("sphereTexture"));
-        playerModelTextured = new TexturedModel(playerModel, playerTexture);
+        playerModelTextured = new TexturedModel(playerModel, playerTexture, 0);
 
         RawModel sphereModel = OBJLoader.loadObjModel("Sphere", loader);
         ModelTexture sphereTexture = new ModelTexture(loader.loadTexture("sphereTexture1"));
-        staticSphereModel = new TexturedModel(sphereModel, sphereTexture);
+        staticSphereModel = new TexturedModel(sphereModel, sphereTexture,1);
 
         RawModel goalModel = OBJLoader.loadObjModel("GolfGoal", loader);
         ModelTexture goalTexture = new ModelTexture(loader.loadTexture("sphereTexture"));
-        golfGoal = new TexturedModel(goalModel, goalTexture);
+        golfGoal = new TexturedModel(goalModel, goalTexture,2);
 
         RawModel tree1Model = OBJLoader.loadObjModel("Tree", loader);
         ModelTexture treeTexture = new ModelTexture(loader.loadTexture("treeTexture"));
-        tree = new TexturedModel(tree1Model, treeTexture);
+        tree = new TexturedModel(tree1Model, treeTexture,3);
         tree.getTextureModel().setHasTransparency(true);
 
         RawModel rockModel = OBJLoader.loadObjModel("rock", loader);
         ModelTexture rockTexture = new ModelTexture(loader.loadTexture("rockTexture"));
-        rock = new TexturedModel(rockModel, rockTexture);
+        rock = new TexturedModel(rockModel, rockTexture,4);
         rock.getTextureModel().setUseFakeLighting(true);
 
         RawModel fernModel = OBJLoader.loadObjModel("fern", loader);
         ModelTexture fernTextureAtlas = new ModelTexture(loader.loadTexture("fern"));
         fernTextureAtlas.setNumberOfRows(2);
-        fern = new TexturedModel(fernModel, fernTextureAtlas);
+        fern = new TexturedModel(fernModel, fernTextureAtlas,5);
         fern.getTextureModel().setHasTransparency(true);
         fern.getTextureModel().setUseFakeLighting(true);
 
         RawModel wallModel = OBJLoader.loadObjModel("SimpleWall2", loader);
         ModelTexture wallTexture = new ModelTexture(loader.loadTexture("simpleWallTexture"));
-        wall = new TexturedModel(wallModel, wallTexture);
+        wall = new TexturedModel(wallModel, wallTexture,6);
 
         RawModel castleModel = OBJLoader.loadObjModel("Castle", loader);
         ModelTexture castleTexture = new ModelTexture(loader.loadTexture("simpleWallTexture"));
-        castle = new TexturedModel(castleModel, castleTexture);
+        castle = new TexturedModel(castleModel, castleTexture,7);
 
         RawModel crateModel = OBJLoader.loadObjModel("ComplexCrate", loader);
         ModelTexture crateTexture = new ModelTexture(loader.loadTexture("crateTexture"));
-        crate = new TexturedModel(crateModel, crateTexture);
+        crate = new TexturedModel(crateModel, crateTexture,8);
         crate.getTextureModel().setHasTransparency(true);
         
         RawModel terrainMarkerModel = OBJLoader.loadObjModel("TerrainMarker", loader);
-        terrainMarker = new TexturedModel(terrainMarkerModel, crateTexture);
+        terrainMarker = new TexturedModel(terrainMarkerModel, crateTexture,9);
 
     }
     public static void loadHoll(Loader loader){

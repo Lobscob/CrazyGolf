@@ -30,7 +30,9 @@ import java.util.Random;
  */
 
 public class Main {
-	
+	public static JTextField saveTF;
+	public static JTextField loadTF;
+
 	private static boolean editorMode = true;
 	public static void setEditorMode(boolean b) {
 		editorMode = b;
@@ -115,8 +117,8 @@ public class Main {
 		JButton playerButton = new JButton("Player");
 		JButton saveButton = new JButton("Save");
 		JButton loadButton = new JButton("Load");
-		JTextField saveTF = new JTextField("name");
-		JTextField loadTF = new JTextField("name");
+		saveTF = new JTextField("name");
+		loadTF = new JTextField("name");
 		JPanel panel = new JPanel();
 		JPanel resetPanel = new JPanel();
 	
@@ -384,6 +386,20 @@ public class Main {
 	public static void setMenuChoice(boolean menuChoice) {
 	       setMenuChoiceMade(menuChoice);
 	    }
+
+	public static TexturedModel getModel (int i){
+		if( i ==0) return playerModelTextured;
+		else if(i==1) return staticSphereModel;
+		else if(i==2)return golfGoal;
+		else if(i==3)return tree;
+		else if(i==4)return rock;
+		else if(i==5)return fern;
+		else if(i==6)return wall;
+		else if(i==7)return castle;
+		else if(i==8)return crate;
+		return terrainMarker;
+
+	}
 
     public static Terrain getTerrain(int i) {
         if (i == 1) return terrain1;
