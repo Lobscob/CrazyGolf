@@ -19,6 +19,11 @@ public class gameLoader {
         Scanner s = new Scanner(new File(fileName));
 
         String line = s.nextLine();
+        Main.terrainChoice = Main.getTerrain(line);
+        System.out.println(Main.terrainChoice);
+        System.out.println(line);
+
+        line = s.nextLine();
         System.out.println("Loading");
         Main.entities.clear();
         //TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale, boolean isObstacle, Vector3f collisionSize

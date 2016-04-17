@@ -1,6 +1,5 @@
 package fileManager;
 
-import entities.Entity;
 import testing.Main;
 
 import java.io.File;
@@ -25,10 +24,8 @@ public class gameSaver {
         File inputFile = new File(courseName);
 
         PrintWriter out = new PrintWriter(courseName);
-
+        out.println(Main.terrainChoice.toString());
         for (int i = 0; i < Main.entities.size(); i++) {
-            Entity t = Main.entities.get(i);
-            String k = " ";
 
            /* String s = t.getModel().getIndex() + k + t.getPosition().x + k + t.getPosition().y + k + t.getPosition().z + k + t.getRotX() + k + t.getRotY() + k + t.getRotZ() +
                     k + t.getScale() + k + t.isEntityObstacle() + k + +t.getCollisionZone().x + k + t.getCollisionZone().y + k + t.getCollisionZone().z + k + Main.terrainChoice.getID().substring(0,1);

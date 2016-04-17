@@ -1,21 +1,17 @@
 package terrains;
 
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
+import models.RawModel;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
-
-import models.RawModel;
 import renderEngine.Loader;
-import textures.ModelTexture;
 import textures.TerrainTexture;
 import textures.TerrainTexturePack;
 import toolbox.Maths;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * This class represents the terrain of the golf course
@@ -337,8 +333,9 @@ public class Terrain {
 		height *= MAX_HEIGHT;
 		return height;
 	}
-	public int toInt(){
-		return index;
+	@Override
+	public String toString(){
+		return ID;
 	}
 
 
