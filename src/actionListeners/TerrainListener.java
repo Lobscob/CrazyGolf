@@ -1,12 +1,12 @@
 package actionListeners;
 
-import testing.Main;
+import Testing.Main;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static testing.Main.lightChoice;
-import static testing.Main.terrainChoice;
+import static Testing.Main.lightChoice;
+import static Testing.Main.terrainChoice;
 
 public class TerrainListener implements ActionListener {
 

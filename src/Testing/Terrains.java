@@ -1,4 +1,4 @@
-package testing;
+package Testing;
 
 import entities.Light;
 import org.lwjgl.util.vector.Vector3f;

@@ -3,7 +3,7 @@ package fileManager;
 import entities.Entity;
 import models.TexturedModel;
 import org.lwjgl.util.vector.Vector3f;
-import testing.Main;
+import Testing.Main;
 
 import java.io.File;
 import java.io.FileNotFoundException;

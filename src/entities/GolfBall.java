@@ -5,7 +5,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import renderEngine.DisplayManager;
 import terrains.Terrain;
-import testing.Main;
+import Testing.Main;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;

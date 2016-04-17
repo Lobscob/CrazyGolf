@@ -1,7 +1,7 @@
 package fileManager;
 
 import entities.Entity;
-import testing.Main;
+import Testing.Main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
