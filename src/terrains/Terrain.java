@@ -103,7 +103,6 @@ public class Terrain {
 	/**
 	 * @param x x position
 	 * @param z z position 
-	 * @param heights array of heights
 	 * @return the normal vector at that specific position
 	 */
 	public Vector3f calculateNormal(int x, int z) {
@@ -337,6 +336,10 @@ public class Terrain {
 	public String toString(){
 		return ID;
 	}
+
+	public float[][] getHeights(){return heights;}
+	public void setHeights(float[][] heights){this.heights = heights;}
+
 
 
 }

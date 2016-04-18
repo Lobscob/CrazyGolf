@@ -1,5 +1,6 @@
 package fileManager;
 
+import terrains.Terrain;
 import testing.Main;
 
 import java.io.File;
@@ -22,7 +23,7 @@ public class gameSaver {
 //        courseName = dateFormat.format(date) + "-"+courseName;
         courseName = "crs/" + courseName + ".txt";
         File inputFile = new File(courseName);
-
+        Terrain terrain = Main.terrainChoice;
         PrintWriter out = new PrintWriter(courseName);
         out.println(Main.terrainChoice.toString());
         for (int i = 0; i < Main.entities.size(); i++) {
@@ -34,9 +35,20 @@ public class gameSaver {
             out.println(s);
             out.flush();
         }
+        out.println("HEIGHTS");
+        float[][] heights = terrain.getHeights();
+        for(int i = 0; i< heights.length; i++){
+            for(int j  =0; j<heights[0].length;j++){
+                out.print(heights[i][j] +" " );
+                out.flush();
+            }
+            out.println();
+            out.flush();
+        }
 //        System.out.println("SAVING FINISHED");
         out.close();
     }
+
 
 }
 

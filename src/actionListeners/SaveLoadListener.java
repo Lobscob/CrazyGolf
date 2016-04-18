@@ -25,6 +25,7 @@ public class SaveLoadListener implements ActionListener {
 
 
         } else if (e.getActionCommand() == "Load") {
+            Main.randomObjects = 0;
             try {
                 gameLoader.loadEntities(Main.loadTF.getText());
             } catch (FileNotFoundException e1) {
