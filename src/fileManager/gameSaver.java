@@ -1,6 +1,6 @@
 package fileManager;
 
-import terrains.Terrain;
+import entities.Entity;
 import testing.Main;
 
 import java.io.File;
@@ -23,10 +23,12 @@ public class gameSaver {
 //        courseName = dateFormat.format(date) + "-"+courseName;
         courseName = "crs/" + courseName + ".txt";
         File inputFile = new File(courseName);
-        Terrain terrain = Main.terrainChoice;
+
         PrintWriter out = new PrintWriter(courseName);
-        out.println(Main.terrainChoice.toString());
+
         for (int i = 0; i < Main.entities.size(); i++) {
+            Entity t = Main.entities.get(i);
+            String k = " ";
 
            /* String s = t.getModel().getIndex() + k + t.getPosition().x + k + t.getPosition().y + k + t.getPosition().z + k + t.getRotX() + k + t.getRotY() + k + t.getRotZ() +
                     k + t.getScale() + k + t.isEntityObstacle() + k + +t.getCollisionZone().x + k + t.getCollisionZone().y + k + t.getCollisionZone().z + k + Main.terrainChoice.getID().substring(0,1);
@@ -35,20 +37,9 @@ public class gameSaver {
             out.println(s);
             out.flush();
         }
-        out.println("HEIGHTS");
-        float[][] heights = terrain.getHeights();
-        for(int i = 0; i< heights.length; i++){
-            for(int j  =0; j<heights[0].length;j++){
-                out.print(heights[i][j] +" " );
-                out.flush();
-            }
-            out.println();
-            out.flush();
-        }
 //        System.out.println("SAVING FINISHED");
         out.close();
     }
-
 
 }
 
