@@ -1,15 +1,15 @@
 package fileManager;
 
+import Testing.Main;
 import entities.Entity;
 import models.TexturedModel;
 import org.lwjgl.util.vector.Vector3f;
-import Testing.Main;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import static testing.Main.terrainChoice;
+import static Testing.Main.terrainChoice;
 
 /**
  * Created by Jeroen on 16-3-2016.

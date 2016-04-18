@@ -68,7 +68,7 @@ public class Main {
     public static GolfBall golfBallUsed2;
     public static GoalHole holeUsed;
     //useless debug variables
-    public static int randomObjects = 0;
+    public static int randomObjects = 10;
     public static Loader loader;
     
     private static JFrame frame;
@@ -246,24 +246,24 @@ public class Main {
 		GuiRenderer guiRenderer = new GuiRenderer(loader);
 		MasterRenderer renderer = new MasterRenderer(loader, camera);
 		for (int i = 0; i < randomObjects; i++) {
-			float x = rand.nextInt(1025);
-			float z = rand.nextInt(1025);
+			float x = rand.nextInt(1024);
+			float z = rand.nextInt(1024);
 	        float y = terrain.getHeightOfTerrain(x, z);
 	        entities.add(new Entity(tree, new Vector3f(x, y, z), 0, rand.nextFloat() * 360, 0, 10, true, new Vector3f(4f, 40f, 4f)));
 		}
 
 
 	    for (int i = 0; i < randomObjects; i++) {
-	        float x = rand.nextInt(1025);
-	        float z = rand.nextInt(1025);
+	        float x = rand.nextInt(1024);
+	        float z = rand.nextInt(1024);
 	        float y = terrain.getHeightOfTerrain(x, z);
 	        entities.add(new Entity(rock, new Vector3f(x, y, z), 0, 0, 0, 4, true, new Vector3f(6f, 4f, 6f)));
 	    }
 
 
 	    for (int i = 0; i < randomObjects; i++) {
-	        float x = rand.nextInt(1025);
-	        float z = rand.nextInt(1025);
+	        float x = rand.nextInt(1024);
+	        float z = rand.nextInt(1024	);
 	        float y = terrain.getHeightOfTerrain(x, z);
 	        entities.add(new Entity(fern, rand.nextInt(4), new Vector3f(x, y, z), 0, 0, 0, 1, false, new Vector3f(0, 0, 0)));
 	    }
@@ -446,5 +446,13 @@ public class Main {
 	public static void setMenuChoiceMade(boolean menuChoiceMade) {
 		Main.menuChoiceMade = menuChoiceMade;
 	}
-	
+
+	public static Terrain getTerrain(String s){
+		int i = Integer.parseInt(s.substring(0,1));
+		if (i == Integer.parseInt(terrain1.getID().substring(0,1)))return terrain1;
+		else if (i == Integer.parseInt(terrain2.getID().substring(0,1)))return terrain2;
+		else if (i == Integer.parseInt(terrain3.getID().substring(0,1)))return terrain3;
+		return terrain4;
+
+	}
 }
