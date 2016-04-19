@@ -76,7 +76,16 @@ public class Main {
     private static Camera camera2;
     private static Camera editorCamera;
     private static Camera terrainEditorCamera;
-    private static Player player1;
+
+	public static Player getPlayer2() {
+		return player2;
+	}
+
+	public static Player getPlayer1() {
+		return player1;
+	}
+
+	private static Player player1;
     private static Player player2;
     private static Editor editor;
     private static TerrainEditor terrainEditor;

@@ -1,11 +1,12 @@
 package entities;
 
+import AI.BotMover;
+import Testing.Main;
 import models.TexturedModel;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector3f;
 import renderEngine.DisplayManager;
 import terrains.Terrain;
-import Testing.Main;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -39,7 +40,10 @@ public class Player extends Entity{
 	private boolean turnTaken = false;
 	
 	private Player opponent;
-	
+
+	private Boolean bot1 = false;
+	private Boolean bot2 = true;
+
 
 	/**
 	 * @param model a textured model of what the editor will look like in 3D
@@ -69,6 +73,9 @@ public class Player extends Entity{
 
 	@Override
 	public void move(Terrain terrain) {
+		BotMover ai = new BotMover();
+		if(bot1)ai.moveBotToBall(Main.getPlayer1(),Main.golfBallUsed1);
+		if(bot2)ai.moveBotToBall(Main.getPlayer2(),Main.golfBallUsed2);
 		numberOfFrames++;
 		checkInputs();
 		super.increaseRotation(0, currentTurnSpeed * DisplayManager.getFrameTimeSeconds(), 0);
@@ -159,8 +166,17 @@ public class Player extends Entity{
 	            keyPressed = true;
 	            numberOfFrames = 0;
 	        }
-		
-	        if (Keyboard.isKeyDown(Keyboard.KEY_I) && keyPressed) {
+			if(Keyboard.isKeyDown(Keyboard.KEY_Z) && keyPressed){
+				if(bot2)bot2 = false;
+				else bot2 = true;
+
+			keyPressed=false;
+		}else if(Keyboard.isKeyDown(Keyboard.KEY_B) && keyPressed){
+				if(bot1)bot1 = false;
+				else bot1 = true;
+				keyPressed=false;
+			}
+	       else if (Keyboard.isKeyDown(Keyboard.KEY_I) && keyPressed) {
 	            increaseHitPower();
 
 	            System.out.println("Xforce: " + HIT_FORCE_X);
