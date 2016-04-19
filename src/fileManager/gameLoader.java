@@ -75,7 +75,7 @@ public class gameLoader {
 
 
         }
-
+//
         terrainChoice.setHeights(heights);
         System.out.println("FINISHED");
     }
