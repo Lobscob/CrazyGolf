@@ -1,11 +1,11 @@
 package entities;
 
+import Testing.Main;
 import models.TexturedModel;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import renderEngine.DisplayManager;
 import terrains.Terrain;
-import Testing.Main;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -44,7 +44,7 @@ public class GolfBall extends Entity {
 	public void move(Terrain terrain) {
 		
 		float x = 0;
-		float y = 0; 
+		float y = 0;
 		float z = 0;
 		
 		float heightL = terrain.getHeightOfTerrain(this.getPosition().x-1, this.getPosition().z);

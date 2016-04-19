@@ -23,7 +23,7 @@ public class gameLoader {
         String line = s.nextLine();
         terrainChoice = Main.getTerrain(line);
         System.out.println(terrainChoice);
-        System.out.println(line);
+        System.out.println("line" +line);
 
         line = s.nextLine();
         System.out.println("Loading");
@@ -60,11 +60,11 @@ public class gameLoader {
                 while (s2.hasNext()) {
 
                     heights[i][j] = Float.parseFloat(s2.next());
-                    System.out.print(heights[i][j]);
+//                    System.out.print(heights[i][j]);
                     j++;
                 }
                 if(!s2.hasNext())finalLine=true;
-                System.out.println("");
+//                System.out.println("");
                 i++;
                 j=0;
                 line = s.nextLine();

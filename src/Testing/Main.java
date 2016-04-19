@@ -256,7 +256,7 @@ public class Main {
 		MasterRenderer renderer = new MasterRenderer(loader, camera);
 		for (int i = 0; i < randomObjects; i++) {
 			float x = rand.nextInt(1024);
-			float z = rand.nextInt(1024);
+			float z = -rand.nextInt(1024);
 	        float y = terrain.getHeightOfTerrain(x, z);
 	        entities.add(new Entity(tree, new Vector3f(x, y, z), 0, rand.nextFloat() * 360, 0, 10, true, new Vector3f(4f, 40f, 4f)));
 		}
@@ -264,7 +264,7 @@ public class Main {
 
 	    for (int i = 0; i < randomObjects; i++) {
 	        float x = rand.nextInt(1024);
-	        float z = rand.nextInt(1024);
+	        float z = -rand.nextInt(1024);
 	        float y = terrain.getHeightOfTerrain(x, z);
 	        entities.add(new Entity(rock, new Vector3f(x, y, z), 0, 0, 0, 4, true, new Vector3f(6f, 4f, 6f)));
 	    }
@@ -272,7 +272,7 @@ public class Main {
 
 	    for (int i = 0; i < randomObjects; i++) {
 	        float x = rand.nextInt(1024);
-	        float z = rand.nextInt(1024	);
+	        float z = -rand.nextInt(1024	);
 	        float y = terrain.getHeightOfTerrain(x, z);
 	        entities.add(new Entity(fern, rand.nextInt(4), new Vector3f(x, y, z), 0, 0, 0, 1, false, new Vector3f(0, 0, 0)));
 	    }

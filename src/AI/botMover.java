@@ -26,13 +26,13 @@ public class BotMover {
     float playerZ2 = Main.getPlayer2().getPosition().z;
 
     public void moveBotToBall(Player p, GolfBall b){
-        float bX = b.getPosition().x;
-        float bY = b.getPosition().y;
-        float bZ = b.getPosition().z;
+        float bX = Math.round(b.getPosition().x);
+        float bY = Math.round(b.getPosition().y);
+        float bZ = Math.round(b.getPosition().z);
 
-        float pX = p.getPosition().x;
-        float pY = p.getPosition().y;
-        float pZ = p.getPosition().z;
+        float pX = Math.round(p.getPosition().x);
+        float pY = Math.round(p.getPosition().y);
+        float pZ = Math.round(p.getPosition().z);
         if(Math.round(pX)!=Math.round(bX) || Math.round(pY) != Math.round(bY) || Math.round(pZ) != Math.round(bZ)){
             if(pX<bX)p.increasePosition(1,0,0);
             else p.increasePosition(-1,0,0);

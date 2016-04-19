@@ -27,7 +27,7 @@ public class gameSaver {
         File inputFile = new File(courseName);
 
         PrintWriter out = new PrintWriter(courseName);
-        out.print(Main.terrainChoice.getID().substring(0,1));
+        out.println(Main.terrainChoice.getID().substring(0,1));
         for (int i = 0; i < Main.entities.size(); i++) {
             Entity t = Main.entities.get(i);
             String k = " ";
