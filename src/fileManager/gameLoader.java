@@ -51,10 +51,10 @@ public class gameLoader {
         int stopCondition = (terrainChoice.getHeights().length) * 2;
         boolean row = true;
         System.out.println("line" +line);
-        while (s.hasNextLine() && i * j < stopCondition) {
+        while (s.hasNextLine() ) {
 
             boolean finalLine = false;
-            while (i < heights.length && s.hasNextLine()) {
+            while ( s.hasNextLine()) {
                 Scanner s2 = new Scanner(line);
 
                 while (s2.hasNext()) {
