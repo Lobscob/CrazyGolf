@@ -53,15 +53,17 @@ public class gameLoader {
         System.out.println("line" +line);
         while (s.hasNextLine() && i * j < stopCondition) {
 
-
+            boolean finalLine = false;
             while (i < heights.length && s.hasNextLine()) {
                 Scanner s2 = new Scanner(line);
+
                 while (s2.hasNext()) {
 
                     heights[i][j] = Float.parseFloat(s2.next());
                     System.out.print(heights[i][j]);
                     j++;
                 }
+                if(!s2.hasNext())finalLine=true;
                 System.out.println("");
                 i++;
                 j=0;

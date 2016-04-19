@@ -10,6 +10,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static Testing.Main.terrainChoice;
+
 /**
  * Created by Jeroen on 16-3-2016.
  */
@@ -36,6 +38,14 @@ public class gameSaver {
             String s = Main.entities.get(i).toString();
             out.println(s);
             out.flush();
+        }
+        out.println("HEIGHTS");
+        for(int i = 0; i< terrainChoice.getHeights().length; i++){
+            for(int j = 0; j< terrainChoice.getHeights()[0].length; j++){
+                out.print(terrainChoice.getHeights()[i][j] + " ");
+                out.flush();
+            }
+            out.println("");
         }
 //        System.out.println("SAVING FINISHED");
         out.close();
