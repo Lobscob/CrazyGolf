@@ -62,7 +62,7 @@ public class Terrains {
         Main.setLight(light3, 3);
 
         TerrainTexture blendMap4 = new TerrainTexture(loader.loadTexture("blendMap4"));
-        Terrain terrain4 = new Terrain("4 - Grid",0, -1, loader, texturePack4, blendMap4, "heightMap4");
+        Terrain terrain4 = new Terrain("4 - Grid",0, -1, loader, texturePack4, blendMap4, "heightMap1");
         Light light4 = new Light(new Vector3f(1024000,1000000,-1024000), new Vector3f(1,1,1));
         Main.setTerrain(terrain4, 4);
         Main.setLight(light4, 4);
