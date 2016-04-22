@@ -16,7 +16,7 @@ import java.awt.geom.Area;
  */
 public class GolfBall extends Entity {
 	
-	private static final float GRAVITY = -100f;
+	private static final float GRAVITY = -50f;
     private static final float MASS = 5;
     private static final float RADIUS = 4;
     public Vector3f velocity = new Vector3f(0,0,0);
@@ -184,7 +184,7 @@ public class GolfBall extends Entity {
 	}
 	
 	private float friction = 0.7f;
-	private float groundFriction = 0.99f;
+	private float groundFriction = 0.98f;
 	private float coefficientOfRestitution = 0.4f;
 	public void manageCollision(Entity entity) {
 		if(checkCollision(entity) && entity.isEntityObstacle()) {

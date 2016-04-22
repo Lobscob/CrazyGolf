@@ -271,7 +271,7 @@ public class Main {
 
 	    for (int i = 0; i < randomObjects; i++) {
 	        float x = rand.nextInt(1024);
-	        float z = -rand.nextInt(1024	);
+	        float z = -rand.nextInt(1024);
 	        float y = terrain.getHeightOfTerrain(x, z);
 	        entities.add(new Entity(fern, rand.nextInt(4), new Vector3f(x, y, z), 0, 0, 0, 1, false, new Vector3f(0, 0, 0)));
 	    }
@@ -280,7 +280,7 @@ public class Main {
 	    //entities.add(new Entity(wall,new Vector3f(700, terrain.getHeightOfTerrain(700, -700) ,-700),0,0,0,3.2f, true, new Vector3f(42,5,3)));
 
 
-	    entities.add(new Entity(castle,new Vector3f(500,terrain.getHeightOfTerrain(500, -500),-500),0,0,0,10, false, new Vector3f(0,0,0)));
+	    //entities.add(new Entity(castle,new Vector3f(500,terrain.getHeightOfTerrain(500, -500),-500),0,0,0,10, false, new Vector3f(0,0,0)));
 
 
 	   //entities.add(new Entity(crate,new Vector3f(700, terrain.getHeightOfTerrain(700, -700) ,-700),0,0,0,10, true, new Vector3f(5,5,5)));
