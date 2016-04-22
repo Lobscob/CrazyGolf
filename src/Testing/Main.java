@@ -68,7 +68,7 @@ public class Main {
     public static GolfBall golfBallUsed2;
     public static GoalHole holeUsed;
     //useless debug variables
-    public static int randomObjects = 10;
+    public static int randomObjects = 0;
     public static Loader loader;
     
     private static JFrame frame;
@@ -200,7 +200,6 @@ public class Main {
 			frame.setVisible(true);
 			
 			while(!isMenuChoiceMade()) {
-				System.out.print("");
 			}
 			frame.setVisible(false);
 			
@@ -216,8 +215,8 @@ public class Main {
 				player2 = new Player(playerModelTextured, new Vector3f(220,terrainChoice.getHeightOfTerrain(220, -220),-220),0,0,0,3,false, golfBallUsed2, new Vector3f(2f,14f,2f), true, null);
 				player1.setOpponent(player2);
 				player2.setOpponent(player1);
-				camera1 = new Camera(player1);
-				camera2 = new Camera(player2);
+				camera1 = new Camera(golfBallUsed1);
+				camera2 = new Camera(golfBallUsed2);
 			}else if(terrainEditorMode) {
 				terrainEditor = new TerrainEditor(playerModelTextured, new Vector3f(400,terrainChoice.getHeightOfTerrain(400, -400),-400),0,0,0,1, false, golfBallUsed1, new Vector3f(0,0,0));
 				terrainEditorCamera = new Camera(terrainEditor);
@@ -281,7 +280,7 @@ public class Main {
 	    //entities.add(new Entity(wall,new Vector3f(700, terrain.getHeightOfTerrain(700, -700) ,-700),0,0,0,3.2f, true, new Vector3f(42,5,3)));
 
 
-	    //entities.add(new Entity(castle,new Vector3f(500,terrain.getHeightOfTerrain(500, -500),-500),0,0,0,20, false, new Vector3f(0,0,0)));
+	    entities.add(new Entity(castle,new Vector3f(500,terrain.getHeightOfTerrain(500, -500),-500),0,0,0,10, false, new Vector3f(0,0,0)));
 
 
 	   //entities.add(new Entity(crate,new Vector3f(700, terrain.getHeightOfTerrain(700, -700) ,-700),0,0,0,10, true, new Vector3f(5,5,5)));
