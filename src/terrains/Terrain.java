@@ -20,8 +20,8 @@ public class Terrain {
 	
 	private static final float SIZE = 1024;
 	
-	private static final float MAX_HEIGHT = 50;
-	private static final float MIN_HEIGHT = -50;
+	private static final float MAX_HEIGHT = 10;
+	private static final float MIN_HEIGHT = -10;
 	private static final float MAX_PIXEL_COLOUR = 256 * 256 * 256;
 
 	private String ID;

@@ -52,19 +52,19 @@ public class GolfBall extends Entity {
 		float heightD = terrain.getHeightOfTerrain(this.getPosition().x, this.getPosition().z-1);
 		float heightU = terrain.getHeightOfTerrain(this.getPosition().x, this.getPosition().z+1);
 		
-		Vector3f normal = new Vector3f(heightL-heightR, 1f, heightD-heightU);
+		Vector3f normal = new Vector3f(heightL-heightR, 2f, heightD-heightU);
 		normal.normalise();
 		//System.out.println(normal.x + " " + normal.y + " " + normal.z);
 		
 		if(Math.abs(velocity.x) < 0.01f) {
 			velocity.x = 0;
-		}else if(y > terrain.getHeightOfTerrain(super.getPosition().x, super.getPosition().z)) {
+		}else if(y > terrain.getHeightOfTerrain(this.getPosition().x, this.getPosition().z)) {
 			velocity.x = velocity.x * groundFriction;
 		}
 		
 		if(Math.abs(velocity.z) < 0.01f) {
 			velocity.z = 0;
-		}else if(y > terrain.getHeightOfTerrain(super.getPosition().x, super.getPosition().z)){
+		}else if(y > terrain.getHeightOfTerrain(this.getPosition().x, this.getPosition().z)){
 			velocity.z = velocity.z * groundFriction;
 		}
 		
