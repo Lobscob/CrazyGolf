@@ -23,9 +23,9 @@ public class Player extends Entity{
 	private static final float JUMP_POWER = 40;
 	
 	private static float RANGE = 10;
-	private static float HIT_FORCE_X = 5000;
-	private static float HIT_FORCE_Y = 500;
-	private static float HIT_FORCE_Z = 5000;
+	private static float HIT_FORCE_X = 4000;
+	private static float HIT_FORCE_Y = 00;
+	private static float HIT_FORCE_Z = 4000;
 	
 	private float currentSpeed = 0;
 	private float currentTurnSpeed = 0;
@@ -213,11 +213,9 @@ public class Player extends Entity{
 	        if (Keyboard.isKeyDown(Keyboard.KEY_J)) {
 	            jump();
 	        }
-	        if(checkInRange()) {
-	        	if(Keyboard.isKeyDown(Keyboard.KEY_H)) {
-	        		hit();
-	        		keyPressed = false;
-	        	}
+	        if(Keyboard.isKeyDown(Keyboard.KEY_H)) {
+	        	hit();
+	        	keyPressed = false;
 	        } 
 	        if(Keyboard.isKeyDown(Keyboard.KEY_R)) {
 				Main.entities.get(Main.entities.size()-1).increaseRotation(0, 1, 0);

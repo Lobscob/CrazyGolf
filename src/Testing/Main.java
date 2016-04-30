@@ -276,9 +276,9 @@ public class Main {
 	        entities.add(new Entity(fern, rand.nextInt(4), new Vector3f(x, y, z), 0, 0, 0, 1, false, new Vector3f(0, 0, 0)));
 	    }
 
-	    //entities.add(new Entity(wall,new Vector3f(700, terrain.getHeightOfTerrain(700, -700) ,-700),0,0,0,3.2f, true, new Vector3f(42,5,3)));
+	    //entities.add(new Entity(wall,new Vector3f(350, terrain.getHeightOfTerrain(350, -300) ,-300),0,0,0,3.2f, true, new Vector3f(42,5,3)));
 	    //entities.add(new Entity(castle,new Vector3f(500,terrain.getHeightOfTerrain(500, -500),-500),0,0,0,10, false, new Vector3f(0,0,0)));
-	    //entities.add(new Entity(crate,new Vector3f(330, terrain.getHeightOfTerrain(330, -330) ,-330),0,0,0,10, true, new Vector3f(10,10,10)));
+	    entities.add(new Entity(crate,new Vector3f(330, terrain.getHeightOfTerrain(330, -330) ,-330),0,0,0,10, true, new Vector3f(10,10,10)));
 		
 		List<GuiTexture> guis = new ArrayList<GuiTexture>();
 		if(editorMode) {
@@ -354,7 +354,7 @@ public class Main {
 				//golfBallUsed1.checkCollision(golfBallUsed2);
 				//golfBallUsed2.checkCollision(golfBallUsed1);
 			}
-			if(frameCounter >= 4) {
+			if(frameCounter >= 2) {
 				frameCounter = 0;
 				canCollideBall = true;
 				canCollideOther = true;

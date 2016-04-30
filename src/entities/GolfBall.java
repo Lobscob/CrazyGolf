@@ -58,13 +58,13 @@ public class GolfBall extends Entity {
 		
 		if(Math.abs(velocity.x) < 0.01f) {
 			velocity.x = 0;
-		}else if(y > terrain.getHeightOfTerrain(this.getPosition().x, this.getPosition().z)) {
+		}else {
 			velocity.x = velocity.x * groundFriction;
 		}
 		
 		if(Math.abs(velocity.z) < 0.01f) {
 			velocity.z = 0;
-		}else if(y > terrain.getHeightOfTerrain(this.getPosition().x, this.getPosition().z)){
+		}else {
 			velocity.z = velocity.z * groundFriction;
 		}
 		
@@ -116,6 +116,14 @@ public class GolfBall extends Entity {
 		Area ra = a.createTransformedArea(af);//ra is the rotated a, a is unchanged
 		Area rb = b.createTransformedArea(bf);//rb is the rotated b, b is unchanged
 		collision = ra.intersects(rb.getBounds2D()) && rb.intersects(ra.getBounds2D());
+		if(collision) {
+			if(r1.getX() < r2.getX()+ r2.getWidth() || r1.getX() + r1.getWidth() >= r2.getX()) {
+				//this.velocity.y *= -1;
+			}
+			if(r1.getY() < r2.getY() - r2.getHeight() || r1.getY() + r1.getHeight() >= r2.getY()) {
+				//this.velocity.x *= -1;
+			}
+		}
 		return collision;
 	}
 	
@@ -151,7 +159,7 @@ public class GolfBall extends Entity {
 		System.out.println("Left Normal" + LeftNormal);
 		
 		Vector2f ballPosition = new Vector2f(this.getPosition().x, this.getPosition().z);
-		ballPosition.normalise();
+		//ballPosition.normalise();
 		Vector2f subT = new Vector2f();
 		Vector2f subR = new Vector2f();
 		Vector2f subB = new Vector2f();
@@ -179,13 +187,13 @@ public class GolfBall extends Entity {
 			System.out.println("Left");
 			return LeftNormal;
 		} else {
-			return BottomNormal;
+			System.out.println("End");
+			return RightNormal;
 		}
 	}
 	
-	private float friction = 0.7f;
-	private float groundFriction = 0.98f;
-	private float coefficientOfRestitution = 0.4f;
+	private float groundFriction = 0.985f;
+	private float coefficientOfRestitution = 0.6f;
 	public void manageCollision(Entity entity) {
 		if(checkCollision(entity) && entity.isEntityObstacle()) {
 			//System.out.println("BOUNCE BOUNCE BOUNCE");
@@ -193,6 +201,7 @@ public class GolfBall extends Entity {
 			
 			Vector2f V = new Vector2f(this.velocity.x, this.velocity.z);
 			Vector2f normal = normalOfImpact(entity);
+			normal.normalise();
 			
 			Vector2f VPrime = new Vector2f();
 			Vector2f u = new Vector2f();
