@@ -16,7 +16,7 @@ import java.awt.geom.Area;
  */
 public class GolfBall extends Entity {
 	
-	private static final float GRAVITY = -50f;
+	private static final float GRAVITY = -9.80665f;
     private static final float MASS = 5;
     private static final float RADIUS = 4;
     public Vector3f velocity = new Vector3f(0,0,0);
@@ -68,9 +68,9 @@ public class GolfBall extends Entity {
 			velocity.z = velocity.z * groundFriction;
 		}
 		
-		velocity.x += ax * DisplayManager.getFrameTimeSeconds() - normal.x * GRAVITY * DisplayManager.getFrameTimeSeconds() * groundFriction;
-		velocity.y += ay * DisplayManager.getFrameTimeSeconds() + normal.y * GRAVITY * DisplayManager.getFrameTimeSeconds();
-		velocity.z -= az * DisplayManager.getFrameTimeSeconds() + normal.z * GRAVITY * DisplayManager.getFrameTimeSeconds() * groundFriction;
+		velocity.x += ax * DisplayManager.getFrameTimeSeconds() - normal.x * GRAVITY * groundFriction;
+		velocity.y += ay * DisplayManager.getFrameTimeSeconds() + normal.y * GRAVITY;
+		velocity.z -= az * DisplayManager.getFrameTimeSeconds() + normal.z * GRAVITY * groundFriction;
 		//System.out.println(velocity.x + " " +  velocity.y + " " +  velocity.z);
 		
 		x += velocity.x * DisplayManager.getFrameTimeSeconds();
@@ -159,7 +159,6 @@ public class GolfBall extends Entity {
 		System.out.println("Left Normal" + LeftNormal);
 		
 		Vector2f ballPosition = new Vector2f(this.getPosition().x, this.getPosition().z);
-		//ballPosition.normalise();
 		Vector2f subT = new Vector2f();
 		Vector2f subR = new Vector2f();
 		Vector2f subB = new Vector2f();
@@ -192,7 +191,7 @@ public class GolfBall extends Entity {
 		}
 	}
 	
-	private float groundFriction = 0.985f;
+	private float groundFriction = 0.975f;
 	private float coefficientOfRestitution = 0.6f;
 	public void manageCollision(Entity entity) {
 		if(checkCollision(entity) && entity.isEntityObstacle()) {
