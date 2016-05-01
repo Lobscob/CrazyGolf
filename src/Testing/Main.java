@@ -208,7 +208,7 @@ public class Main {
             Objects.loadHoll(loaderUsed);
             
 			if(editorMode) {
-				editor = new Editor(playerModelTextured, new Vector3f(400,terrainChoice.getHeightOfTerrain(400, -400),-400),0,0,0,1, false, golfBallUsed1, new Vector3f(0,0,0));
+				editor = new Editor(playerModelTextured, new Vector3f(400,terrainChoice.getHeightOfTerrain(400, -400),-400),0,0,0,0, false, golfBallUsed1, new Vector3f(0,0,0));
 				editorCamera = new Camera(editor);
 			}else if(playerMode){
 				player1 = new Player(playerModelTextured, new Vector3f(400,terrainChoice.getHeightOfTerrain(400, -400),-400),0,0,0,3, false, golfBallUsed1, new Vector3f(2f,14f,2f), false, null);
@@ -218,7 +218,7 @@ public class Main {
 				camera1 = new Camera(golfBallUsed1);
 				camera2 = new Camera(golfBallUsed2);
 			}else if(terrainEditorMode) {
-				terrainEditor = new TerrainEditor(playerModelTextured, new Vector3f(400,terrainChoice.getHeightOfTerrain(400, -400),-400),0,0,0,1, false, golfBallUsed1, new Vector3f(0,0,0));
+				terrainEditor = new TerrainEditor(playerModelTextured, new Vector3f(400,terrainChoice.getHeightOfTerrain(400, -400),-400),0,0,0,0, false, golfBallUsed1, new Vector3f(0,0,0));
 				terrainEditorCamera = new Camera(terrainEditor);
 			}
 
@@ -354,7 +354,7 @@ public class Main {
 				//golfBallUsed1.checkCollision(golfBallUsed2);
 				//golfBallUsed2.checkCollision(golfBallUsed1);
 			}
-			if(frameCounter >= 2) {
+			if(frameCounter >= 4) {
 				frameCounter = 0;
 				canCollideBall = true;
 				canCollideOther = true;

@@ -140,25 +140,26 @@ public class GolfBall extends Entity {
 		Vector2f Bottom = new Vector2f((float) (entity.getPosition().x + entity.getCollisionZone().x/2 * Math.sin(Math.toRadians(theta))), (float) (entity.getPosition().z + entity.getCollisionZone().z/2 * Math.cos(Math.toRadians(theta))));
 		Vector2f Left = new Vector2f((float) (entity.getPosition().x - entity.getCollisionZone().x/2 * Math.cos(Math.toRadians(theta))), (float) (entity.getPosition().z + entity.getCollisionZone().z/2 * Math.sin(Math.toRadians(theta))));
 
-		System.out.println("Top: " + Top);
-		System.out.println("Right: " + Right);
-		System.out.println("Bottom: " + Bottom);
-		System.out.println("Left: " + Left);
-		System.out.println(":::::::::");
+		//System.out.println("Top: " + Top);
+		//System.out.println("Right: " + Right);
+		//System.out.println("Bottom: " + Bottom);
+		//System.out.println("Left: " + Left);
+		//System.out.println(":::::::::");
 		Vector2f TopNormal = new Vector2f(-dz,-dx);
 		TopNormal.normalise();
-		System.out.println("Top Normal" + TopNormal);
+		//System.out.println("Top Normal" + TopNormal);
 		Vector2f RightNormal = new Vector2f(dx,-dz);
 		RightNormal.normalise();
-		System.out.println("Right Normal" + RightNormal);
+		//System.out.println("Right Normal" + RightNormal);
 		Vector2f BottomNormal = new Vector2f(dz,dx);
 		BottomNormal.normalise();
-		System.out.println("Bottom Normal" + BottomNormal);
+		//System.out.println("Bottom Normal" + BottomNormal);
 		Vector2f LeftNormal = new Vector2f(-dx,dz);
 		LeftNormal.normalise();
-		System.out.println("Left Normal" + LeftNormal);
+		//System.out.println("Left Normal" + LeftNormal);
 		
 		Vector2f ballPosition = new Vector2f(this.getPosition().x, this.getPosition().z);
+		
 		Vector2f subT = new Vector2f();
 		Vector2f subR = new Vector2f();
 		Vector2f subB = new Vector2f();
@@ -172,22 +173,22 @@ public class GolfBall extends Entity {
 		subB.normalise();
 		subL.normalise();
 		
-		//if(Dot(ballCtr - i, normal[i]) > 0 ) {
-		if(Vector2f.dot(subT, TopNormal) > 0)  {
+		//if(Dot(ballCtr - i, normal[i]) < 0 ) {
+		if(Vector2f.dot(subT, TopNormal) < 0)  {
 			System.out.println("Top");
 			return TopNormal;
-		} else if(Vector2f.dot(subR, RightNormal) > 0) {
+		} else if(Vector2f.dot(subR, RightNormal) < 0) {
 			System.out.println("Right");
 			return RightNormal;
-		} else if(Vector2f.dot(subB, BottomNormal) > 0) {
+		} else if(Vector2f.dot(subB, BottomNormal) < 0) {
 			System.out.println("Bottom");
 			return BottomNormal;
-		} else if(Vector2f.dot(subL, LeftNormal) > 0){
+		} else if(Vector2f.dot(subL, LeftNormal) < 0){
 			System.out.println("Left");
 			return LeftNormal;
 		} else {
 			System.out.println("End");
-			return RightNormal;
+			return TopNormal;
 		}
 	}
 	
