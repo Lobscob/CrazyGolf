@@ -147,19 +147,30 @@ public class Terrain {
 	 * @param worldX an x position on the map
 	 * @param worldZ a z position on the map
 	 */
+	public void createHole(float worldX, float worldZ, float intensity) {
+		float terrainX = worldX - this.x;
+		float terrainZ = worldZ - this.z;
+		
+		float gridSquareSize = (SIZE) / ((float) heights.length -1);
+		
+		int gridX = (int) Math.floor(terrainX / gridSquareSize);
+		int gridZ = (int) Math.floor(terrainZ / gridSquareSize);
+		heights[gridX][gridZ] -= intensity;
+	}
+	
 	public void createDepression(float worldX, float worldZ, int brushSize, float intensity) {
 		float terrainX = worldX - this.x;
 		float terrainZ = worldZ - this.z;
 		
-		float gridSquareSize = SIZE / ((float) heights.length -1);
+		float gridSquareSize = (SIZE) / ((float) heights.length -1);
 		
 		int gridX = (int) Math.floor(terrainX / gridSquareSize);
 		int gridZ = (int) Math.floor(terrainZ / gridSquareSize);
-		
+		heights[gridX][gridZ] -= intensity;
 		for (int i=-brushSize; i<=brushSize; i++) {
 			for(int j=-brushSize; j<=brushSize; j++) {
 				if(gridX+i>0 && gridX+i<256 && gridZ+j>0 && gridZ+j<256) {
-					heights[gridX+i][gridZ+j] -= intensity;
+					//heights[gridX+i][gridZ+j] -= intensity;
 				}
 			}
 		}

@@ -20,12 +20,6 @@ public class Editor extends Entity {
     private static final float GRAVITY = -50;
     private static final float JUMP_POWER = 30;
 
-    private static final float RANGE = 10;
-    private final float HIT_FORCE_X = 10000;
-    private final float HIT_FORCE_Y = 10000;
-    private final float HIT_FORCE_Z = 10000;
-    private static final float PUTTER_MASS = 10;
-
     private float currentSpeed = 0;
     private float currentTurnSpeed = 0;
     private float upSpeed = 0;
@@ -177,8 +171,8 @@ public class Editor extends Entity {
             Main.entities.add(placed);
             keyPressed = false;
         } else if (Keyboard.isKeyDown(Keyboard.KEY_8)) {
-        	Main.goalXPos = (int) this.getPosition().x;
-        	Main.goalZPos = (int) this.getPosition().z;
+        	Main.goalXPos = (int) mouseTerrainPosition.x;
+        	Main.goalZPos = (int) mouseTerrainPosition.z;
             GoalHole placed = new GoalHole(Main.loaderUsed, Main.terrainChoice, Main.golfGoal, new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, this.getRotY(), 0, 5, true, new Vector3f(6f,6f,6f));
             Main.holeUsed = placed;
             keyPressed = false;
@@ -199,11 +193,7 @@ public class Editor extends Entity {
     private static float xConnect;
     private static float zConnect;
     private static int wallCounter;
-    
-    public void hit() {
-        Vector3f forces = new Vector3f(this.HIT_FORCE_X, this.HIT_FORCE_Y, this.HIT_FORCE_Z);
-        golfBall.manageHit(this, forces);
-    }
+
 
 
 }

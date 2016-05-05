@@ -38,42 +38,25 @@ public class GoalHole extends Entity{
 			boolean isObstacle, Vector3f collisionSize) {
 		super(model, position, rotX, rotY, rotZ, scale, isObstacle, collisionSize);
 		this.terrain = terrain;
-		//depressTerrain();
+		terrain.createHole(this.getPosition().x, this.getPosition().z, 5);
 		terrain.updateTerrain(loader);
 	}
 	
-	public void depressTerrain() {
-		for(float i= (this.getPosition().x); i<this.getPosition().x + 0.4f; i+=0.11f) {
-			for(float j= (this.getPosition().z);  j<this.getPosition().z + 6; j+=1f) {
-				//terrain.createDepression(i, j);
-			}
-		}
-	}
-	private static int collisionCounter = 0;
+	
 	public boolean checkCollision(GolfBall golfBall) {
-		collisionCounter = 0;
+
 		float dx = this.getPosition().x - golfBall.getPosition().x;
 		float dz = this.getPosition().z - golfBall.getPosition().z;
 		
 		float distance = (float) Math.sqrt(dx*dx + dz*dz);
 		boolean collision = distance + golfBall.getRadius() < this.getCollisionZone().x;
-		while(collision && collisionCounter == 0) {
-			float v = (float) Math.sqrt(golfBall.velocity.x * golfBall.velocity.x + golfBall.velocity.z * golfBall.velocity.z);
-			if(v < scoreThreshold && distance + golfBall.getRadius()>= this.getCollisionZone().x - 0.4f)  {
-				//System.out.println("GET IN THE HOLE DAMMIT");
-				golfBall.velocity.x = -golfBall.velocity.x * 0.99f;
-				golfBall.velocity.z = -golfBall.velocity.z * 0.99f;
-				if(v<0.00001f) {
-					//System.out.println("Score!");
-					golfBall.setIsInHole(true);
-					collisionCounter++;
-					collision = false;
-				}
-			}else {
-				collision = false;
-			}
-			
+		float v = (float) Math.sqrt(golfBall.velocity.x * golfBall.velocity.x + golfBall.velocity.z * golfBall.velocity.z);
+		if(v < scoreThreshold && collision)  {
+			golfBall.setIsInHole(true);
+			golfBall.velocity.x *= 0.9f;
+			golfBall.velocity.z *= 0.9f;
 		}
+
 		return collision;
 	}
 	

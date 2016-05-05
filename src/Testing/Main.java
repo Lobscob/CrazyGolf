@@ -62,8 +62,8 @@ public class Main {
     public static List<Terrain> terrains = new ArrayList<Terrain>();
     public static Terrain terrainChoice;
     public static Loader loaderUsed;
-    public static int goalXPos = 900;
-    public static int goalZPos = -900;
+    public static int goalXPos = 50;
+    public static int goalZPos = -50;
     public static GolfBall golfBallUsed1;
     public static GolfBall golfBallUsed2;
     public static GoalHole holeUsed;
@@ -208,17 +208,17 @@ public class Main {
             Objects.loadHoll(loaderUsed);
             
 			if(editorMode) {
-				editor = new Editor(playerModelTextured, new Vector3f(400,terrainChoice.getHeightOfTerrain(400, -400),-400),0,0,0,0, false, golfBallUsed1, new Vector3f(0,0,0));
+				editor = new Editor(playerModelTextured, new Vector3f(50,terrainChoice.getHeightOfTerrain(50, -50),-50),0,0,0,0, false, golfBallUsed1, new Vector3f(0,0,0));
 				editorCamera = new Camera(editor);
 			}else if(playerMode){
-				player1 = new Player(playerModelTextured, new Vector3f(400,terrainChoice.getHeightOfTerrain(400, -400),-400),0,0,0,3, false, golfBallUsed1, new Vector3f(2f,14f,2f), false, null);
+				player1 = new Player(playerModelTextured, new Vector3f(440,terrainChoice.getHeightOfTerrain(440, -440),-440),0,0,0,3, false, golfBallUsed1, new Vector3f(2f,14f,2f), false, null);
 				player2 = new Player(playerModelTextured, new Vector3f(220,terrainChoice.getHeightOfTerrain(220, -220),-220),0,0,0,3,false, golfBallUsed2, new Vector3f(2f,14f,2f), true, null);
 				player1.setOpponent(player2);
 				player2.setOpponent(player1);
 				camera1 = new Camera(golfBallUsed1);
 				camera2 = new Camera(golfBallUsed2);
 			}else if(terrainEditorMode) {
-				terrainEditor = new TerrainEditor(playerModelTextured, new Vector3f(400,terrainChoice.getHeightOfTerrain(400, -400),-400),0,0,0,0, false, golfBallUsed1, new Vector3f(0,0,0));
+				terrainEditor = new TerrainEditor(playerModelTextured, new Vector3f(444,terrainChoice.getHeightOfTerrain(444, -444),-444),0,0,0,0, false, golfBallUsed1, new Vector3f(0,0,0));
 				terrainEditorCamera = new Camera(terrainEditor);
 			}
 
@@ -309,12 +309,10 @@ public class Main {
 			
 				renderer.processEntity(player1);
 				renderer.processEntity(player2);
-				if(!player1.getGolfBall().getIsInHole()) {
-					renderer.processEntity(golfBallUsed1);
-				}
-				if(!player2.getGolfBall().getIsInHole()) {
-					renderer.processEntity(golfBallUsed2);
-				}
+
+				renderer.processEntity(golfBallUsed1);
+				renderer.processEntity(golfBallUsed2);
+				
 				golfBallUsed1.move(terrain);
 				golfBallUsed2.move(terrain);
 			}else if(editorMode){
