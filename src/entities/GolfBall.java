@@ -168,10 +168,10 @@ public class GolfBall extends Entity {
 		Vector2f.sub(ballPosition, Right, subR);
 		Vector2f.sub(ballPosition, Bottom, subB);
 		Vector2f.sub(ballPosition, Left, subL);
-		//subT.normalise();
-		//subR.normalise();
-		//subB.normalise();
-		//subL.normalise();
+		subT.normalise();
+		subR.normalise();
+		subB.normalise();
+		subL.normalise();
 		
 		//if(Dot(ballCtr - i, normal[i]) < 0 ) {
 		if(Vector2f.dot(subT, TopNormal) < 0)  {

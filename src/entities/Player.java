@@ -23,9 +23,9 @@ public class Player extends Entity{
 	private static final float JUMP_POWER = 40;
 	
 	private static float RANGE = 10;
-	private static float HIT_FORCE_X = 4000;
+	private static float HIT_FORCE_X = 40000;
 	private static float HIT_FORCE_Y = 00;
-	private static float HIT_FORCE_Z = 4000;
+	private static float HIT_FORCE_Z = 40000;
 	
 	private float currentSpeed = 0;
 	private float currentTurnSpeed = 0;
@@ -153,7 +153,7 @@ public class Player extends Entity{
 	        HIT_FORCE_Z *= 1.1;
 	    }
 	 private void decreaseHitPower() {
-		 if ((HIT_FORCE_X > 0 && HIT_FORCE_Y > 0 && HIT_FORCE_Z > 0)) {
+		 if ((HIT_FORCE_X >= 0 && HIT_FORCE_Y >= 0 && HIT_FORCE_Z >= 0)) {
 			 this.setScale((float) (getScale() * 0.9));
 			 HIT_FORCE_X *= 0.9;
 			 HIT_FORCE_Y *= 0.9;
@@ -162,7 +162,7 @@ public class Player extends Entity{
 	 }
 
 	private void checkInputs() {
-		 if (numberOfFrames >= 60) {
+		 if (numberOfFrames >= 120) {
 	            keyPressed = true;
 	            numberOfFrames = 0;
 	        }
@@ -171,7 +171,7 @@ public class Player extends Entity{
 				else bot2 = true;
 
 			keyPressed=false;
-		}else if(Keyboard.isKeyDown(Keyboard.KEY_B) && keyPressed){
+			}else if(Keyboard.isKeyDown(Keyboard.KEY_B) && keyPressed){
 				if(bot1)bot1 = false;
 				else bot1 = true;
 				keyPressed=false;
@@ -190,7 +190,10 @@ public class Player extends Entity{
 	            System.out.println("Yforce: " + HIT_FORCE_Y);
 	            System.out.println("Zforce: " + HIT_FORCE_Z);
 	            keyPressed=false;
-	        }
+	        } else if(Keyboard.isKeyDown(Keyboard.KEY_H) && keyPressed) {
+	        	hit();
+	        	keyPressed = false;
+	        } 
 
 	        if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
 	            this.currentSpeed = RUN_SPEED;
@@ -208,15 +211,13 @@ public class Player extends Entity{
 	            this.currentTurnSpeed = TURN_SPEED;
 			} else {
 	            this.currentTurnSpeed = 0;
-	        }
+	        } 
+	       
 
 	        if (Keyboard.isKeyDown(Keyboard.KEY_J)) {
 	            jump();
 	        }
-	        if(Keyboard.isKeyDown(Keyboard.KEY_H)) {
-	        	hit();
-	        	keyPressed = false;
-	        } 
+	       
 	        if(Keyboard.isKeyDown(Keyboard.KEY_R)) {
 				Main.entities.get(Main.entities.size()-1).increaseRotation(0, 1, 0);
 				keyPressed = false;

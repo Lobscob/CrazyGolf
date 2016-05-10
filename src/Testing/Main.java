@@ -250,7 +250,6 @@ public class Main {
 	 */
 	
 	public static void run(Light light, Camera camera, Entity player, Loader loader, Terrain terrain, GolfBall golfBall) {
-		
 		GuiRenderer guiRenderer = new GuiRenderer(loader);
 		MasterRenderer renderer = new MasterRenderer(loader, camera);
 		for (int i = 0; i < randomObjects; i++) {
