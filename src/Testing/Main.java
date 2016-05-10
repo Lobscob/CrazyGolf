@@ -332,6 +332,7 @@ public class Main {
 				}
 			}
 	        //testing Github don't mind me
+			//still testing
 			renderer.processTerrains(terrain);
 	
 			renderer.processEntity(holeUsed);
