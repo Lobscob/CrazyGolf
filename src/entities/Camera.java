@@ -108,10 +108,10 @@ public class Camera {
 	}
 	
 	private void calculateAngle() {
-		if(Mouse.isButtonDown(0)) {
-			float angleChange = Mouse.getDX() * 0.3f;
-			angleAroundPlayer -= angleChange;
-			player.increaseRotation(0, angleAroundPlayer * 0.1f, 0);
+		if(Keyboard.isKeyDown(Keyboard.KEY_A)) {
+			player.increaseRotation(0, 1, 0);
+		}else if(Keyboard.isKeyDown(Keyboard.KEY_D)) {
+			player.increaseRotation(0, -1, 0);
 		}
 	}
 	

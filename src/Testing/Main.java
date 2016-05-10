@@ -331,7 +331,7 @@ public class Main {
 					player.setCurrentTerrainPoint(terrainPoint);
 				}
 			}
-	
+	        //testing Github don't mind me
 			renderer.processTerrains(terrain);
 	
 			renderer.processEntity(holeUsed);

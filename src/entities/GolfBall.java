@@ -168,10 +168,10 @@ public class GolfBall extends Entity {
 		Vector2f.sub(ballPosition, Right, subR);
 		Vector2f.sub(ballPosition, Bottom, subB);
 		Vector2f.sub(ballPosition, Left, subL);
-		subT.normalise();
-		subR.normalise();
-		subB.normalise();
-		subL.normalise();
+		//subT.normalise();
+		//subR.normalise();
+		//subB.normalise();
+		//subL.normalise();
 		
 		//if(Dot(ballCtr - i, normal[i]) < 0 ) {
 		if(Vector2f.dot(subT, TopNormal) < 0)  {
@@ -193,7 +193,7 @@ public class GolfBall extends Entity {
 	}
 	
 	private float groundFriction = 0.975f;
-	private float coefficientOfRestitution = 0.6f;
+	private float coefficientOfRestitution = 0.650f;
 	public void manageCollision(Entity entity) {
 		if(checkCollision(entity) && entity.isEntityObstacle()) {
 			//System.out.println("BOUNCE BOUNCE BOUNCE");
