@@ -32,20 +32,19 @@ public class Objects {
         RawModel sphereModel = OBJLoader.loadObjModel("Sphere", loader);
         ModelTexture sphereTexture = new ModelTexture(loader.loadTexture("sphereTexture1"));
         staticSphereModel = new TexturedModel(sphereModel, sphereTexture,1);
-
+        
         RawModel goalModel = OBJLoader.loadObjModel("GolfGoal", loader);
         ModelTexture goalTexture = new ModelTexture(loader.loadTexture("sphereTexture"));
         golfGoal = new TexturedModel(goalModel, goalTexture,2);
-
+        
         RawModel tree1Model = OBJLoader.loadObjModel("Tree", loader);
         ModelTexture treeTexture = new ModelTexture(loader.loadTexture("treeTexture"));
         tree = new TexturedModel(tree1Model, treeTexture,3);
         tree.getTextureModel().setHasTransparency(true);
-
+        
         RawModel rockModel = OBJLoader.loadObjModel("rock", loader);
         ModelTexture rockTexture = new ModelTexture(loader.loadTexture("rockTexture"));
         rock = new TexturedModel(rockModel, rockTexture,4);
-        rock.getTextureModel().setUseFakeLighting(true);
 
         RawModel fernModel = OBJLoader.loadObjModel("fern", loader);
         ModelTexture fernTextureAtlas = new ModelTexture(loader.loadTexture("fern"));
@@ -69,6 +68,7 @@ public class Objects {
         
         RawModel terrainMarkerModel = OBJLoader.loadObjModel("TerrainMarker", loader);
         terrainMarker = new TexturedModel(terrainMarkerModel, crateTexture,9);
+        terrainMarker.getTextureModel().setHasTransparency(true);		
 
     }
     public static void loadHoll(Loader loader){

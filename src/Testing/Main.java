@@ -284,10 +284,10 @@ public class Main {
 			GuiTexture editorPanel = new GuiTexture(loader.loadTexture("GUIEditor"),new Vector2f(0.135f,-0.14f), new Vector2f(1.14f,1.14f));
 			guis.add(editorPanel);
 		}else {
-			GuiTexture editorPanel = new GuiTexture(loader.loadTexture("GUIPlayer"),new Vector2f(0.135f,-0.14f), new Vector2f(1.14f,1.14f));
-			guis.add(editorPanel);
+			GuiTexture playerPanel = new GuiTexture(loader.loadTexture("GUIPlayer"),new Vector2f(0.135f,-0.14f), new Vector2f(1.14f,1.14f));
+			guis.add(playerPanel);
 		}
-		
+		//System.out.println(guis.size());
 		picker = new MousePicker(camera, renderer.getProjectionMatrix(), terrain);
 		
 		while(!Display.isCloseRequested()) {
@@ -306,8 +306,8 @@ public class Main {
 					golfBall = player2.getGolfBall();
 				}
 			
-				renderer.processEntity(player1);
-				renderer.processEntity(player2);
+				//renderer.processEntity(player1);
+				//renderer.processEntity(player2);
 
 				renderer.processEntity(golfBallUsed1);
 				renderer.processEntity(golfBallUsed2);
@@ -349,8 +349,7 @@ public class Main {
 				player.manageCollision(entities.get(i));
 			}
 			if(canCollideBall) {
-				//golfBallUsed1.checkCollision(golfBallUsed2);
-				//golfBallUsed2.checkCollision(golfBallUsed1);
+				golfBallUsed1.checkCollision(golfBallUsed2);
 			}
 			if(frameCounter >= 4) {
 				frameCounter = 0;
@@ -370,7 +369,7 @@ public class Main {
 			}else if(player2.getScore() < player1.getScore()){
 				System.out.println("PLAYER 2 WINS \\(*o*)/");
 			}else {
-				System.out.println("ITS A TIE �\\_(o.o)_/�");
+				System.out.println("ITS A TIE \\_(o.o)_/");
 			}
 		}
 		

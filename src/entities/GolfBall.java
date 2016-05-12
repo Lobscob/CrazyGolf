@@ -116,14 +116,6 @@ public class GolfBall extends Entity {
 		Area ra = a.createTransformedArea(af);//ra is the rotated a, a is unchanged
 		Area rb = b.createTransformedArea(bf);//rb is the rotated b, b is unchanged
 		collision = ra.intersects(rb.getBounds2D()) && rb.intersects(ra.getBounds2D());
-		if(collision) {
-			if(r1.getX() < r2.getX()+ r2.getWidth() || r1.getX() + r1.getWidth() >= r2.getX()) {
-				//this.velocity.y *= -1;
-			}
-			if(r1.getY() < r2.getY() - r2.getHeight() || r1.getY() + r1.getHeight() >= r2.getY()) {
-				//this.velocity.x *= -1;
-			}
-		}
 		return collision;
 	}
 	
@@ -253,7 +245,14 @@ public class GolfBall extends Entity {
 	}
 	
 	public void manageBallCollision(GolfBall golfBall) {
-		Main.canCollideBall = false;
+		if(checkCollision(golfBall)) {
+			Main.canCollideBall = false;
+		
+			this.velocity.x *= -1;
+			this.velocity.z *= -1;
+			golfBall.velocity.x += this.velocity.x/2;
+			golfBall.velocity.z += this.velocity.z/2;
+		}
 		
 	}
 }
