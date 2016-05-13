@@ -62,7 +62,7 @@ public class BotMover {
 //            System.out.println("DVz " + dvz);
 //            Vector3f forces= new Vector3f(dvx,dvy,dvz);
 //            golfBall.manageHit(player,forces);
-            if (Math.abs(golfBall.velocity.x) == 0 && Math.abs(golfBall.velocity.y) == 0 && Math.abs(golfBall.velocity.z) == 0) {
+            if (Math.abs(golfBall.velocity.x) <= 1 && Math.abs(golfBall.velocity.y) <=1 && Math.abs(golfBall.velocity.z) <= 1) {
                 golfBall.velocity.x += dvx * DisplayManager.getFrameTimeSeconds();
                 golfBall.velocity.y += dvy * DisplayManager.getFrameTimeSeconds();
                 golfBall.velocity.z += dvz * DisplayManager.getFrameTimeSeconds();

@@ -2,6 +2,7 @@ package entities;
 
 import AI.BotMover;
 //import AI.Simulation;
+import AI.Simulation;
 import Testing.Main;
 import models.TexturedModel;
 import org.lwjgl.input.Keyboard;
@@ -229,12 +230,12 @@ public class Player extends Entity{
 	            jump();
 	        }
 	        if (Keyboard.isKeyDown(Keyboard.KEY_X)&& keyPressed) {
-//	            Simulation sim = new Simulation(this);
+	            Simulation sim = new Simulation(this);
 	            //sim.calculateHitToGoal(this.getGolfBall(), Main.holeUsed);
 	            //System.out.println("Xforce: " + HIT_FORCE_X);
 	            //System.out.println("Yforce: " + HIT_FORCE_Y);
 	            //System.out.println("Zforce: " + HIT_FORCE_Z);
-//	            sim.simulateHit(this.getGolfBall());
+	            sim.simulateHit(this.getGolfBall());
 	            keyPressed = false;
 	        }
 	       
