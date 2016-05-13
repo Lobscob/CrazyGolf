@@ -43,7 +43,8 @@ public class Player extends Entity{
 
 	private Boolean bot1 = false;
 	private Boolean bot2 = true;
-
+	private BotMover ai1 = new BotMover(Main.getPlayer1(),Main.golfBallUsed1,Main.holeUsed);
+	private BotMover ai2 = new BotMover(Main.getPlayer2(),Main.golfBallUsed2,Main.holeUsed);
 
 	/**
 	 * @param model a textured model of what the editor will look like in 3D
@@ -73,9 +74,8 @@ public class Player extends Entity{
 
 	@Override
 	public void move(Terrain terrain) {
-		BotMover ai = new BotMover();
-		if(bot1)ai.moveBotToBall(Main.getPlayer1(),Main.golfBallUsed1);
-		if(bot2)ai.moveBotToBall(Main.getPlayer2(),Main.golfBallUsed2);
+
+
 		numberOfFrames++;
 		checkInputs();
 		super.increaseRotation(0, currentTurnSpeed * DisplayManager.getFrameTimeSeconds(), 0);
@@ -167,13 +167,11 @@ public class Player extends Entity{
 	            numberOfFrames = 0;
 	        }
 			if(Keyboard.isKeyDown(Keyboard.KEY_Z) && keyPressed){
-				if(bot2)bot2 = false;
-				else bot2 = true;
+				ai2.shootBall();
 
 			keyPressed=false;
 			}else if(Keyboard.isKeyDown(Keyboard.KEY_B) && keyPressed){
-				if(bot1)bot1 = false;
-				else bot1 = true;
+				ai1.shootBall();
 				keyPressed=false;
 			}
 	       else if (Keyboard.isKeyDown(Keyboard.KEY_I) && keyPressed) {
