@@ -199,7 +199,7 @@ public class Main {
 			frame.setLocationRelativeTo(null);
 			frame.setVisible(true);
 			
-			while(!isMenuChoiceMade()) {
+			while(!isMenuChoiceMade()) {System.out.print("");
 			}
 			frame.setVisible(false);
 			
