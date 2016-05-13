@@ -172,7 +172,7 @@ public class TerrainEditor extends Entity {
     
     public void hit() {
         Vector3f forces = new Vector3f(this.HIT_FORCE_X, this.HIT_FORCE_Y, this.HIT_FORCE_Z);
-        golfBall.manageHit(this, forces);
+        golfBall.manageHit(forces);
     }
 
 

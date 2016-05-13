@@ -10,6 +10,7 @@ import terrains.Terrain;
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
+import java.util.Random;
 
 /**
  * This class represents the golf ball
@@ -67,10 +68,23 @@ public class GolfBall extends Entity {
 		}else {
 			velocity.z = velocity.z * groundFriction;
 		}
+		Random rand = new Random();
+		float windx = 0;
+		float windz = 0;
+		if(rand.nextFloat()<0.1f) {
+			windx += rand.nextFloat()/5f;
+			windz += rand.nextFloat()/5f;
+			if(rand.nextFloat()<0.4) {
+				windx*=-1;
+			}
+			if(rand.nextFloat()<0.4) {
+				windz*=-1;
+			}
+		}
 		
-		velocity.x += ax * DisplayManager.getFrameTimeSeconds() - normal.x * GRAVITY * groundFriction;
+		velocity.x += ax * DisplayManager.getFrameTimeSeconds() - normal.x*2 * GRAVITY * groundFriction + windx;
 		velocity.y += ay * DisplayManager.getFrameTimeSeconds() + normal.y * GRAVITY;
-		velocity.z -= az * DisplayManager.getFrameTimeSeconds() + normal.z * GRAVITY * groundFriction;
+		velocity.z -= az * DisplayManager.getFrameTimeSeconds() + normal.z*2 * GRAVITY * groundFriction + windz;
 		//System.out.println(velocity.x + " " +  velocity.y + " " +  velocity.z);
 		
 		x += velocity.x * DisplayManager.getFrameTimeSeconds();
@@ -121,9 +135,7 @@ public class GolfBall extends Entity {
 	
 	private Vector2f normalOfImpact(Entity entity) {
 		float theta = entity.getRotY();
-		if(theta > 180) {
-			theta = theta - 180;
-		}
+
 		float dz = (float) Math.sin(Math.toRadians(theta));
 		float dx = (float) Math.cos(Math.toRadians(theta));
 		
@@ -138,16 +150,16 @@ public class GolfBall extends Entity {
 		//System.out.println("Left: " + Left);
 		//System.out.println(":::::::::");
 		Vector2f TopNormal = new Vector2f(-dz,-dx);
-		//TopNormal.normalise();
+		TopNormal.normalise();
 		//System.out.println("Top Normal" + TopNormal);
 		Vector2f RightNormal = new Vector2f(dx,-dz);
-		//RightNormal.normalise();
+		RightNormal.normalise();
 		//System.out.println("Right Normal" + RightNormal);
 		Vector2f BottomNormal = new Vector2f(dz,dx);
-		//BottomNormal.normalise();
+		BottomNormal.normalise();
 		//System.out.println("Bottom Normal" + BottomNormal);
 		Vector2f LeftNormal = new Vector2f(-dx,dz);
-		//LeftNormal.normalise();
+		LeftNormal.normalise();
 		//System.out.println("Left Normal" + LeftNormal);
 		
 		Vector2f ballPosition = new Vector2f(this.getPosition().x, this.getPosition().z);
@@ -156,16 +168,12 @@ public class GolfBall extends Entity {
 		Vector2f subR = new Vector2f();
 		Vector2f subB = new Vector2f();
 		Vector2f subL = new Vector2f();
-		Vector2f.sub(ballPosition, Top, subT);
-		Vector2f.sub(ballPosition, Right, subR);
-		Vector2f.sub(ballPosition, Bottom, subB);
-		Vector2f.sub(ballPosition, Left, subL);
-		//subT.normalise();
-		//subR.normalise();
-		//subB.normalise();
-		//subL.normalise();
+		Vector2f.sub(Top,ballPosition, subT);
+		Vector2f.sub(Right,ballPosition,  subR);
+		Vector2f.sub(Bottom,ballPosition,  subB);
+		Vector2f.sub(Left,ballPosition,  subL);
 		
-		if(Vector2f.dot(subT, TopNormal) > 0)  {
+		if(Vector2f.dot(subT, TopNormal) < 0)  {
 			System.out.println("Top");
 			return TopNormal;
 		} else if(Vector2f.dot(subR, RightNormal) < 0) {
@@ -179,11 +187,12 @@ public class GolfBall extends Entity {
 			return LeftNormal;
 		} else {
 			System.out.println("End");
-			return TopNormal;
+			return BottomNormal;
 		}
 	}
 	
 	private float groundFriction = 0.975f;
+	public float getGroundFriction() { return groundFriction; }
 	private float coefficientOfRestitution = 0.650f;
 	public void manageCollision(Entity entity) {
 		if(checkCollision(entity) && entity.isEntityObstacle()) {
@@ -192,7 +201,7 @@ public class GolfBall extends Entity {
 			
 			Vector2f V = new Vector2f(this.velocity.x, this.velocity.z);
 			Vector2f normal = normalOfImpact(entity);
-			normal.normalise();
+			//normal.normalise();
 			
 			Vector2f VPrime = new Vector2f();
 			Vector2f u = new Vector2f();
@@ -217,15 +226,13 @@ public class GolfBall extends Entity {
 	 * @param player reference to the player hitting the ball
 	 * @param forces a vector of the forces involved in hitting the ball
 	 */
-	public void manageHit(Entity player, Vector3f forces) {
+	public void manageHit(Vector3f forces) {
 		
-		float dvx = (float) (forces.x/MASS * Math.sin(Math.toRadians(this.getRotY())));
-		float dvz = (float) (forces.z/MASS * Math.cos(Math.toRadians(this.getRotY())));
-		float dvy = forces.y/MASS;
+		float dvx = (float) (forces.x);//* Math.sin(Math.toRadians(this.getRotY())));
+		float dvz = (float) (forces.z);// * Math.cos(Math.toRadians(this.getRotY())));
+		float dvy = forces.y;
 		
-		//this.setRotY(player.getRotY());
-		
-		this.velocity.x += dvx * DisplayManager.getFrameTimeSeconds();
+		this.velocity.x -= dvx * DisplayManager.getFrameTimeSeconds();
 		this.velocity.y += dvy * DisplayManager.getFrameTimeSeconds();
 		this.velocity.z += dvz * DisplayManager.getFrameTimeSeconds();
 	}
@@ -235,11 +242,8 @@ public class GolfBall extends Entity {
 		float dz = this.getPosition().z - golfBall.getPosition().z;
 		
 		float distanceSquared = dx*dx + dz*dz;
-		boolean collision = distanceSquared < this.getRadius() + golfBall.getRadius() * this.getRadius() + golfBall.getRadius();
-		if(collision) {
-			//System.out.println("balls collide");
-			manageBallCollision(golfBall);
-		}
+		boolean collision = distanceSquared < (this.getRadius() * this.getRadius()) + (golfBall.getRadius() * golfBall.getRadius());
+		
 		return collision;
 	}
 	
@@ -249,8 +253,8 @@ public class GolfBall extends Entity {
 		
 			this.velocity.x *= -1;
 			this.velocity.z *= -1;
-			golfBall.velocity.x += this.velocity.x/2;
-			golfBall.velocity.z += this.velocity.z/2;
+			golfBall.velocity.x += 1000;
+			golfBall.velocity.z += 1000;
 		}
 		
 	}

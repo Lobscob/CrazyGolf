@@ -47,6 +47,7 @@ public class Main {
 	}
 	
 	public static List<Entity> entities = new ArrayList<Entity>();
+	public static List<GolfBall> simulatedBalls = new ArrayList<GolfBall>();
     public static TexturedModel tree;
     public static TexturedModel crate;
     public static TexturedModel rock;
@@ -340,7 +341,11 @@ public class Main {
 				System.out.println("ohno");
 			}
 			renderer.render(light, camera);
-				
+			//SIMULATION
+			for(int i=0; i<simulatedBalls.size(); i++) {
+				renderer.processEntity(simulatedBalls.get(i));
+			}
+			
 			for(int i=0; i<entities.size(); i++) {
 				renderer.processEntity(entities.get(i));
 				if(canCollideOther) {
@@ -349,7 +354,8 @@ public class Main {
 				player.manageCollision(entities.get(i));
 			}
 			if(canCollideBall) {
-				golfBallUsed1.checkCollision(golfBallUsed2);
+				golfBallUsed1.manageCollision(golfBallUsed2);
+				golfBallUsed2.manageCollision(golfBallUsed1);
 			}
 			if(frameCounter >= 4) {
 				frameCounter = 0;

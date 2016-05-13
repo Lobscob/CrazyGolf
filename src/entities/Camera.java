@@ -109,9 +109,9 @@ public class Camera {
 	
 	private void calculateAngle() {
 		if(Keyboard.isKeyDown(Keyboard.KEY_A)) {
-			player.increaseRotation(0, 1, 0);
+			player.increaseRotation(0, 2, 0);
 		}else if(Keyboard.isKeyDown(Keyboard.KEY_D)) {
-			player.increaseRotation(0, -1, 0);
+			player.increaseRotation(0, -2, 0);
 		}
 	}
 	

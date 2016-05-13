@@ -1,6 +1,7 @@
 package entities;
 
 import AI.BotMover;
+import AI.Simulation;
 import Testing.Main;
 import models.TexturedModel;
 import org.lwjgl.input.Keyboard;
@@ -23,9 +24,20 @@ public class Player extends Entity{
 	private static final float JUMP_POWER = 40;
 	
 	private static float RANGE = 10;
-	private static float HIT_FORCE_X = 40000;
+	private static float HIT_FORCE_X = 10000;
 	private static float HIT_FORCE_Y = 00;
-	private static float HIT_FORCE_Z = 40000;
+	private static float HIT_FORCE_Z = 10000;
+	
+	
+	public Vector3f getHitPower() {
+		Vector3f hitVec = new Vector3f(HIT_FORCE_X, HIT_FORCE_Y, HIT_FORCE_Z);
+		return hitVec;
+	}
+	public void setHitPower(Vector3f hitForces) {
+		HIT_FORCE_X = hitForces.x;
+		HIT_FORCE_Y = hitForces.y;
+		HIT_FORCE_Z = hitForces.z;
+	}
 	
 	private float currentSpeed = 0;
 	private float currentTurnSpeed = 0;
@@ -217,6 +229,14 @@ public class Player extends Entity{
 	        if (Keyboard.isKeyDown(Keyboard.KEY_J)) {
 	            jump();
 	        }
+	        if (Keyboard.isKeyDown(Keyboard.KEY_X)) {
+	            Simulation sim = new Simulation(this);
+	            sim.calculateHitToGoal(this.getGolfBall(), Main.holeUsed);
+	            System.out.println("Xforce: " + HIT_FORCE_X);
+	            System.out.println("Yforce: " + HIT_FORCE_Y);
+	            System.out.println("Zforce: " + HIT_FORCE_Z);
+	            sim.simulateHit(this.getGolfBall());
+	        }
 	       
 	        if(Keyboard.isKeyDown(Keyboard.KEY_R)) {
 				Main.entities.get(Main.entities.size()-1).increaseRotation(0, 1, 0);
@@ -251,6 +271,6 @@ public class Player extends Entity{
 	public void hit() {
 		score++;
 		Vector3f forces = new Vector3f(HIT_FORCE_X, HIT_FORCE_Y, HIT_FORCE_Z);
-		golfBall.manageHit(this, forces);
+		golfBall.manageHit(forces);
 	}
 }
