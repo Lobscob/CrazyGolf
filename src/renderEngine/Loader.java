@@ -46,7 +46,7 @@ public class Loader {
 		storeDataInAttributeList(2,3, normals);
 		bindIndecesBuffer(indeces);
 		unbindVAO();
-		return new RawModel(vaoID,indeces.length);
+		return new RawModel(vaoID,indeces.length, normals, positions);
 	}
 	public RawModel loadNewTerrain(float[] positions, float[] textureCoords, float[] normals, int[] indeces){
 		int vaoID = createVAOWithNewTerrain();
@@ -58,14 +58,14 @@ public class Loader {
 		bindTerrainIndecesBuffer(indeces);
 		//System.out.println("Terrain: " + vaoID + " VBO Arraylist: " + vbos.size());
 		unbindVAO();
-		return new RawModel(vaoID,indeces.length);
+		return new RawModel(vaoID,indeces.length, normals, positions);
 	}
 	
-	public RawModel loadToVAO(float[] positions, int dimensions) {
+	public RawModel loadToVAO(float[] positions, int dimensions, float[] normals, float[] indeces) {
 		int vaoID = createVAO();
 		this.storeDataInAttributeList(0, dimensions, positions);
 		unbindVAO();
-		return new RawModel(vaoID, positions.length/dimensions);
+		return new RawModel(vaoID, positions.length/dimensions, normals, indeces );
 	}
 	
 	public int loadTexture(String fileName) {
