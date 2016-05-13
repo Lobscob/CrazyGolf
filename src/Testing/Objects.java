@@ -72,7 +72,7 @@ public class Objects {
 
     }
     public static void loadHoll(Loader loader){
-        holeUsed = new GoalHole(loader, terrainChoice, golfGoal, new Vector3f(goalXPos, terrainChoice.getHeightOfTerrain(goalXPos, goalZPos), goalZPos), 0, 0, 0, 5, true, new Vector3f(7f, 7f, 7f));
+        holeUsed = new GoalHole(loader, terrainChoice, golfGoal, new Vector3f(GoalHole.goalXPos, terrainChoice.getHeightOfTerrain(GoalHole.goalXPos, GoalHole.goalZPos), GoalHole.goalZPos), 0, 0, 0, 5, true, new Vector3f(7f, 7f, 7f));
     }
 
 }

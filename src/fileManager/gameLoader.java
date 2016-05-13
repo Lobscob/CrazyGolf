@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
+import static Testing.Main.golfBallUsed1;
 import static Testing.Main.terrainChoice;
 
 /**
@@ -31,9 +32,11 @@ public class gameLoader {
         //TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale, boolean isObstacle, Vector3f collisionSize
         while (s.hasNextLine() && !line.substring(0,7).equals("HEIGHTS")) {
             Scanner s2 = new Scanner(line);
-            TexturedModel model = Main.getModel(Integer.parseInt(s2.next()));
+            int modelNumber = Integer.parseInt(s2.next());
+            TexturedModel model = Main.getModel(modelNumber);
 
             Vector3f position = new Vector3f(Float.parseFloat(s2.next()), Float.parseFloat(s2.next()), Float.parseFloat(s2.next()));
+            if(modelNumber==8)Main.holeUsed.setPosition(position);
             float rotX = Float.parseFloat(s2.next());
             float rotY = Float.parseFloat(s2.next());
             float rotZ = Float.parseFloat(s2.next());

@@ -40,6 +40,12 @@ public class GolfBall extends Entity {
 		super(model, position, rotX, rotY, rotZ, scale, true, new Vector3f(RADIUS, RADIUS, RADIUS));
 		
 	}
+
+	public void setGolfBallLocation(Vector3f position){
+
+		super.setPosition(position);
+
+	}
 	
 	public void move(Terrain terrain) {
 		

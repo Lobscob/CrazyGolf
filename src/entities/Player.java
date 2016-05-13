@@ -41,8 +41,7 @@ public class Player extends Entity{
 	
 	private Player opponent;
 
-	private Boolean bot1 = false;
-	private Boolean bot2 = true;
+
 	private BotMover ai1 = new BotMover(Main.getPlayer1(),Main.golfBallUsed1,Main.holeUsed);
 	private BotMover ai2 = new BotMover(Main.getPlayer2(),Main.golfBallUsed2,Main.holeUsed);
 
@@ -74,9 +73,11 @@ public class Player extends Entity{
 
 	@Override
 	public void move(Terrain terrain) {
-
-
-		numberOfFrames++;
+		System.out.println("AI1 " + ai1.getAI());
+		System.out.println("AI2 " + ai2.getAI());
+		if(ai1.getAI()) ai1.shootBall();
+		if(ai2.getAI()) ai2.shootBall();
+				numberOfFrames++;
 		checkInputs();
 		super.increaseRotation(0, currentTurnSpeed * DisplayManager.getFrameTimeSeconds(), 0);
 		float distance = currentSpeed * DisplayManager.getFrameTimeSeconds();
@@ -167,11 +168,11 @@ public class Player extends Entity{
 	            numberOfFrames = 0;
 	        }
 			if(Keyboard.isKeyDown(Keyboard.KEY_Z) && keyPressed){
-				ai2.shootBall();
+				ai2.setAI(true);
 
 			keyPressed=false;
 			}else if(Keyboard.isKeyDown(Keyboard.KEY_B) && keyPressed){
-				ai1.shootBall();
+				ai1.setAI(true);
 				keyPressed=false;
 			}
 	       else if (Keyboard.isKeyDown(Keyboard.KEY_I) && keyPressed) {

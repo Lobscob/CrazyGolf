@@ -12,9 +12,10 @@ import renderEngine.DisplayManager;
 
 public class BotMover {
 
-    private GolfBall golfBall;
+    public GolfBall golfBall;
     private Player player;
     private GoalHole golfHole;
+    boolean ai =false;
 
     public void setX(Boolean x) {
         this.x = x;
@@ -51,23 +52,31 @@ public class BotMover {
 
     public void shootBall() {
 //        while(x){
-        if(x) {
-            float dvx =( -golfBall.getPosition().x                + golfHole.getPosition().x )*hitForce         ;
-            float dvy = (-golfBall.getPosition().y + golfHole.getPosition().y) *hitForce;
-            float dvz = (-golfBall.getPosition().z + golfHole.getPosition().z)*hitForce;
 
-            System.out.println("DVX " +dvx);
-            System.out.println("DVy " +dvy);
-            System.out.println("DVz " +dvz);
+            float dvx = (-golfBall.getPosition().x + golfHole.getPosition().x) * hitForce;
+            float dvy = (-golfBall.getPosition().y + golfHole.getPosition().y) * hitForce;
+            float dvz = (-golfBall.getPosition().z + golfHole.getPosition().z) * hitForce;
+
+//            System.out.println("DVX " + dvx);
+//            System.out.println("DVy " + dvy);
+//            System.out.println("DVz " + dvz);
 //            Vector3f forces= new Vector3f(dvx,dvy,dvz);
 //            golfBall.manageHit(player,forces);
-            if(Math.abs(golfBall.velocity.x)==0&& Math.abs(golfBall.velocity.y) ==0 && Math.abs(golfBall.velocity.z) ==0){
+            if (Math.abs(golfBall.velocity.x) == 0 && Math.abs(golfBall.velocity.y) == 0 && Math.abs(golfBall.velocity.z) == 0) {
                 golfBall.velocity.x += dvx * DisplayManager.getFrameTimeSeconds();
                 golfBall.velocity.y += dvy * DisplayManager.getFrameTimeSeconds();
-                golfBall.velocity.z += dvz * DisplayManager.getFrameTimeSeconds();}
+                golfBall.velocity.z += dvz * DisplayManager.getFrameTimeSeconds();
+
         }
 //    x = false;
     }
 
 
+    public void setAI(boolean b) {
+        ai = true;
+    }
+
+    public boolean getAI() {
+        return ai;
+    }
 }

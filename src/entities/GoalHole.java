@@ -19,6 +19,9 @@ public class GoalHole extends Entity{
 	private static final float scoreThreshold = 130f;
 	private Terrain terrain;
 
+	public static int goalXPos = (int)168.34851;
+	public static int goalZPos = (int) -208.15895;
+
 	/**
 	 * @param loader a reference to the loader for terrain textures
 	 * @param terrain a reference to the current terrain
@@ -30,7 +33,6 @@ public class GoalHole extends Entity{
 	 * @param scale scale of the model
 	 * @param isObstacle boolean specifying whether the model is an obstacle (of the Entity class)
 	 * @param collisionSize size of collision
-	 * @param golfBall a reference to the golf ball of the player
 	 */
 	
 	
@@ -40,6 +42,12 @@ public class GoalHole extends Entity{
 		this.terrain = terrain;
 		terrain.createHole(this.getPosition().x, this.getPosition().z, 5);
 		terrain.updateTerrain(loader);
+	}
+
+	public void setGolfHoleLocation(Vector3f position){
+
+		goalXPos = (int)position.getX();
+		goalZPos = (int)position.getY();
 	}
 	
 	
