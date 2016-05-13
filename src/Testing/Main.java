@@ -62,7 +62,7 @@ public class Main {
     public static List<Terrain> terrains = new ArrayList<Terrain>();
     public static Terrain terrainChoice;
     public static Loader loaderUsed;
-    public static int goalXPos = 50;
+    public static int goalXPos = 110;
     public static int goalZPos = -50;
     public static GolfBall golfBallUsed1;
     public static GolfBall golfBallUsed2;

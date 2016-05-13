@@ -138,16 +138,16 @@ public class GolfBall extends Entity {
 		//System.out.println("Left: " + Left);
 		//System.out.println(":::::::::");
 		Vector2f TopNormal = new Vector2f(-dz,-dx);
-		TopNormal.normalise();
+		//TopNormal.normalise();
 		//System.out.println("Top Normal" + TopNormal);
 		Vector2f RightNormal = new Vector2f(dx,-dz);
-		RightNormal.normalise();
+		//RightNormal.normalise();
 		//System.out.println("Right Normal" + RightNormal);
 		Vector2f BottomNormal = new Vector2f(dz,dx);
-		BottomNormal.normalise();
+		//BottomNormal.normalise();
 		//System.out.println("Bottom Normal" + BottomNormal);
 		Vector2f LeftNormal = new Vector2f(-dx,dz);
-		LeftNormal.normalise();
+		//LeftNormal.normalise();
 		//System.out.println("Left Normal" + LeftNormal);
 		
 		Vector2f ballPosition = new Vector2f(this.getPosition().x, this.getPosition().z);
@@ -165,8 +165,7 @@ public class GolfBall extends Entity {
 		//subB.normalise();
 		//subL.normalise();
 		
-		//if(Dot(ballCtr - i, normal[i]) < 0 ) {
-		if(Vector2f.dot(subT, TopNormal) < 0)  {
+		if(Vector2f.dot(subT, TopNormal) > 0)  {
 			System.out.println("Top");
 			return TopNormal;
 		} else if(Vector2f.dot(subR, RightNormal) < 0) {
