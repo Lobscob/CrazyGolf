@@ -229,13 +229,14 @@ public class Player extends Entity{
 	        if (Keyboard.isKeyDown(Keyboard.KEY_J)) {
 	            jump();
 	        }
-	        if (Keyboard.isKeyDown(Keyboard.KEY_X)) {
+	        if (Keyboard.isKeyDown(Keyboard.KEY_X)&& keyPressed) {
 	            Simulation sim = new Simulation(this);
-	            sim.calculateHitToGoal(this.getGolfBall(), Main.holeUsed);
-	            System.out.println("Xforce: " + HIT_FORCE_X);
-	            System.out.println("Yforce: " + HIT_FORCE_Y);
-	            System.out.println("Zforce: " + HIT_FORCE_Z);
+	            //sim.calculateHitToGoal(this.getGolfBall(), Main.holeUsed);
+	            //System.out.println("Xforce: " + HIT_FORCE_X);
+	            //System.out.println("Yforce: " + HIT_FORCE_Y);
+	            //System.out.println("Zforce: " + HIT_FORCE_Z);
 	            sim.simulateHit(this.getGolfBall());
+	            keyPressed = false;
 	        }
 	       
 	        if(Keyboard.isKeyDown(Keyboard.KEY_R)) {

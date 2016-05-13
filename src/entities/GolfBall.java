@@ -228,8 +228,8 @@ public class GolfBall extends Entity {
 	 */
 	public void manageHit(Vector3f forces) {
 		
-		float dvx = (float) (forces.x);//* Math.sin(Math.toRadians(this.getRotY())));
-		float dvz = (float) (forces.z);// * Math.cos(Math.toRadians(this.getRotY())));
+		float dvx = (float) (forces.x); //Math.sin(Math.toRadians(this.getRotY())));
+		float dvz = (float) (forces.z); //Math.cos(Math.toRadians(this.getRotY())));
 		float dvy = forces.y;
 		
 		this.velocity.x -= dvx * DisplayManager.getFrameTimeSeconds();
