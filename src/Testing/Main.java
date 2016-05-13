@@ -341,9 +341,13 @@ public class Main {
 				System.out.println("ohno");
 			}
 			renderer.render(light, camera);
-			//SIMULATION
+			//SIMULATIONd
 			for(int i=0; i<simulatedBalls.size(); i++) {
+				simulatedBalls.get(i).move(terrain);
 				renderer.processEntity(simulatedBalls.get(i));
+				for(int j=0; j<entities.size(); j++) {
+					simulatedBalls.get(i).manageCollision(entities.get(j));
+				}
 			}
 			
 			for(int i=0; i<entities.size(); i++) {
