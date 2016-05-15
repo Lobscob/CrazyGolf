@@ -8,6 +8,7 @@ import java.util.List;
 import org.lwjgl.util.vector.Vector3f;
 
 import Testing.Main;
+import entities.Entity;
 import entities.GoalHole;
 import entities.GolfBall;
 import entities.Player;
@@ -39,7 +40,7 @@ public class Simulation {
 		
 		float vx = -dx / (DisplayManager.getFrameTimeSeconds() * golfBall.getGroundFriction() * 0.6f);
 		float vz = dz / (DisplayManager.getFrameTimeSeconds() * golfBall.getGroundFriction() * 0.6f);
-		HitPower = new Vector3f(vx,000,vz);
+		HitPower = new Vector3f(vx,1000,vz);
 		//AI.setHitPower(HitPower);
 		return HitPower;
 	}
@@ -66,8 +67,17 @@ public class Simulation {
 		Main.simulatedBalls.clear();
 	}
 	
-	public float angleAvoid() {
-		return 0;
+	public float angleAvoid(Entity entity, GolfBall golfBall) {
+		final float epsilon = 1;
+		
+		float a = (entity.getCollisionZone().x * (float) Math.cos(Math.toRadians(entity.getRotY())))/2;
+		float bx = entity.getPosition().x - golfBall.getPosition().x;
+		float bz = entity.getPosition().z - golfBall.getPosition().z;
+		float b = (float) Math.sqrt(bx*bx+bz*bz);
+		float theta = (float) Math.atan((a/b));
+		theta += epsilon;
+		
+		return theta;
 	}
 	
 }

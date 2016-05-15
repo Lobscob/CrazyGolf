@@ -229,7 +229,7 @@ public class Player extends Entity{
 	        if (Keyboard.isKeyDown(Keyboard.KEY_J)) {
 	            jump();
 	        }
-	        if (Keyboard.isKeyDown(Keyboard.KEY_X)&& keyPressed) {
+	        if (Keyboard.isKeyDown(Keyboard.KEY_X)&&keyPressed) {
 	            Simulation sim = new Simulation(this);
 	            //sim.calculateHitToGoal(this.getGolfBall(), Main.holeUsed);
 	            //System.out.println("Xforce: " + HIT_FORCE_X);
