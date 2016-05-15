@@ -40,11 +40,11 @@ public class Simulation {
 		
 		float vx = -dx / (DisplayManager.getFrameTimeSeconds() * golfBall.getGroundFriction() * 0.6f);
 		float vz = dz / (DisplayManager.getFrameTimeSeconds() * golfBall.getGroundFriction() * 0.6f);
-		HitPower = new Vector3f(vx,1000,vz);
-		//AI.setHitPower(HitPower);
+		Vector3f hitPower = new Vector3f(vx,0,vz);
+		this.HitPower = hitPower;
+		AI.setHitPower(hitPower);
 		return HitPower;
 	}
-	
 	public void calculateHeuristics() {
 		
 	}
@@ -59,7 +59,8 @@ public class Simulation {
 				System.out.println("Sim ball present");
 			}
 			Vector3f simHit = calculateHitToGoal(Main.simulatedBalls.get(i), Main.holeUsed);
-			simulationBall.manageHit(simHit);
+			System.out.println(simHit);
+			simulationBall.manageSimHit(simHit);
 		}
 	}
 	
