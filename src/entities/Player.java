@@ -86,8 +86,8 @@ public class Player extends Entity{
 
 	@Override
 	public void move(Terrain terrain) {
-		System.out.println("AI1 " + ai1.getAI());
-		System.out.println("AI2 " + ai2.getAI());
+		//System.out.println("AI1 " + ai1.getAI());
+		//System.out.println("AI2 " + ai2.getAI());
 		if(ai1.getAI()) ai1.shootBall();
 		if(ai2.getAI()) ai2.shootBall();
 				numberOfFrames++;
