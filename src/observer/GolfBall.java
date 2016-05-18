@@ -13,12 +13,17 @@ import org.omg.CORBA.BooleanHolder;
 public class GolfBall extends Entity {
 	
 	private int modelIndex;
-	
+    private ObserverPhysics obs;
     
     public GolfBall(Vector3f position, float radius, int modelIndex) {
     	super(position, radius);
     	this.modelIndex = modelIndex;
+        obs = new ObserverPhysics(this);
     	
+    }
+
+    public void move() {
+        obs.notifyObs();
     }
     
     public int getModelIndex() {

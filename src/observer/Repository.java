@@ -18,13 +18,11 @@ public class Repository {
     
     public static void main(String[] args) {
     	List<Entity> entities = new ArrayList<Entity>();
-    	Entity a1 = new GolfBall(new Vector3f(10,10,10), 5, 1);
-    	Entity a2 = new GolfBall(new Vector3f(20,20,20), 5, 2);
-    	Entity a3 = new Entity(new Vector3f(0,0,0), 10);
+    	GolfBall a1 = new GolfBall(new Vector3f(10,10,10), 5, 1);
+    	GolfBall a2 = new GolfBall(new Vector3f(20,20,20), 5, 2);
     	
     	entities.add(a1);
     	entities.add(a2);
-    	entities.add(a3);
  
     	
     	boolean running = true;
@@ -34,7 +32,6 @@ public class Repository {
     		t++;
     		a1.move();
     		a2.move();
-    		a3.move();
     		if(t>10) {
     			running = false;
     		}
