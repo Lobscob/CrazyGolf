@@ -11,8 +11,26 @@ public class Entity {
     private Vector3f rotation;
     private Boolean score;
     private float radius;
+    private final float MASS = 10;
+    private ObserverPhysics obs;
+    
+    public Entity(Vector3f position, float radius) {
+    	this.position = position;
+    	this.radius = radius;
+    	obs = new ObserverPhysics(this);
+    }
+    
+    public void move() {
+    	//observer performs calculations, all the golfball does is notify that something has changed
+    	obs.notify();
+    }
+    
+    
 
-
+    public float getMass() {
+    	return MASS;
+    }
+    
     public Vector3f getVelocity() {
         return velocity;
     }
