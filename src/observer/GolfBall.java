@@ -9,52 +9,60 @@ import org.omg.CORBA.BooleanHolder;
 /**
  * Created by Jeroen on 17/05/2016.
  */
-public class GolfBall extends Entity {
-    private Vector3f velocity;
-    private Vector3f position;
-    private Vector3f rotation;
-    private Boolean score;
-    private float radius;
 
+public class GolfBall extends Entity {
+	
+	private int modelIndex;
+	
+    
+    public GolfBall(Vector3f position, float radius, int modelIndex) {
+    	super(position, radius);
+    	this.modelIndex = modelIndex;
+    	
+    }
+    
+    public int getModelIndex() {
+    	return this.modelIndex;
+    }
 
     public Vector3f getVelocity() {
-        return velocity;
+        return super.getVelocity();
     }
 
     public void setVelocity(Vector3f velocity) {
-        this.velocity = velocity;
+        super.setVelocity(velocity);
     }
 
     public Vector3f getPosition() {
-        return position;
+        return super.getPosition();
     }
 
     public void setPosition(Vector3f position) {
-        this.position = position;
+        super.setPosition(position);
     }
 
     public Vector3f getRotation() {
-        return rotation;
+        return super.getRotation();
     }
 
     public void setRotation(Vector3f rotation) {
-        this.rotation = rotation;
+        super.setRotation(rotation);
     }
 
     public Boolean getScore() {
-        return score;
+        return super.getScore();
     }
 
     public void setScore(Boolean score) {
-        this.score = score;
+        super.setScore(score);
     }
 
     public float getRadius() {
-        return radius;
+        return super.getRadius();
     }
 
     public void setRadius(float radius) {
-        this.radius = radius;
+        super.setRadius(radius);
     }
 
 
