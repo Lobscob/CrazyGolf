@@ -22,6 +22,6 @@ public class ObserverPhysics {
     }
     public void notifyOBS(){
         time++;
-  
+
     }
 }
