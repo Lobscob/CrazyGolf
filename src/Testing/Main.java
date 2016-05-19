@@ -29,7 +29,7 @@ import java.util.Random;
  * The main running class for Crazy Golf 
  */
 
-public class Main {
+public class Main extends Objects {
 	public static JTextField saveTF;
 	public static JTextField loadTF;
 

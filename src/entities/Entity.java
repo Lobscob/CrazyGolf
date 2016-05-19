@@ -2,6 +2,7 @@ package entities;
 
 import java.awt.Rectangle;
 
+import Testing.Main;
 import org.lwjgl.util.vector.Vector3f;
 
 import models.TexturedModel;
