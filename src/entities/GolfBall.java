@@ -1,5 +1,6 @@
 package entities;
 
+import AI.AI;
 import Testing.Main;
 import models.TexturedModel;
 import org.lwjgl.util.vector.Vector2f;
@@ -11,6 +12,9 @@ import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.util.Random;
+
+import static Testing.Main.golfBallUsed1;
+import static Testing.Main.holeUsed;
 
 /**
  * This class represents the golf ball
@@ -26,7 +30,11 @@ public class GolfBall extends Entity {
     private float az = 0;
     
     private boolean isInHole = false;
-    public void setIsInHole(boolean b) { this.isInHole = b; }
+	private float windX;
+	private float windZ;
+	private Vector3f normal;
+
+	public void setIsInHole(boolean b) { this.isInHole = b; }
     public boolean getIsInHole() { return this.isInHole; }
 
 	/**
@@ -49,6 +57,7 @@ public class GolfBall extends Entity {
 	}
 	
 	public void move(Terrain terrain) {
+
 		
 		float x = 0;
 		float y = 0;
@@ -273,5 +282,25 @@ public class GolfBall extends Entity {
 			golfBall.velocity.z += 1000;
 		}
 		
+	}
+
+	public void setVelocity(Vector3f velocity) {
+		this.velocity = velocity;
+	}
+
+	public float getGravity() {
+		return GRAVITY;
+	}
+
+	public float getWindX() {
+		return windX;
+	}
+
+	public float getWindZ() {
+		return windZ;
+	}
+
+	public Vector3f getNormal() {
+		return normal;
 	}
 }
