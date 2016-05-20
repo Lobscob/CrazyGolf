@@ -170,7 +170,7 @@ public class Terrain {
 		for (int i=-brushSize; i<=brushSize; i++) {
 			for(int j=-brushSize; j<=brushSize; j++) {
 				if(gridX+i>0 && gridX+i<256 && gridZ+j>0 && gridZ+j<256) {
-					//heights[gridX+i][gridZ+j] -= intensity;
+					heights[gridX+i][gridZ+j] -= intensity;
 				}
 			}
 		}

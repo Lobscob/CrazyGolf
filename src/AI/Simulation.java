@@ -42,7 +42,7 @@ public class Simulation {
 		float vz = dz / (DisplayManager.getFrameTimeSeconds() * golfBall.getGroundFriction() * 0.6f);
 		Vector3f hitPower = new Vector3f(vx,0,vz);
 		this.HitPower = hitPower;
-		AI.setHitPower(hitPower);
+		//AI.setHitPower(hitPower);
 		return HitPower;
 	}
 	public void calculateHeuristics() {
