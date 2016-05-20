@@ -184,7 +184,6 @@ public class GolfBall extends Entity {
 		
 		Vector2f ballPosition = new Vector2f(this.getPosition().x, this.getPosition().z);
 		
-		
 		Vector2f subT = new Vector2f();
 		Vector2f subR = new Vector2f();
 		Vector2f subB = new Vector2f();
