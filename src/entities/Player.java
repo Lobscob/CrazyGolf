@@ -61,8 +61,8 @@ public class Player extends Entity {
     private Player opponent;
 
 
-//    private Bot/*Mover ai1 = new BotMover(Main.getPlayer1(), Main.golfBallUsed1, Main.holeUsed);
-//    private BotMover */ai2 = new BotMover(Main.getPlayer2(), Main.golfBallUsed2, Main.holeUsed);
+//    private BotMover ai1 = new BotMover(Main.getPlayer1(), Main.golfBallUsed1, Main.holeUsed);
+    private BotMover ai21 = new BotMover(Main.getPlayer2(), Main.golfBallUsed2, Main.holeUsed);
     AI ai1 = new AI(Main.golfBallUsed1, Main.terrainChoice, Main.holeUsed);
     AI ai2= new AI(Main.golfBallUsed2, Main.terrainChoice, Main.holeUsed);
 
@@ -101,8 +101,8 @@ public class Player extends Entity {
 //        ai.runBot();
 
 
- /*       if (ai1.getAI()) ai1.shootBall();
-        if (ai2.getAI()) ai2.shootBall();*/
+//       if (ai1.getAI()) ai1.shootBall();
+        if (ai21.getAI()) ai21.shootBall();
         numberOfFrames++;
         checkInputs();
         super.increaseRotation(0, currentTurnSpeed * DisplayManager.getFrameTimeSeconds(), 0);
@@ -195,13 +195,13 @@ public class Player extends Entity {
             numberOfFrames = 0;
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_Z) && keyPressed) {
-//				ai2.setAI(true);
-             ai1.runBot();
+				ai21.setAI(true);
+//             ai2.runBot();
 
             keyPressed = false;
         } else if (Keyboard.isKeyDown(Keyboard.KEY_B) && keyPressed) {
 //				ai1.setAI(true);
-            ai2.runBot();
+            ai1.runBot();
             keyPressed = false;
         } else if (Keyboard.isKeyDown(Keyboard.KEY_I) && keyPressed) {
             increaseHitPower();
