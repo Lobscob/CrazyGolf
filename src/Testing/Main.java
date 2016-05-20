@@ -286,8 +286,8 @@ public class Main extends Objects {
         }
 
         //entities.add(new Entity(wall,new Vector3f(350, terrain.getHeightOfTerrain(350, -300) ,-300),0,0,0,3.2f, true, new Vector3f(42,5,3)));
-        //entities.add(new Entity(castle,new Vector3f(500,terrain.getHeightOfTerrain(500, -500),-500),0,0,0,10, false, new Vector3f(0,0,0)));
-        entities.add(new Entity(crate, new Vector3f(330, terrain.getHeightOfTerrain(330, -330), -330), 0, 0, 0, 10, true, new Vector3f(12, 12, 12)));
+        entities.add(new Entity(castle,new Vector3f(800,terrain.getHeightOfTerrain(800, -800),-800),0,0,0,10, false, new Vector3f(0,0,0)));
+        entities.add(new Entity(crate, new Vector3f(330, terrain.getHeightOfTerrain(330, -330), -330), 0, 0, 0, 10, true, new Vector3f(14, 14, 14)));
 
         List<GuiTexture> guis = new ArrayList<GuiTexture>();
         if (editorMode) {

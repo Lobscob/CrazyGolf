@@ -132,28 +132,28 @@ public class Editor extends Entity {
         		keyPressed = false;
         }
         	else if (Keyboard.isKeyDown(Keyboard.KEY_1)) {
-            Entity placed = new Entity(Main.rock, new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, this.getRotY(), 0, 4, true, new Vector3f(6,4,6));
+            Entity placed = new Entity(Main.rock, new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, 0, 0, 4, true, new Vector3f(6,4,6));
             //placed.setPosition(new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(x, z), mouseTerrainPosition.z));
             Main.entities.add(placed); 
             keyPressed = false;
         } else if (Keyboard.isKeyDown(Keyboard.KEY_2)) {
-            Entity placed = new Entity(Main.tree,new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, this.getRotY(), 0, 10, true, new Vector3f(4,40,4));
+            Entity placed = new Entity(Main.tree,new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, 0, 0, 10, true, new Vector3f(4,40,4));
             Main.entities.add(placed); 
             keyPressed = false;
         } else if (Keyboard.isKeyDown(Keyboard.KEY_3)) {
-            Entity placed = new Entity(Main.fern, new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, this.getRotY(), 0, 1, true, new Vector3f(0,0,0));
+            Entity placed = new Entity(Main.fern, new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, 0, 0, 1, true, new Vector3f(0,0,0));
             Main.entities.add(placed); 
             keyPressed = false;
         } else if (Keyboard.isKeyDown(Keyboard.KEY_4)) {
-            Entity placed = new Entity(Main.playerModelTextured, new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, this.getRotY(), 0, 4, true, new Vector3f(4,14,4));
+            Entity placed = new Entity(Main.playerModelTextured, new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, 0, 0, 4, true, new Vector3f(4,14,4));
             Main.entities.add(placed); 
             keyPressed = false;
         } else if (Keyboard.isKeyDown(Keyboard.KEY_5)) {
-            Entity placed = new Entity(Main.staticSphereModel, new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, this.getRotY(), 0, 4, true, new Vector3f(4,4,4));
+            Entity placed = new Entity(Main.staticSphereModel, new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, 0, 0, 4, true, new Vector3f(4,4,4));
             Main.entities.add(placed);
             keyPressed = false;
         }else if (Keyboard.isKeyDown(Keyboard.KEY_6)) {
-        	Entity placed = new Entity(Main.crate, new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, this.getRotY(), 0, 5, true, new Vector3f(5,5,5));
+        	Entity placed = new Entity(Main.crate, new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, 0, 0, 5, true, new Vector3f(5,5,5));
         	Main.entities.add(placed);
         	keyPressed = false;
         } else if (Keyboard.isKeyDown(Keyboard.KEY_7)) {
@@ -161,7 +161,7 @@ public class Editor extends Entity {
         		xConnect = mouseTerrainPosition.x;
         		zConnect = mouseTerrainPosition.z;
         	}
-            Entity placed = new Entity(Main.wall, new Vector3f(xConnect , terrain.getHeightOfTerrain(xConnect, zConnect), zConnect), 0, this.getRotY()+90, 0, 3.2f, true, new Vector3f(16, 5, 2f));
+            Entity placed = new Entity(Main.wall, new Vector3f(xConnect , terrain.getHeightOfTerrain(xConnect, zConnect), zConnect), 0, this.getRotY()+90, 0, 3.2f, true, new Vector3f(15, 5, 2f));
             wallCounter ++;
             float xN = (float) ((placed.getCollisionZone().x/2) * (Math.cos(Math.toRadians(placed.getRotY())))); 
         	float zN = (float) ((placed.getCollisionZone().x/2) * (Math.sin(Math.toRadians(placed.getRotY()))));
