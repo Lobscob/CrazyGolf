@@ -97,9 +97,9 @@ public class GolfBall extends Entity {
 			}
 		}
 		
-		velocity.x += ax * DisplayManager.getFrameTimeSeconds() - normal.x*2 * GRAVITY * groundFriction + windx;
+		velocity.x += ax * DisplayManager.getFrameTimeSeconds() - normal.x*2 * GRAVITY  + windx;
 		velocity.y += ay * DisplayManager.getFrameTimeSeconds() + normal.y * GRAVITY;
-		velocity.z -= az * DisplayManager.getFrameTimeSeconds() + normal.z*2 * GRAVITY * groundFriction + windz;
+		velocity.z -= az * DisplayManager.getFrameTimeSeconds() + normal.z*2 * GRAVITY  + windz;
 		//System.out.println(velocity.x + " " +  velocity.y + " " +  velocity.z);
 		
 		x += velocity.x * DisplayManager.getFrameTimeSeconds();
