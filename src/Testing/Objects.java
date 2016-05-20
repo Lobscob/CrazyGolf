@@ -73,8 +73,8 @@ public class Objects {
     }
     public static void loadHoll(Loader loader){
         holeUsed = new GoalHole(loader, terrainChoice, golfGoal, new Vector3f(Main.goalXPos, terrainChoice.getHeightOfTerrain(Main.goalXPos, Main.goalZPos), Main.goalZPos), 0, 0, 0, 5, true, new Vector3f(7f, 7f, 7f));
-       if(Main.getPlayerMode()) {terrainChoice.createHole(holeUsed.getPosition().x, holeUsed.getPosition().z, 5);
-        terrainChoice.updateTerrain(loader);}
+       if(Main.getPlayerMode()) {terrainChoice.createHole(holeUsed.getPosition().x, holeUsed.getPosition().z, 5);}
+        terrainChoice.updateTerrain(loader);
 
     }
 

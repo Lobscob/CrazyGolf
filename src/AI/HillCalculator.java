@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class HillCalculator {
 
-    private float percision = 60;
+    private float percision = 120;
     private GolfBall ball;
     private GoalHole hole;
     private Vector3f holePos;
@@ -97,11 +97,15 @@ public class HillCalculator {
             System.out.println(i + " NegZ= " +negativeZ);*/
                 groundFriction += 1/ball.getGroundFriction();
             if(difY<0) {
-                ax += (float) negativeX * (Math.sqrt((difX * difX) + difY * difY)) - normal.x * 4 * ball.getGravity();
-                az += (float) negativeZ * (Math.sqrt((difZ * difZ) + difY * difY)) + normal.z * 4 * ball.getGravity();
+//                ax += (float) negativeX * (Math.sqrt((difX * difX) + difY * difY)) - normal.x * 2 * ball.getGravity();
+                ax += (float) negativeX * (Math.sqrt((difX * difX) + difY * difY)) ;
+//                az += (float) negativeZ * (Math.sqrt((difZ * difZ) + difY * difY)) + normal.z * 2 * ball.getGravity();
+                az += (float) negativeZ * (Math.sqrt((difZ * difZ) + difY * difY)) ;
             }else{
-                ax += (float) negativeX * (Math.sqrt((difX * difX) + difY * difY)) + normal.x * 4 * ball.getGravity();
-            az += (float) negativeZ * (Math.sqrt((difZ * difZ) + difY * difY)) - normal.z * 4 * ball.getGravity();}
+//                ax += (float) negativeX * (Math.sqrt((difX * difX) + difY * difY)) + normal.x * 2 * ball.getGravity();
+                ax += (float) negativeX * (Math.sqrt((difX * difX) + difY * difY));
+//            az += (float) negativeZ * (Math.sqrt((difZ * difZ) + difY * difY)) - normal.z * 2 * ball.getGravity();
+            az += (float) negativeZ * (Math.sqrt((difZ * difZ) + difY * difY)) ;}
 //            System.out.println(DisplayManager.getFrameTimeSeconds() * 1 / (difX * 2 * ball.getGravity() * ball.getGroundFriction()));
 
         }
