@@ -362,7 +362,8 @@ public class Main extends Objects {
             for (int i = 0; i < entities.size(); i++) {
                 renderer.processEntity(entities.get(i));
                 if (canCollideOther) {
-                    golfBall.manageCollision(entities.get(i));
+                	golfBallUsed1.manageCollision(entities.get(i));
+                	golfBallUsed2.manageCollision(entities.get(i));
                 }
                 player.manageCollision(entities.get(i));
             }
