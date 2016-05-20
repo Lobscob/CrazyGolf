@@ -222,7 +222,7 @@ public class GolfBall extends Entity {
 			Vector2f V = new Vector2f(this.velocity.x, this.velocity.z);
 			Vector2f normal = normalOfImpact(entity);
 			
-			normal.normalise();
+			//normal.normalise();
 			
 			Vector2f VPrime = new Vector2f();
 			Vector2f u = new Vector2f();
