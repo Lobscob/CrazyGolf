@@ -78,7 +78,7 @@ public class HillCalculator {
         int negativeZ = 1;
         Vector3f normal = new Vector3f();
         for (int i = 1; i < percision + 1; i++) {
-            normal = normalCalculator((points.get(i).x + points.get(i).x) / 2, (points.get(i).z + points.get(i).z) / 2);
+            normal = normalCalculator((points.get(i).x + points.get(i-1).x) / 2, (points.get(i).z + points.get(i-1).z) / 2);
 //            System.out.println(normal);
             negativeX = 1;
             negativeZ = 1;

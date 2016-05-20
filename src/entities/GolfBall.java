@@ -86,7 +86,7 @@ public class GolfBall extends Entity {
 		Random rand = new Random();
 		float windx = 0;
 		float windz = 0;
-		if(rand.nextFloat()<0.1f) {
+		if(rand.nextFloat()<0.01f) {
 			windx += rand.nextFloat()/5f;
 			windz += rand.nextFloat()/5f;
 			if(rand.nextFloat()<0.4) {
@@ -97,9 +97,9 @@ public class GolfBall extends Entity {
 			}
 		}
 		
-		velocity.x += ax * DisplayManager.getFrameTimeSeconds() - normal.x*2 * GRAVITY * groundFriction + windx;
-		velocity.y += ay * DisplayManager.getFrameTimeSeconds() + normal.y * GRAVITY;
-		velocity.z -= az * DisplayManager.getFrameTimeSeconds() + normal.z*2 * GRAVITY * groundFriction + windz;
+		velocity.x += ax * DisplayManager.getFrameTimeSeconds() - (normal.x*2) * GRAVITY  + windx;
+		velocity.y += ay * DisplayManager.getFrameTimeSeconds() + (normal.y) * GRAVITY;
+		velocity.z -= az * DisplayManager.getFrameTimeSeconds() + (normal.z*2) * GRAVITY  + windz;
 		//System.out.println(velocity.x + " " +  velocity.y + " " +  velocity.z);
 		
 		x += velocity.x * DisplayManager.getFrameTimeSeconds();
@@ -149,6 +149,7 @@ public class GolfBall extends Entity {
 	}
 	
 	private Vector2f normalOfImpact(Entity entity) {
+		
 		float theta = entity.getRotY();
 
 		float dz = (float) Math.sin(Math.toRadians(theta));
@@ -166,6 +167,9 @@ public class GolfBall extends Entity {
 		//System.out.println(":::::::::");
 		Vector2f TopNormal = new Vector2f(-dz,-dx);
 		TopNormal.normalise();
+		if (entity.getModel() == Main.wall) {
+			return TopNormal;
+		}
 		//System.out.println("Top Normal" + TopNormal);
 		Vector2f RightNormal = new Vector2f(dx,-dz);
 		RightNormal.normalise();
@@ -178,6 +182,7 @@ public class GolfBall extends Entity {
 		//System.out.println("Left Normal" + LeftNormal);
 		
 		Vector2f ballPosition = new Vector2f(this.getPosition().x, this.getPosition().z);
+		
 		
 		Vector2f subT = new Vector2f();
 		Vector2f subR = new Vector2f();
@@ -208,7 +213,7 @@ public class GolfBall extends Entity {
 	
 	private float groundFriction = 0.975f;
 	public float getGroundFriction() { return groundFriction; }
-	private float coefficientOfRestitution = 0.650f;
+	private float coefficientOfRestitution = 0.450f;
 	public void manageCollision(Entity entity) {
 		if(checkCollision(entity) && entity.isEntityObstacle()) {
 			//System.out.println("BOUNCE BOUNCE BOUNCE");
@@ -216,6 +221,7 @@ public class GolfBall extends Entity {
 			
 			Vector2f V = new Vector2f(this.velocity.x, this.velocity.z);
 			Vector2f normal = normalOfImpact(entity);
+			
 			//normal.normalise();
 			
 			Vector2f VPrime = new Vector2f();
@@ -262,7 +268,7 @@ public class GolfBall extends Entity {
 		this.velocity.z += dvz * DisplayManager.getFrameTimeSeconds();
 	}
 	
-	public boolean checkCollision(GolfBall golfBall) {
+	private boolean checkCollision(GolfBall golfBall) {
 		float dx = this.getPosition().x - golfBall.getPosition().x;
 		float dz = this.getPosition().z - golfBall.getPosition().z;
 		
@@ -272,14 +278,16 @@ public class GolfBall extends Entity {
 		return collision;
 	}
 	
-	public void manageBallCollision(GolfBall golfBall) {
-		if(checkCollision(golfBall)) {
+	public void manageBallCollision(GolfBall g) {
+		if(checkCollision(g) && Main.canCollideBall) {
 			Main.canCollideBall = false;
-		
-			this.velocity.x *= -1;
-			this.velocity.z *= -1;
-			golfBall.velocity.x += 1000;
-			golfBall.velocity.z += 1000;
+
+			g.velocity.x = this.velocity.x * coefficientOfRestitution;
+			g.velocity.z = this.velocity.z * coefficientOfRestitution;
+			
+			this.velocity.x *= -(coefficientOfRestitution * coefficientOfRestitution);
+			this.velocity.z *= -(coefficientOfRestitution * coefficientOfRestitution);
+			//System.out.println("Ball Collision");
 		}
 		
 	}
