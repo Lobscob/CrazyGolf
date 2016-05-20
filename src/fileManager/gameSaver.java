@@ -28,6 +28,8 @@ public class gameSaver {
 
         PrintWriter out = new PrintWriter(courseName);
         out.println(Main.terrainChoice.getID().substring(0,1));
+        out.println(Main.goalXPos);
+        out.println(Main.goalZPos);
         for (int i = 0; i < Main.entities.size(); i++) {
             Entity t = Main.entities.get(i);
             String k = " ";

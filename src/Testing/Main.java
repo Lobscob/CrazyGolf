@@ -472,4 +472,8 @@ public class Main extends Objects {
         return terrain4;
 
     }
+
+    public static boolean getPlayerMode() {
+        return playerMode;
+    }
 }

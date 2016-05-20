@@ -40,8 +40,7 @@ public class GoalHole extends Entity{
 			boolean isObstacle, Vector3f collisionSize) {
 		super(model, position, rotX, rotY, rotZ, scale, isObstacle, collisionSize);
 		this.terrain = terrain;
-		terrain.createHole(this.getPosition().x, this.getPosition().z, 5);
-		terrain.updateTerrain(loader);
+
 	}
 
 	public void setGolfHoleLocation(Vector3f position){
