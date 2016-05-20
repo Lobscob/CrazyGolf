@@ -165,6 +165,7 @@ public class GolfBall extends Entity {
 		//System.out.println("Bottom: " + Bottom);
 		//System.out.println("Left: " + Left);
 		//System.out.println(":::::::::");
+		
 		Vector2f TopNormal = new Vector2f(-dz,-dx);
 		TopNormal.normalise();
 		if (entity.getModel() == Main.wall) {
@@ -207,7 +208,7 @@ public class GolfBall extends Entity {
 			return LeftNormal;
 		} else {
 			System.out.println("End");
-			return BottomNormal;
+			return TopNormal;
 		}
 	}
 	
@@ -222,7 +223,7 @@ public class GolfBall extends Entity {
 			Vector2f V = new Vector2f(this.velocity.x, this.velocity.z);
 			Vector2f normal = normalOfImpact(entity);
 			
-			//normal.normalise();
+			normal.normalise();
 			
 			Vector2f VPrime = new Vector2f();
 			Vector2f u = new Vector2f();
