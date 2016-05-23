@@ -176,6 +176,10 @@ public class Editor extends Entity {
             GoalHole placed = new GoalHole(Main.loaderUsed, Main.terrainChoice, Main.golfGoal, new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, this.getRotY(), 0, 5, true, new Vector3f(6f,6f,6f));
             Main.holeUsed = placed;
             keyPressed = false;
+        }else if (Keyboard.isKeyDown(Keyboard.KEY_9)) {
+        	Main.startX = (int) mouseTerrainPosition.x;
+        	Main.startZ = (int) mouseTerrainPosition.z;
+            keyPressed = false;
         } else if(Keyboard.isKeyDown(Keyboard.KEY_P)) {
         	wallCounter = 0;
         }

@@ -30,6 +30,8 @@ public class gameSaver {
         out.println(Main.terrainChoice.getID().substring(0,1));
         out.println(Main.goalXPos);
         out.println(Main.goalZPos);
+        out.println(Main.startX);
+        out.println(Main.startZ);
         for (int i = 0; i < Main.entities.size(); i++) {
             Entity t = Main.entities.get(i);
             String k = " ";

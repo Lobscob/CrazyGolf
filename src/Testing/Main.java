@@ -72,6 +72,8 @@ public class Main extends Objects {
     public static Loader loaderUsed;
     public static int goalXPos = 110;
     public static int goalZPos = -50;
+    public static int startX = 250;
+    public static int startZ = -250;
     public static GolfBall golfBallUsed1;
     public static GolfBall golfBallUsed2;
     public static GoalHole holeUsed;
@@ -217,17 +219,17 @@ public class Main extends Objects {
             Objects.loadHoll(loaderUsed);
 
             if (editorMode) {
-                editor = new Editor(playerModelTextured, new Vector3f(50, terrainChoice.getHeightOfTerrain(50, -50), -50), 0, 0, 0, 0, false, golfBallUsed1, new Vector3f(0, 0, 0));
+                editor = new Editor(playerModelTextured, new Vector3f(startX, terrainChoice.getHeightOfTerrain(startX, startZ), startZ), 0, 0, 0, 0, false, golfBallUsed1, new Vector3f(0, 0, 0));
                 editorCamera = new Camera(editor);
             } else if (playerMode) {
-                player1 = new Player(playerModelTextured, new Vector3f(440, terrainChoice.getHeightOfTerrain(440, -440), -440), 0, 0, 0, 3, false, golfBallUsed1, new Vector3f(2f, 14f, 2f), false, null);
-                player2 = new Player(playerModelTextured, new Vector3f(220, terrainChoice.getHeightOfTerrain(220, -220), -220), 0, 0, 0, 3, false, golfBallUsed2, new Vector3f(2f, 14f, 2f), true, null);
+                player1 = new Player(playerModelTextured, new Vector3f(startX, terrainChoice.getHeightOfTerrain(startX, startZ), startZ), 0, 0, 0, 3, false, golfBallUsed1, new Vector3f(2f, 14f, 2f), false, null);
+                player2 = new Player(playerModelTextured, new Vector3f(startX, terrainChoice.getHeightOfTerrain(startX, startZ), startZ), 0, 0, 0, 3, false, golfBallUsed2, new Vector3f(2f, 14f, 2f), true, null);
                 player1.setOpponent(player2);
                 player2.setOpponent(player1);
                 camera1 = new Camera(golfBallUsed1);
                 camera2 = new Camera(golfBallUsed2);
             } else if (terrainEditorMode) {
-                terrainEditor = new TerrainEditor(playerModelTextured, new Vector3f(444, terrainChoice.getHeightOfTerrain(444, -444), -444), 0, 0, 0, 0, false, golfBallUsed1, new Vector3f(0, 0, 0));
+                terrainEditor = new TerrainEditor(playerModelTextured, new Vector3f(startX, terrainChoice.getHeightOfTerrain(startX, startZ), startZ), 0, 0, 0, 0, false, golfBallUsed1, new Vector3f(0, 0, 0));
                 terrainEditorCamera = new Camera(terrainEditor);
             }
 
