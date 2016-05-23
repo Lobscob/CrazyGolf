@@ -108,11 +108,7 @@ public class TerrainEditor extends Entity {
 
         Random rand = new Random();
         
-        if(Keyboard.isKeyDown(Keyboard.KEY_R)) {
-				Main.entities.get(Main.entities.size()-1).increaseRotation(0, 1, 0);
-				keyPressed = false;
-			}
-        if(numberOfFrames>=20){keyPressed=true;numberOfFrames=0;}
+        if(numberOfFrames>=10){keyPressed=true;numberOfFrames=0;}
         
         while(keyPressed){
         	brushSize = (int) terrainMarker.getScale()/2;
@@ -169,11 +165,6 @@ public class TerrainEditor extends Entity {
     }
     private int brushSize;
     private float intensity = 1;
-    
-    public void hit() {
-        Vector3f forces = new Vector3f(this.HIT_FORCE_X, this.HIT_FORCE_Y, this.HIT_FORCE_Z);
-        golfBall.manageHit(forces);
-    }
 
 
 }
