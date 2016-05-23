@@ -25,6 +25,8 @@ public class gameLoader {
         System.out.println(terrainChoice);
         Main.goalXPos = Integer.parseInt(s.nextLine());
         Main.goalZPos = Integer.parseInt(s.nextLine());
+        Main.startX = Integer.parseInt(s.nextLine());
+        Main.startZ = Integer.parseInt(s.nextLine());
         System.out.println("XPOS= " + goalXPos);
         System.out.println("Zpos = " + goalZPos);
 
