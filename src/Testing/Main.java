@@ -122,6 +122,9 @@ public class Main extends Objects {
     private static Light light2;
     private static Light light3;
     private static Light light4;
+    
+    static float vx = 1;
+    static float vz = -1;
 
     private static MousePicker picker;
 
@@ -362,10 +365,17 @@ public class Main extends Objects {
                     simulatedBalls.get(i).manageCollision(entities.get(j));
                 }
             }
+           
             ArrayList<Entity> collisionAlert = new ArrayList<Entity>();
             for (int i = 0; i < entities.size(); i++) {
             	if(entities.get(i).getModel() == UFO) {
-            		entities.get(i).increasePosition(0.51f, 0, -0.51f);
+            		if (rand.nextDouble()<0.001 || entities.get(i).getPosition().x<0 || entities.get(i).getPosition().x>400 ) {
+            			vx*=-1;
+            		}
+            		if (rand.nextDouble()<0.001 || entities.get(i).getPosition().z<0 || entities.get(i).getPosition().z>-400) {
+            			vz*=-1;
+            		}
+            		entities.get(i).increasePosition(vx, 0, vz);
             		entities.get(i).increaseRotation(0, 5, 0);
             	}
             	renderer.processEntity(entities.get(i));
