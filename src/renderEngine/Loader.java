@@ -56,7 +56,7 @@ public class Loader {
 		storeDataInAttributeList(2,3, normals);
 		
 		bindTerrainIndecesBuffer(indeces);
-		//System.out.println("Terrain: " + vaoID + " VBO Arraylist: " + vbos.size());
+		System.out.println("Terrain: " + vaoID + " VBO Arraylist: " + vbos.size());
 		unbindVAO();
 		return new RawModel(vaoID,indeces.length, normals, positions);
 	}

@@ -29,6 +29,9 @@ public class Objects {
         ModelTexture playerTexture = new ModelTexture(loader.loadTexture("sphereTexture"));
         playerModelTextured = new TexturedModel(playerModel, playerTexture, 0);
 
+        RawModel ufoModel = OBJLoader.loadObjModel("UFOModel", loader);
+        UFO = new TexturedModel(ufoModel, playerTexture,10);
+        
         RawModel sphereModel = OBJLoader.loadObjModel("Sphere", loader);
         ModelTexture sphereTexture = new ModelTexture(loader.loadTexture("sphereTexture1"));
         staticSphereModel = new TexturedModel(sphereModel, sphereTexture,1);

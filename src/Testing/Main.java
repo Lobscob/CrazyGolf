@@ -64,6 +64,7 @@ public class Main extends Objects {
     public static TexturedModel wall;
     public static TexturedModel castle;
     public static TexturedModel terrainMarker;
+    public static TexturedModel UFO;
 
     //	public static Light light1;
     public static TexturedModel golfGoal;
@@ -290,7 +291,8 @@ public class Main extends Objects {
         //entities.add(new Entity(wall,new Vector3f(350, terrain.getHeightOfTerrain(350, -300) ,-300),0,0,0,3.2f, true, new Vector3f(42,5,3)));
         entities.add(new Entity(castle,new Vector3f(800,terrain.getHeightOfTerrain(800, -800),-800),0,0,0,10, false, new Vector3f(0,0,0)));
         entities.add(new Entity(crate, new Vector3f(330, terrain.getHeightOfTerrain(330, -330), -330), 0, 0, 0, 10, true, new Vector3f(14, 14, 14)));
-
+        entities.add(new Entity(UFO, new Vector3f(0,terrain.getHeightOfTerrain(0,0) + 10,0),0,0,0,10,false,new Vector3f(0,0,0)));
+        
         List<GuiTexture> guis = new ArrayList<GuiTexture>();
         if (editorMode) {
             GuiTexture editorPanel = new GuiTexture(loader.loadTexture("GUIEditor"), new Vector2f(0.135f, -0.14f), new Vector2f(1.14f, 1.14f));
@@ -360,20 +362,26 @@ public class Main extends Objects {
                     simulatedBalls.get(i).manageCollision(entities.get(j));
                 }
             }
-
+            ArrayList<Entity> collisionAlert = new ArrayList<Entity>();
             for (int i = 0; i < entities.size(); i++) {
-                renderer.processEntity(entities.get(i));
-                if (canCollideOther) {
-                	if(detectInRange(golfBallUsed1, entities.get(i))) {
-                		System.out.println("We made it");
-                    	golfBallUsed1.manageCollision(entities.get(i));
-                	}
-                	if(detectInRange(golfBallUsed2, entities.get(i))) {
-                    	golfBallUsed2.manageCollision(entities.get(i));
-                	}
-                }
-                player.manageCollision(entities.get(i));
+            	if(entities.get(i).getModel() == UFO) {
+            		entities.get(i).increasePosition(0.51f, 0, -0.51f);
+            		entities.get(i).increaseRotation(0, 5, 0);
+            	}
+            	renderer.processEntity(entities.get(i));
+            	if(detectInRange(golfBallUsed1, entities.get(i)) || detectInRange(golfBallUsed2, entities.get(i))) {
+            		collisionAlert.add(entities.get(i));
+            	}
+            	player.manageCollision(entities.get(i));
             }
+            if (canCollideOther) {
+            	for(int i=0; i<collisionAlert.size(); i++) {
+                    golfBallUsed1.manageCollision(collisionAlert.get(i));
+                    golfBallUsed2.manageCollision(collisionAlert.get(i));
+                }
+            }
+            collisionAlert.clear();
+                
             if (canCollideBall) {
                 golfBallUsed1.manageBallCollision(golfBallUsed2);
                 golfBallUsed2.manageBallCollision(golfBallUsed1);
@@ -490,7 +498,7 @@ public class Main extends Objects {
 		float dz = entity.getPosition().z - golfBall.getPosition().z;
 		
 		float distanceSquared = dx*dx + dz*dz;
-		boolean collision = distanceSquared < 50;
+		boolean collision = distanceSquared < 200;
 		
 		return collision;
 	}
