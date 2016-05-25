@@ -199,7 +199,6 @@ float sum2 =0;
              faz *= ball.getGroundFriction();
              sum2 += (faz/ball.getGroundFriction())/i;
         }
-        sum2+= (faz/ball.getGroundFriction());
         System.out.println("Sum " + sum + ", Sum2 " + sum2);
         System.out.println("fax " + fax + ", faz " + faz);
         System.out.println("ax " + ax + ", az " + az);
