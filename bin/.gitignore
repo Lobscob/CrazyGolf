@@ -1,5 +1,4 @@
-/AI/
-/entities/
+/renderEngine/
 /Testing/
-/terrains/
-/fileManager/
+/commands/
+/visitor/
