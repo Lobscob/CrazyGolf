@@ -371,10 +371,10 @@ public class Main extends Objects {
             	renderer.processEntity(entities.get(i));
             	
             	if(entities.get(i).getModel() == UFO) {
-            		if (rand.nextDouble()<0.001 || entities.get(i).getPosition().x<0 || entities.get(i).getPosition().x>400 ) {
+            		if (rand.nextDouble()<0.009 || entities.get(i).getPosition().x<0 || entities.get(i).getPosition().x>400 ) {
             			vx*=-1;
             		}
-            		if (rand.nextDouble()<0.001 || entities.get(i).getPosition().z<0 || entities.get(i).getPosition().z>-400) {
+            		if (rand.nextDouble()<0.009 || entities.get(i).getPosition().z>0 || entities.get(i).getPosition().z<-400) {
             			vz*=-1;
             		}
             		entities.get(i).increasePosition(vx, 0, vz);

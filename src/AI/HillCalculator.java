@@ -118,8 +118,8 @@ public class HillCalculator {
         phycicsPercision = 0;
         float fax = ax;
         float faz = az;
-        int frictionApplied = 1;
-        int frictionApplied2 = 1;
+        int frictionApplied = 0;
+        int frictionApplied2 = 0;
         System.out.println("ax= " + ax + " az= " + az);
         boolean running1 = true;
         boolean running2 = true;
@@ -189,15 +189,21 @@ float sum =0;
 float sum2 =0;
         fax = ax;
         faz = az;
-        for (int i = 1; i < frictionCallX; i++) {
-           sum+=fax/ball.getGroundFriction()-fax;
-            fax *=ball.getGroundFriction();
+        for (int i = 7; i < frictionCallX; i++) {
+            fax *= ball.getGroundFriction();
+            sum += (fax/ball.getGroundFriction())/i;
         }
-        for (int i = 1; i < frictionCallZ; i++) {
-            sum2+= faz/ball.getGroundFriction()-faz;
-            faz *=ball.getGroundFriction();
+        
+        
+        for (int i = 7; i < frictionCallZ; i++) {
+             faz *= ball.getGroundFriction();
+             sum2 += (faz/ball.getGroundFriction())/i;
         }
-        System.out.println("SUM=  "+sum + " SUM 2= " +sum2);
+        sum2+= (faz/ball.getGroundFriction());
+        System.out.println("Sum " + sum + ", Sum2 " + sum2);
+        System.out.println("fax " + fax + ", faz " + faz);
+        System.out.println("ax " + ax + ", az " + az);
+
 
 //        System.out.println(1/(ball.getNormal().x*2*ball.getGravity() * ball.getGroundFriction()) - ball.getWindX());
 //        ax *= groundFriction;
@@ -206,11 +212,11 @@ float sum2 =0;
         ax *= 1.6;*/
 /*        ax *= 1/(ball.getGravity() * ball.getGroundFriction()) - ball.getWindX();
         az *= 1/(ball.getGravity() * ball.getGroundFriction()) - ball.getWindZ();*/
-        System.out.println("velocity " + new Vector3f(ax+sum, ay, az+sum2));
-        System.out.println("velocity1 " + new Vector3f(axd, 0, azd));
-        System.out.println("x" + (holePos.x - ball.getPosition().x) * 1.6);
-        System.out.println("z" + (holePos.y - ball.getPosition().z) * 1.6);
-        return new Vector3f(ax+sum, ay, az+sum2);
+        //System.out.println("velocity " + new Vector3f(ax+sum, ay, az+sum2));
+        //System.out.println("velocity1 " + new Vector3f(axd, 0, azd));
+       // System.out.println("x" + (holePos.x - ball.getPosition().x) * 1.6);
+       // System.out.println("z" + (holePos.y - ball.getPosition().z) * 1.6);
+        return new Vector3f(sum, ay, sum2);
     }
 
 }
