@@ -15,7 +15,8 @@ import java.util.List;
  */
 public class HillCalculator {
 
-    private float percision = 15;
+    private float percision = 60;
+    private float phycicsPercision = 60;
     private GolfBall ball;
     private GoalHole hole;
     private Vector3f holePos;
@@ -77,15 +78,15 @@ public class HillCalculator {
         float ax = 0;
         float az = 0;
         float ay = 0;
-        float axd =0;
-        float azd =0;
+        float axd = 0;
+        float azd = 0;
 
         int negativeX = 1;
         int negativeZ = 1;
         Vector3f normal = new Vector3f();
         float groundFriction = 0;
         for (int i = 1; i < percision + 1; i++) {
-            normal = normalCalculator((points.get(i).x + points.get(i-1).x) / 2, (points.get(i).z + points.get(i-1 ).z) / 2);
+            normal = normalCalculator((points.get(i).x + points.get(i - 1).x) / 2, (points.get(i).z + points.get(i - 1).z) / 2);
             System.out.println(normal);
             negativeX = 1;
             negativeZ = 1;
@@ -100,14 +101,14 @@ public class HillCalculator {
             System.out.println(i + " NegZ= " +negativeZ);*/
             groundFriction = 1 / ball.getGroundFriction();
 //           if (Math.abs(difY)== 0) {
-                ax += (float) negativeX * (Math.sqrt((difX * difX) + difY * difY))   + normal.x * 2 * ball.getGravity();
-                axd+= difX;
-                azd+=difZ;
+            ax += (float) negativeX * (Math.sqrt((difX * difX) + difY * difY)) ;
+            axd += difX;
+            azd += difZ;
 //                ax += (float) negativeX * (Math.sqrt((difX * difX) + difY * difY));
-                az += (float) negativeZ * (Math.sqrt((difZ * difZ) + difY * difY)) - normal.z * 2 * ball.getGravity();
+            az += (float) negativeZ * (Math.sqrt((difZ * difZ) + difY * difY)) ;
 //                az += (float) negativeZ * (Math.sqrt((difZ * difZ) + difY * difY));
 
-/*            } else {
+/*            } else {a
                 ax += (float) negativeX * (Math.sqrt((difX * difX) + difY * difY))+ball.getGravity()* difZ/difY  ;
 //                ax += (float) negativeX * (Math.sqrt((difX * difX) + difY * difY));
                 az += (float) negativeZ * (Math.sqrt((difZ * difZ) + difY * difY)) +ball.getGravity()* difZ/difY ;
@@ -116,15 +117,50 @@ public class HillCalculator {
 //            System.out.println(DisplayManager.getFrameTimeSeconds() * 1 / (difX * 2 * ball.getGravity() * ball.getGroundFriction()));
 
         }
+        phycicsPercision = 0;
+        float fax = ax;
+        float faz = az;
+        int frictionApplied = 1;
+        int frictionApplied2 = 1;
+        System.out.println("ax= " + ax +" az= " + az);
+        boolean running1 = true;
+        boolean running2 = true;
+        while (running1 ) {
+            if(Math.abs(fax)<0.01)running1 = false;
+            fax=ax;
+            System.out.print(frictionApplied);
+            frictionApplied++;
+            fax -= frictionApplied*  ball.getGroundFriction();
+
+            System.out.print("fax" +fax + " ");
+        }
+        System.out.println("fax" + fax);
+        while (Math.abs(faz) > 0.01f ) {
+            faz=az;
+            frictionApplied2++;
+
+            faz *=  frictionApplied2* ball.getGroundFriction();
+
+        }
+//        if(frictionApplied2>frictionApplied)frictionApplied=frictionApplied2;
+        System.out.println("FrictionApplied" +frictionApplied);
+         /*   ax +=normal.x*2*ball.getGravity() ;
+            az += normal.z*2*ball.getGravity();*/
+            ax *=frictionApplied* 1/ball.getGroundFriction();
+         /*   ax +=normal.x*2*ball.getGravity() ;
+            az += normal.z*2*ball.getGravity();*/
+            az *=frictionApplied2*1/ball.getGroundFriction();
+
+
 //        System.out.println(1/(ball.getNormal().x*2*ball.getGravity() * ball.getGroundFriction()) - ball.getWindX());
 //        ax *= groundFriction;
 //        az *= groundFriction;
-        az*=1.6;
-        ax *=1.6;
+      /*  az *= 1.6;
+        ax *= 1.6;*/
 /*        ax *= 1/(ball.getGravity() * ball.getGroundFriction()) - ball.getWindX();
         az *= 1/(ball.getGravity() * ball.getGroundFriction()) - ball.getWindZ();*/
         System.out.println("velocity " + new Vector3f(ax, ay, az));
-        System.out.println("velocity1 " + new Vector3f(axd,0,azd));
+        System.out.println("velocity1 " + new Vector3f(axd, 0, azd));
         System.out.println("x" + (holePos.x - ball.getPosition().x) * 1.6);
         System.out.println("z" + (holePos.y - ball.getPosition().z) * 1.6);
         return new Vector3f(ax, ay, az);

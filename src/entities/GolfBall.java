@@ -34,6 +34,8 @@ public class GolfBall extends Entity {
     private float windZ;
     private Vector3f normal;
 
+
+
     public void setIsInHole(boolean b) {
         this.isInHole = b;
     }
@@ -102,10 +104,13 @@ public class GolfBall extends Entity {
             }
         }
 
-        velocity.x += ax * DisplayManager.getFrameTimeSeconds() - (normal.x * 2) * GRAVITY + windx;
-        velocity.y += ay * DisplayManager.getFrameTimeSeconds() + (normal.y) * GRAVITY;
-        velocity.z -= az * DisplayManager.getFrameTimeSeconds() + (normal.z * 2) * GRAVITY + windz;
-        //System.out.println(velocity.x + " " +  velocity.y + " " +  velocity.z);
+
+            velocity.x += ax * DisplayManager.getFrameTimeSeconds() - (normal.x * 2) * GRAVITY + windx;
+            velocity.y += ay * DisplayManager.getFrameTimeSeconds() + (normal.y) * GRAVITY;
+            velocity.z -= az * DisplayManager.getFrameTimeSeconds() + (normal.z * 2) * GRAVITY + windz;
+            //System.out.println(velocity.x + " " +  velocity.y + " " +  velocity.z);
+
+
 
         x += velocity.x * DisplayManager.getFrameTimeSeconds();
         y += velocity.y * DisplayManager.getFrameTimeSeconds();
@@ -113,7 +118,6 @@ public class GolfBall extends Entity {
         //System.out.println(x + " " +  y + " " +  z);
 
         super.increasePosition(x, y, z);
-
 
         float terrainHeight = terrain.getHeightOfTerrain(super.getPosition().x, super.getPosition().z);
         if (super.getPosition().y < terrainHeight) {
@@ -272,6 +276,8 @@ public class GolfBall extends Entity {
         this.velocity.y += dvy * DisplayManager.getFrameTimeSeconds();
         this.velocity.z += dvz * DisplayManager.getFrameTimeSeconds();
     }
+
+
 
     public void manageSimHit(Vector3f forces) {
 
