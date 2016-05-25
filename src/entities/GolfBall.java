@@ -79,6 +79,7 @@ public class GolfBall extends Entity {
         normal.normalise();
         //System.out.println(normal.x + " " + normal.y + " " + normal.z);
 
+
         if (Math.abs(velocity.x) < 0.01f) {
             velocity.x = 0;
         } else {
