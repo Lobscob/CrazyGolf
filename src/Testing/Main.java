@@ -357,7 +357,7 @@ public class Main extends Objects {
                 System.out.println("ohno");
             }
             renderer.render(light, camera);
-            //SIMULATIONd
+            //SIMULATIOND
             for (int i = 0; i < simulatedBalls.size(); i++) {
                 simulatedBalls.get(i).move(terrain);
                 renderer.processEntity(simulatedBalls.get(i));
@@ -368,6 +368,8 @@ public class Main extends Objects {
            
             ArrayList<Entity> collisionAlert = new ArrayList<Entity>();
             for (int i = 0; i < entities.size(); i++) {
+            	renderer.processEntity(entities.get(i));
+            	
             	if(entities.get(i).getModel() == UFO) {
             		if (rand.nextDouble()<0.001 || entities.get(i).getPosition().x<0 || entities.get(i).getPosition().x>400 ) {
             			vx*=-1;
@@ -378,14 +380,14 @@ public class Main extends Objects {
             		entities.get(i).increasePosition(vx, 0, vz);
             		entities.get(i).increaseRotation(0, 5, 0);
             	}
-            	renderer.processEntity(entities.get(i));
+            	
             	if(detectInRange(golfBallUsed1, entities.get(i)) || detectInRange(golfBallUsed2, entities.get(i))) {
             		collisionAlert.add(entities.get(i));
             	}
             	player.manageCollision(entities.get(i));
             }
-            if (canCollideOther) {
-            	for(int i=0; i<collisionAlert.size(); i++) {
+            for(int i=0; i<collisionAlert.size(); i++) {
+            	if (canCollideOther) {
                     golfBallUsed1.manageCollision(collisionAlert.get(i));
                     golfBallUsed2.manageCollision(collisionAlert.get(i));
                 }
@@ -507,9 +509,9 @@ public class Main extends Objects {
 		float dx = entity.getPosition().x - golfBall.getPosition().x;
 		float dz = entity.getPosition().z - golfBall.getPosition().z;
 		
-		float distanceSquared = dx*dx + dz*dz;
-		boolean collision = distanceSquared < 200;
+		float distance = (float)Math.sqrt(dx*dx + dz*dz);
+		boolean alert = distance < 200;
 		
-		return collision;
+		return alert;
 	}
 }
