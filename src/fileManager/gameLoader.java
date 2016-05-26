@@ -27,14 +27,14 @@ public class gameLoader {
         Main.goalZPos = Integer.parseInt(s.nextLine());
         Main.startX = Integer.parseInt(s.nextLine());
         Main.startZ = Integer.parseInt(s.nextLine());
-        System.out.println("XPOS= " + goalXPos);
-        System.out.println("Zpos = " + goalZPos);
+        //System.out.println("XPOS= " + goalXPos);
+       //System.out.println("Zpos = " + goalZPos);
 
 
-        System.out.println("line" +line);
+        //System.out.println("line" +line);
 
         line = s.nextLine();
-        System.out.println("Loading");
+        //System.out.println("Loading");
         Main.entities.clear();
         //TexturedModel model, Vector3f position, float rotX, float rotY, float rotZ, float scale, boolean isObstacle, Vector3f collisionSize
         while (s.hasNextLine() && !line.substring(0,7).equals("HEIGHTS")) {
@@ -51,7 +51,7 @@ public class gameLoader {
             boolean isObstacle = Boolean.parseBoolean(s2.next());
             Vector3f collisionSize = new Vector3f(Float.parseFloat(s2.next()), Float.parseFloat(s2.next()), Float.parseFloat(s2.next()));
             Main.entities.add(new Entity(model, position, rotX, rotY, rotZ, scale, isObstacle, collisionSize));
-            System.out.println(Main.entities);
+            //System.out.println(Main.entities);
             line = s.nextLine();
         }
         line = s.nextLine();
@@ -60,7 +60,7 @@ public class gameLoader {
         int j = 0;
         int stopCondition = (terrainChoice.getHeights().length) * 2;
         boolean row = true;
-        System.out.println("line" +line);
+        //System.out.println("line" +line);
         while (s.hasNextLine() ) {
 
             boolean finalLine = false;
@@ -87,7 +87,7 @@ public class gameLoader {
         }
 //
         terrainChoice.setHeights(heights);
-        System.out.println("FINISHED");
+        //System.out.println("FINISHED");
     }
 /*
         public void loadEntities(String fileName) throws FileNotFoundException {

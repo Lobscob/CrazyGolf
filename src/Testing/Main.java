@@ -294,8 +294,8 @@ public class Main extends Objects {
         }
 
         //entities.add(new Entity(wall,new Vector3f(350, terrain.getHeightOfTerrain(350, -300) ,-300),0,0,0,3.2f, true, new Vector3f(42,5,3)));
-        entitiesInitial.add(new Entity(castle,new Vector3f(800,terrain.getHeightOfTerrain(800, -800),-800),0,0,0,10, false, new Vector3f(0,0,0)));
-        entitiesInitial.add(new Entity(crate, new Vector3f(330, terrain.getHeightOfTerrain(330, -330), -330), 0, 0, 0, 10, true, new Vector3f(14, 14, 14)));
+        entitiesInitial.add(new Entity(castle,new Vector3f(440,terrain.getHeightOfTerrain(300, -300),-300),0,180,0,10, false, new Vector3f(0,0,0)));
+        //entitiesInitial.add(new Entity(crate, new Vector3f(330, terrain.getHeightOfTerrain(330, -330), -330), 0, 0, 0, 10, true, new Vector3f(14, 14, 14)));
         entitiesInitial.add(new Entity(UFO, new Vector3f(0,terrain.getHeightOfTerrain(0,0) + 10,0),0,0,0,10,false,new Vector3f(0,0,0)));
         
        
