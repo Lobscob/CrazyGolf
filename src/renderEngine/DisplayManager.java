@@ -13,7 +13,7 @@ import org.lwjgl.opengl.PixelFormat;
  */
 public class DisplayManager {
 	
-	private static final int WIDTH = 1800;
+	private static final int WIDTH = 1920;
 	private static final int HEIGHT = 900;
 	private static final int FPS = 60;
 	

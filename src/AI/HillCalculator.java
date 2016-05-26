@@ -189,13 +189,13 @@ float sum =0;
 float sum2 =0;
         fax = ax;
         faz = az;
-        for (int i = 7; i < frictionCallX; i++) {
+        for (int i = 8; i < frictionCallX; i++) {
             fax *= ball.getGroundFriction();
             sum += (fax/ball.getGroundFriction())/i;
         }
         
         
-        for (int i = 7; i < frictionCallZ; i++) {
+        for (int i = 8; i < frictionCallZ; i++) {
              faz *= ball.getGroundFriction();
              sum2 += (faz/ball.getGroundFriction())/i;
         }

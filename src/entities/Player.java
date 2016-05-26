@@ -5,9 +5,11 @@ import AI.AI;
 //import AI.Simulation;
 import AI.HillCalculator;
 import AI.Simulation;
+import GUIS.GuiTexture;
 import Testing.Main;
 import models.TexturedModel;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import renderEngine.DisplayManager;
 import terrains.Terrain;
@@ -21,15 +23,17 @@ import java.awt.geom.Area;
  */
 public class Player extends Entity {
 
-    private static final float RUN_SPEED = 50;
-    private static final float TURN_SPEED = 160;
-    private static final float GRAVITY = -50;
-    private static final float JUMP_POWER = 40;
+    private final float RUN_SPEED = 50;
+    private final float TURN_SPEED = 160;
+    private final float GRAVITY = -50;
+    private final float JUMP_POWER = 40;
 
-    private static float RANGE = 10;
-    private static float HIT_FORCE_X = 10000;
+    private float RANGE = 10;
+    private static float HIT_FORCE_X = 5000;
     private static float HIT_FORCE_Y = 00;
-    private static float HIT_FORCE_Z = 10000;
+    private static float HIT_FORCE_Z = 5000;
+    
+    private int gCounter;
 
 
     public Vector3f getHitPower() {
@@ -82,6 +86,7 @@ public class Player extends Entity {
         super(model, position, rotX, rotY, rotZ, scale, isObstacle, collisionSize);
         this.golfBall = golfBall;
         this.turnTaken = turn;
+        this.gCounter = 1;
     }
 
     public boolean isTurnTaken() {
@@ -104,6 +109,7 @@ public class Player extends Entity {
 //       if (ai1.getAI()) ai1.shootBall();
         if (ai21.getAI()) ai21.shootBall();
         numberOfFrames++;
+        fCounter++;
         checkInputs();
         super.increaseRotation(0, currentTurnSpeed * DisplayManager.getFrameTimeSeconds(), 0);
         float distance = currentSpeed * DisplayManager.getFrameTimeSeconds();
@@ -175,25 +181,30 @@ public class Player extends Entity {
 
     private void increaseHitPower() {
         this.setScale((float) (getScale() * 1.1));
-        HIT_FORCE_X *= 1.1;
-        HIT_FORCE_Y *= 1.1;
-        HIT_FORCE_Z *= 1.1;
+        HIT_FORCE_X *= 1.3;
+        HIT_FORCE_Y *= 1.3;
+        HIT_FORCE_Z *= 1.3;
     }
 
     private void decreaseHitPower() {
         if ((HIT_FORCE_X >= 0 && HIT_FORCE_Y >= 0 && HIT_FORCE_Z >= 0)) {
             this.setScale((float) (getScale() * 0.9));
-            HIT_FORCE_X *= 0.9;
-            HIT_FORCE_Y *= 0.9;
-            HIT_FORCE_Z *= 0.9;
+            HIT_FORCE_X /= 1.3;
+            HIT_FORCE_Y /= 1.3;
+            HIT_FORCE_Z /= 1.3;
         }
     }
 
     private void checkInputs() {
-        if (numberOfFrames >= 120) {
+        if (numberOfFrames >= 30) {
             keyPressed = true;
             numberOfFrames = 0;
         }
+        if(fCounter >= 120) {
+        	hitAllowed = true;
+        	fCounter = 0;
+        }
+        		
         if (Keyboard.isKeyDown(Keyboard.KEY_Z) && keyPressed) {
 				ai21.setAI(true);
 //             ai2.runBot();
@@ -203,23 +214,32 @@ public class Player extends Entity {
 //				ai1.setAI(true);
             ai1.runBot();
             keyPressed = false;
-        } else if (Keyboard.isKeyDown(Keyboard.KEY_I) && keyPressed) {
+        } else if (Keyboard.isKeyDown(Keyboard.KEY_I) && keyPressed && gCounter<10) {
+        	gCounter++;
+        	String s = Integer.toString(gCounter);
             increaseHitPower();
-
             System.out.println("Xforce: " + HIT_FORCE_X);
             System.out.println("Yforce: " + HIT_FORCE_Y);
             System.out.println("Zforce: " + HIT_FORCE_Z);
+            GuiTexture power = new GuiTexture(Main.loaderUsed.loadTexture(s), new Vector2f(-0.75f, 0.9f), new Vector2f(0.21f, 0.21f));
+            Main.guis.add(power);
             keyPressed = false;
 
-        } else if (Keyboard.isKeyDown(Keyboard.KEY_O) && keyPressed) {
-            decreaseHitPower();
-            System.out.println("Xforce: " + HIT_FORCE_X);
-            System.out.println("Yforce: " + HIT_FORCE_Y);
-            System.out.println("Zforce: " + HIT_FORCE_Z);
+        } else if (Keyboard.isKeyDown(Keyboard.KEY_O) && keyPressed && gCounter>0) {
+        	gCounter--;
+        	if(Main.guis.size()>2) {
+        		Main.guis.remove(Main.guis.size()-1);
+        		decreaseHitPower();
+        		System.out.println("Xforce: " + HIT_FORCE_X);
+                System.out.println("Yforce: " + HIT_FORCE_Y);
+                System.out.println("Zforce: " + HIT_FORCE_Z);
+        	}
+            
             keyPressed = false;
-        } else if (Keyboard.isKeyDown(Keyboard.KEY_H) && keyPressed) {
+        } else if (Keyboard.isKeyDown(Keyboard.KEY_H) && keyPressed && hitAllowed) {
             hit();
             keyPressed = false;
+            hitAllowed = false;
         }
 
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
@@ -254,10 +274,6 @@ public class Player extends Entity {
             keyPressed = false;
         }
 
-        if (Keyboard.isKeyDown(Keyboard.KEY_R)) {
-            Main.entities.get(Main.entities.size() - 1).increaseRotation(0, 1, 0);
-            keyPressed = false;
-        }
         while (keyPressed) {
             if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
                 this.turnTaken = true;
@@ -283,6 +299,8 @@ public class Player extends Entity {
 
     private int numberOfFrames = 0;
     private boolean keyPressed = true;
+    private int fCounter= 0;
+    private boolean hitAllowed = true;
 
     public void hit() {
         score++;

@@ -65,6 +65,12 @@ public class GolfBall extends Entity {
 
 
     public void move(Terrain terrain) {
+    	if(this.getPosition().z>0 || this.getPosition().z<-1000) {
+    		this.velocity.z *= -1;
+    	}
+    	if(this.getPosition().x<0 || this.getPosition().x>1000) {
+    		this.velocity.x *= -1;
+    	}
 
         float x = 0;
         float y = 0;

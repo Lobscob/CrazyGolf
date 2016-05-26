@@ -54,6 +54,7 @@ public class Main extends Objects {
     }
 
     public static List<Entity> entities = new ArrayList<Entity>();
+    public static List<GuiTexture> guis = new ArrayList<GuiTexture>();
     public static List<GolfBall> simulatedBalls = new ArrayList<GolfBall>();
     public static TexturedModel tree;
     public static TexturedModel crate;
@@ -296,7 +297,7 @@ public class Main extends Objects {
         entities.add(new Entity(crate, new Vector3f(330, terrain.getHeightOfTerrain(330, -330), -330), 0, 0, 0, 10, true, new Vector3f(14, 14, 14)));
         entities.add(new Entity(UFO, new Vector3f(0,terrain.getHeightOfTerrain(0,0) + 10,0),0,0,0,10,false,new Vector3f(0,0,0)));
         
-        List<GuiTexture> guis = new ArrayList<GuiTexture>();
+       
         if (editorMode) {
             GuiTexture editorPanel = new GuiTexture(loader.loadTexture("editor_menu"), new Vector2f(0.135f, -0.14f), new Vector2f(1.14f, 1.14f));
             guis.add(editorPanel);
@@ -305,7 +306,9 @@ public class Main extends Objects {
             guis.add(terrainEditorPanel);
         } else {
             GuiTexture playerPanel = new GuiTexture(loader.loadTexture("player"), new Vector2f(0.135f, -0.14f), new Vector2f(1.14f, 1.14f));
+            GuiTexture power = new GuiTexture(Main.loaderUsed.loadTexture("1"), new Vector2f(-0.75f, 0.9f), new Vector2f(0.21f, 0.21f));
             guis.add(playerPanel);
+            guis.add(power);
         }
         //System.out.println(guis.size());
         picker = new MousePicker(camera, renderer.getProjectionMatrix(), terrain);
@@ -426,7 +429,7 @@ public class Main extends Objects {
         guiRenderer.cleanUP();
         renderer.cleanUp();
         loader.cleanUp();
-        entities.clear();
+        guis.clear();
 
         DisplayManager.closeDisplay();
         frame.setVisible(true);
