@@ -298,10 +298,13 @@ public class Main extends Objects {
         
         List<GuiTexture> guis = new ArrayList<GuiTexture>();
         if (editorMode) {
-            GuiTexture editorPanel = new GuiTexture(loader.loadTexture("GUIEditor"), new Vector2f(0.135f, -0.14f), new Vector2f(1.14f, 1.14f));
+            GuiTexture editorPanel = new GuiTexture(loader.loadTexture("editor_menu"), new Vector2f(0.135f, -0.14f), new Vector2f(1.14f, 1.14f));
             guis.add(editorPanel);
+        }else if (terrainEditorMode) {
+            GuiTexture terrainEditorPanel = new GuiTexture(loader.loadTexture("terrain"), new Vector2f(0.135f, -0.14f), new Vector2f(1.14f, 1.14f));
+            guis.add(terrainEditorPanel);
         } else {
-            GuiTexture playerPanel = new GuiTexture(loader.loadTexture("GUIPlayer"), new Vector2f(0.135f, -0.14f), new Vector2f(1.14f, 1.14f));
+            GuiTexture playerPanel = new GuiTexture(loader.loadTexture("player"), new Vector2f(0.135f, -0.14f), new Vector2f(1.14f, 1.14f));
             guis.add(playerPanel);
         }
         //System.out.println(guis.size());
@@ -348,7 +351,7 @@ public class Main extends Objects {
                     player.setCurrentTerrainPoint(terrainPoint);
                 }
             }
-            //testing Github don't mind me
+            //testing Github don't mind me (~.~)
             //still testing
             renderer.processTerrains(terrain);
 
@@ -419,10 +422,11 @@ public class Main extends Objects {
                 System.out.println("ITS A TIE \\_(o.o)_/");
             }
         }
-
+        
         guiRenderer.cleanUP();
         renderer.cleanUp();
         loader.cleanUp();
+        entities.clear();
 
         DisplayManager.closeDisplay();
         frame.setVisible(true);
