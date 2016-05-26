@@ -189,7 +189,7 @@ public class GolfBall extends Entity {
         if (Integer.parseInt(entity.getModel().toString()) == Integer.parseInt(Main.wall.toString())) {
         	return TopNormal; 
         }
-        //System.out.println("Top Normal" + TopNormal);
+       //System.out.println("Top Normal" + TopNormal);
         Vector2f RightNormal = new Vector2f(dx, -dz);
         RightNormal.normalise();
         //System.out.println("Right Normal" + RightNormal);
@@ -229,12 +229,12 @@ public class GolfBall extends Entity {
         }
     }
 
-    private float groundFriction = 0.975f;
+    
 
     public float getGroundFriction() {
         return groundFriction;
     }
-
+    private float groundFriction = 0.975f;
     private float coefficientOfRestitution = 0.450f;
 
     public void manageCollision(Entity entity) {

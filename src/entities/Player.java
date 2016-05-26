@@ -218,9 +218,9 @@ public class Player extends Entity {
         	gCounter++;
         	String s = Integer.toString(gCounter);
             increaseHitPower();
-            System.out.println("Xforce: " + HIT_FORCE_X);
-            System.out.println("Yforce: " + HIT_FORCE_Y);
-            System.out.println("Zforce: " + HIT_FORCE_Z);
+            //System.out.println("Xforce: " + HIT_FORCE_X);
+            //System.out.println("Yforce: " + HIT_FORCE_Y);
+            //System.out.println("Zforce: " + HIT_FORCE_Z);
             GuiTexture power = new GuiTexture(Main.loaderUsed.loadTexture(s), new Vector2f(-0.75f, 0.9f), new Vector2f(0.21f, 0.21f));
             Main.guis.add(power);
             keyPressed = false;
@@ -230,9 +230,9 @@ public class Player extends Entity {
         	if(Main.guis.size()>2) {
         		Main.guis.remove(Main.guis.size()-1);
         		decreaseHitPower();
-        		System.out.println("Xforce: " + HIT_FORCE_X);
-                System.out.println("Yforce: " + HIT_FORCE_Y);
-                System.out.println("Zforce: " + HIT_FORCE_Z);
+        		//System.out.println("Xforce: " + HIT_FORCE_X);
+                //System.out.println("Yforce: " + HIT_FORCE_Y);
+                //System.out.println("Zforce: " + HIT_FORCE_Z);
         	}
             
             keyPressed = false;
