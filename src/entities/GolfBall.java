@@ -189,7 +189,7 @@ public class GolfBall extends Entity {
         if (Integer.parseInt(entity.getModel().toString()) == Integer.parseInt(Main.wall.toString())) {
         	return TopNormal; 
         }
-       //System.out.println("Top Normal" + TopNormal);
+        //System.out.println("Top Normal" + TopNormal);
         Vector2f RightNormal = new Vector2f(dx, -dz);
         RightNormal.normalise();
         //System.out.println("Right Normal" + RightNormal);
