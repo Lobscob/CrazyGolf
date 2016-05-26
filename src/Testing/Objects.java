@@ -17,8 +17,8 @@ import static Testing.Main.*;
 public class Objects {
 
     public static void loadBalls(Loader loader) {
-        GolfBall golfBall1 = new GolfBall(staticSphereModel, new Vector3f(490, terrainChoice.getHeightOfTerrain(490, -450), -450), 0, 0, 0, 1);
-        GolfBall golfBall2 = new GolfBall(staticSphereModel, new Vector3f(590, terrainChoice.getHeightOfTerrain(590, -450), -450), 0, 0, 0, 1);
+        GolfBall golfBall1 = new GolfBall(staticSphereModel, new Vector3f(Main.startX, terrainChoice.getHeightOfTerrain(Main.startX, Main.startZ), Main.startZ), 0, 0, 0, 1);
+        GolfBall golfBall2 = new GolfBall(staticSphereModel, new Vector3f(Main.startX + 10, terrainChoice.getHeightOfTerrain(Main.startX + 10, Main.startZ + 10), Main.startZ + 10), 0, 0, 0, 1);
         Main.setGolfBall1(golfBall1);
         Main.setGolfBall2(golfBall2);
 
@@ -56,7 +56,7 @@ public class Objects {
         fern.getTextureModel().setHasTransparency(true);
         fern.getTextureModel().setUseFakeLighting(true);
 
-        RawModel wallModel = OBJLoader.loadObjModel("SimpleWall2", loader);
+        RawModel wallModel = OBJLoader.loadObjModel("cubeWall", loader);
         ModelTexture wallTexture = new ModelTexture(loader.loadTexture("simpleWallTexture"));
         wall = new TexturedModel(wallModel, wallTexture,6);
 

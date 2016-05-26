@@ -74,8 +74,8 @@ public class Main extends Objects {
     public static Loader loaderUsed;
     public static int goalXPos = 110;
     public static int goalZPos = -50;
-    public static int startX = 250;
-    public static int startZ = -250;
+    public static int startX = 280;
+    public static int startZ = -280;
     public static GolfBall golfBallUsed1;
     public static GolfBall golfBallUsed2;
     public static GoalHole holeUsed;
@@ -375,6 +375,7 @@ public class Main extends Objects {
             ArrayList<Entity> collisionAlert = new ArrayList<Entity>();
             for (int i = 0; i < entities.size(); i++) {
             	renderer.processEntity(entities.get(i));
+
             	
             	if(entities.get(i).getModel() == UFO) {
             		if (rand.nextDouble()<0.009 || entities.get(i).getPosition().x<0 || entities.get(i).getPosition().x>400 ) {
@@ -394,8 +395,8 @@ public class Main extends Objects {
             }
             for(int i=0; i<collisionAlert.size(); i++) {
             	if (canCollideOther) {
-                    golfBallUsed1.manageCollision(collisionAlert.get(i));
-                    golfBallUsed2.manageCollision(collisionAlert.get(i));
+            			golfBallUsed1.manageCollision(collisionAlert.get(i));
+            			golfBallUsed2.manageCollision(collisionAlert.get(i));
                 }
             }
             collisionAlert.clear();
@@ -404,7 +405,7 @@ public class Main extends Objects {
                 golfBallUsed1.manageBallCollision(golfBallUsed2);
                 golfBallUsed2.manageBallCollision(golfBallUsed1);
             }
-            if (frameCounter >= 6) {
+            if (frameCounter >= 4) {
                 frameCounter = 0;
                 canCollideBall = true;
                 canCollideOther = true;

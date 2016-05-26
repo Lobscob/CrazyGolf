@@ -24,4 +24,7 @@ public class TexturedModel {
 	public RawModel getRawModel() { return this.rawModel; }
 	public ModelTexture getTextureModel() { return this.texture; }
 	public int getIndex(){ return index; }
+	public String toString(){
+		return Integer.toString(index);
+	}
 }

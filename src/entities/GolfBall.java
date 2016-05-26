@@ -135,6 +135,7 @@ public class GolfBall extends Entity {
 
     public boolean checkCollision(Entity entity) {
         boolean collision = false;
+        System.out.println("Collision");
         if (this.getPosition().y + this.getCollisionZone().y / 2 < entity.getPosition().y - entity.getCollisionZone().y / 2 ||
                 this.getPosition().y - this.getCollisionZone().y / 2 > entity.getPosition().y + entity.getCollisionZone().y / 2) {
             return false;
@@ -165,7 +166,8 @@ public class GolfBall extends Entity {
     }
 
     private Vector2f normalOfImpact(Entity entity) {
-
+    	//System.out.println(entity.getModel().toString());
+    	//System.out.println(Main.wall.toString());
         float theta = entity.getRotY();
 
         float dz = (float) Math.sin(Math.toRadians(theta));
@@ -184,8 +186,8 @@ public class GolfBall extends Entity {
 
         Vector2f TopNormal = new Vector2f(-dz, -dx);
         TopNormal.normalise();
-        if (entity.getModel() == Main.wall) {
-            return TopNormal;
+        if (Integer.parseInt(entity.getModel().toString()) == Integer.parseInt(Main.wall.toString())) {
+        	return TopNormal; 
         }
         //System.out.println("Top Normal" + TopNormal);
         Vector2f RightNormal = new Vector2f(dx, -dz);

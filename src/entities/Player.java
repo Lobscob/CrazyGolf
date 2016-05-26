@@ -181,17 +181,17 @@ public class Player extends Entity {
 
     private void increaseHitPower() {
         this.setScale((float) (getScale() * 1.1));
-        HIT_FORCE_X *= 1.3;
-        HIT_FORCE_Y *= 1.3;
-        HIT_FORCE_Z *= 1.3;
+        HIT_FORCE_X *= 1.15;
+        HIT_FORCE_Y *= 1.15;
+        HIT_FORCE_Z *= 1.15;
     }
 
     private void decreaseHitPower() {
         if ((HIT_FORCE_X >= 0 && HIT_FORCE_Y >= 0 && HIT_FORCE_Z >= 0)) {
             this.setScale((float) (getScale() * 0.9));
-            HIT_FORCE_X /= 1.3;
-            HIT_FORCE_Y /= 1.3;
-            HIT_FORCE_Z /= 1.3;
+            HIT_FORCE_X /= 1.15;
+            HIT_FORCE_Y /= 1.15;
+            HIT_FORCE_Z /= 1.15;
         }
     }
 
