@@ -54,6 +54,7 @@ public class Main extends Objects {
     }
 
     public static List<Entity> entities = new ArrayList<Entity>();
+    public static List<Entity> entitiesInitial = new ArrayList<Entity>();
     public static List<GuiTexture> guis = new ArrayList<GuiTexture>();
     public static List<GolfBall> simulatedBalls = new ArrayList<GolfBall>();
     public static TexturedModel tree;
@@ -273,7 +274,7 @@ public class Main extends Objects {
             float x = rand.nextInt(1024);
             float z = -rand.nextInt(1024);
             float y = terrain.getHeightOfTerrain(x, z);
-            entities.add(new Entity(tree, new Vector3f(x, y, z), 0, rand.nextFloat() * 360, 0, 10, true, new Vector3f(4f, 40f, 4f)));
+            entitiesInitial.add(new Entity(tree, new Vector3f(x, y, z), 0, rand.nextFloat() * 360, 0, 10, true, new Vector3f(4f, 40f, 4f)));
         }
 
 
@@ -281,7 +282,7 @@ public class Main extends Objects {
             float x = rand.nextInt(1024);
             float z = -rand.nextInt(1024);
             float y = terrain.getHeightOfTerrain(x, z);
-            entities.add(new Entity(rock, new Vector3f(x, y, z), 0, 0, 0, 4, true, new Vector3f(6f, 4f, 6f)));
+            entitiesInitial.add(new Entity(rock, new Vector3f(x, y, z), 0, 0, 0, 4, true, new Vector3f(6f, 4f, 6f)));
         }
 
 
@@ -289,13 +290,13 @@ public class Main extends Objects {
             float x = rand.nextInt(1024);
             float z = -rand.nextInt(1024);
             float y = terrain.getHeightOfTerrain(x, z);
-            entities.add(new Entity(fern, rand.nextInt(4), new Vector3f(x, y, z), 0, 0, 0, 1, false, new Vector3f(0, 0, 0)));
+            entitiesInitial.add(new Entity(fern, rand.nextInt(4), new Vector3f(x, y, z), 0, 0, 0, 1, false, new Vector3f(0, 0, 0)));
         }
 
         //entities.add(new Entity(wall,new Vector3f(350, terrain.getHeightOfTerrain(350, -300) ,-300),0,0,0,3.2f, true, new Vector3f(42,5,3)));
-        entities.add(new Entity(castle,new Vector3f(800,terrain.getHeightOfTerrain(800, -800),-800),0,0,0,10, false, new Vector3f(0,0,0)));
-        entities.add(new Entity(crate, new Vector3f(330, terrain.getHeightOfTerrain(330, -330), -330), 0, 0, 0, 10, true, new Vector3f(14, 14, 14)));
-        entities.add(new Entity(UFO, new Vector3f(0,terrain.getHeightOfTerrain(0,0) + 10,0),0,0,0,10,false,new Vector3f(0,0,0)));
+        entitiesInitial.add(new Entity(castle,new Vector3f(800,terrain.getHeightOfTerrain(800, -800),-800),0,0,0,10, false, new Vector3f(0,0,0)));
+        entitiesInitial.add(new Entity(crate, new Vector3f(330, terrain.getHeightOfTerrain(330, -330), -330), 0, 0, 0, 10, true, new Vector3f(14, 14, 14)));
+        entitiesInitial.add(new Entity(UFO, new Vector3f(0,terrain.getHeightOfTerrain(0,0) + 10,0),0,0,0,10,false,new Vector3f(0,0,0)));
         
        
         if (editorMode) {
@@ -373,24 +374,29 @@ public class Main extends Objects {
             }
            
             ArrayList<Entity> collisionAlert = new ArrayList<Entity>();
-            for (int i = 0; i < entities.size(); i++) {
-            	renderer.processEntity(entities.get(i));
-
-            	
-            	if(entities.get(i).getModel() == UFO) {
-            		if (rand.nextDouble()<0.009 || entities.get(i).getPosition().x<0 || entities.get(i).getPosition().x>400 ) {
+            for (int i = 0; i < entitiesInitial.size(); i++) {
+            	renderer.processEntity(entitiesInitial.get(i));
+            	if(detectInRange(golfBallUsed1, entitiesInitial.get(i)) || detectInRange(golfBallUsed2, entitiesInitial.get(i))) {
+                	collisionAlert.add(entitiesInitial.get(i));
+                }
+            	if(entitiesInitial.get(i).getModel() == UFO) {
+            		if (rand.nextDouble()<0.009 || entitiesInitial.get(i).getPosition().x<0 || entitiesInitial.get(i).getPosition().x>400 ) {
             			vx*=-1;
             		}
-            		if (rand.nextDouble()<0.009 || entities.get(i).getPosition().z>0 || entities.get(i).getPosition().z<-400) {
+            		if (rand.nextDouble()<0.009 || entitiesInitial.get(i).getPosition().z>0 || entitiesInitial.get(i).getPosition().z<-400) {
             			vz*=-1;
             		}
-            		entities.get(i).increasePosition(vx, 0, vz);
-            		entities.get(i).increaseRotation(0, 5, 0);
+            		entitiesInitial.get(i).increasePosition(vx, 0, vz);
+            		entitiesInitial.get(i).increaseRotation(0, 5, 0);
             	}
+            }
+            
+            for (int i = 0; i < entities.size(); i++) {
+                renderer.processEntity(entities.get(i));
             	
-            	if(detectInRange(golfBallUsed1, entities.get(i)) || detectInRange(golfBallUsed2, entities.get(i))) {
-            		collisionAlert.add(entities.get(i));
-            	}
+                if(detectInRange(golfBallUsed1, entities.get(i)) || detectInRange(golfBallUsed2, entities.get(i))) {
+                	collisionAlert.add(entities.get(i));
+                }
             	player.manageCollision(entities.get(i));
             }
             for(int i=0; i<collisionAlert.size(); i++) {
@@ -405,7 +411,7 @@ public class Main extends Objects {
                 golfBallUsed1.manageBallCollision(golfBallUsed2);
                 golfBallUsed2.manageBallCollision(golfBallUsed1);
             }
-            if (frameCounter >= 4) {
+            if (frameCounter >= 0) {
                 frameCounter = 0;
                 canCollideBall = true;
                 canCollideOther = true;
@@ -430,6 +436,7 @@ public class Main extends Objects {
         guiRenderer.cleanUP();
         renderer.cleanUp();
         loader.cleanUp();
+        entitiesInitial.clear();
         guis.clear();
 
         DisplayManager.closeDisplay();

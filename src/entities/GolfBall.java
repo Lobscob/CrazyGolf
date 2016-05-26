@@ -135,7 +135,7 @@ public class GolfBall extends Entity {
 
     public boolean checkCollision(Entity entity) {
         boolean collision = false;
-        System.out.println("Collision");
+        //System.out.println("Collision");
         if (this.getPosition().y + this.getCollisionZone().y / 2 < entity.getPosition().y - entity.getCollisionZone().y / 2 ||
                 this.getPosition().y - this.getCollisionZone().y / 2 > entity.getPosition().y + entity.getCollisionZone().y / 2) {
             return false;
