@@ -75,8 +75,8 @@ public class Main extends Objects {
     public static Loader loaderUsed;
     public static int goalXPos = 110;
     public static int goalZPos = -50;
-    public static int startX = 280;
-    public static int startZ = -280;
+    public static int startX = 50;
+    public static int startZ = -50;
     public static GolfBall golfBallUsed1;
     public static GolfBall golfBallUsed2;
     public static GoalHole holeUsed;
@@ -411,7 +411,7 @@ public class Main extends Objects {
                 golfBallUsed1.manageBallCollision(golfBallUsed2);
                 golfBallUsed2.manageBallCollision(golfBallUsed1);
             }
-            if (frameCounter >= 0) {
+            if (frameCounter >= 6) {
                 frameCounter = 0;
                 canCollideBall = true;
                 canCollideOther = true;

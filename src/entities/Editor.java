@@ -116,7 +116,7 @@ public class Editor extends Entity {
 				Main.entities.get(Main.entities.size()-1).increaseRotation(0, 1, 0);
 				keyPressed = false;
 			}
-        if(numberOfFrames>=30){keyPressed=true;numberOfFrames=0;}
+        if(numberOfFrames>=20){keyPressed=true;numberOfFrames=0;}
         while(keyPressed){
         	
         	if (Keyboard.isKeyDown(Keyboard.KEY_BACK)) {
@@ -132,7 +132,7 @@ public class Editor extends Entity {
         		keyPressed = false;
         }
         	else if (Keyboard.isKeyDown(Keyboard.KEY_1)) {
-            Entity placed = new Entity(Main.rock, new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, 0, 0, 4, true, new Vector3f(10,6,10));
+            Entity placed = new Entity(Main.rock, new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, 0, 0, 4, true, new Vector3f(15,10,15));
             //placed.setPosition(new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(x, z), mouseTerrainPosition.z));
             Main.entities.add(placed); 
             keyPressed = false;
@@ -153,7 +153,7 @@ public class Editor extends Entity {
             Main.entities.add(placed);
             keyPressed = false;
         }else if (Keyboard.isKeyDown(Keyboard.KEY_6)) {
-        	Entity placed = new Entity(Main.crate, new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, 0, 0, 5, true, new Vector3f(5,5,5));
+        	Entity placed = new Entity(Main.crate, new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, 0, 0, 5, true, new Vector3f(7,7,7));
         	Main.entities.add(placed);
         	keyPressed = false;
         } else if (Keyboard.isKeyDown(Keyboard.KEY_7)) {
@@ -161,7 +161,7 @@ public class Editor extends Entity {
         		xConnect = mouseTerrainPosition.x;
         		zConnect = mouseTerrainPosition.z;
         	}
-            Entity placed = new Entity(Main.wall, new Vector3f(xConnect , terrain.getHeightOfTerrain(xConnect, zConnect), zConnect), 0, this.getRotY()+90, 0, 3.2f, true, new Vector3f(18, 18, 18));
+            Entity placed = new Entity(Main.wall, new Vector3f(xConnect , terrain.getHeightOfTerrain(xConnect, zConnect), zConnect), 0, this.getRotY()+90, 0, 3.2f, true, new Vector3f(16, 16, 16));
             wallCounter ++;
             float xN = (float) ((placed.getCollisionZone().x/2) * (Math.cos(Math.toRadians(placed.getRotY())))); 
         	float zN = (float) ((placed.getCollisionZone().x/2) * (Math.sin(Math.toRadians(placed.getRotY()))));
