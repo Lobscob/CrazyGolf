@@ -1,8 +1,2 @@
-/renderEngine/
-/Testing/
-/commands/
-/visitor/
 /entities/
-/AI/
-/models/
-/fileManager/
+/Testing/

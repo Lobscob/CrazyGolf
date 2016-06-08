@@ -161,7 +161,7 @@ public class Editor extends Entity {
         		xConnect = mouseTerrainPosition.x;
         		zConnect = mouseTerrainPosition.z;
         	}
-            Entity placed = new Entity(Main.wall, new Vector3f(xConnect , terrain.getHeightOfTerrain(xConnect, zConnect), zConnect), 0, this.getRotY()+90, 0, 3.2f, true, new Vector3f(16, 16, 16));
+            Entity placed = new Entity(Main.wall, new Vector3f(xConnect , terrain.getHeightOfTerrain(xConnect, zConnect), zConnect), 0, 0, 0, 3.2f, true, new Vector3f(16, 16, 16));
             wallCounter ++;
             float xN = (float) ((placed.getCollisionZone().x/2) * (Math.cos(Math.toRadians(placed.getRotY())))); 
         	float zN = (float) ((placed.getCollisionZone().x/2) * (Math.sin(Math.toRadians(placed.getRotY()))));
@@ -173,7 +173,7 @@ public class Editor extends Entity {
         } else if (Keyboard.isKeyDown(Keyboard.KEY_8)) {
         	Main.goalXPos = (int) mouseTerrainPosition.x;
         	Main.goalZPos = (int) mouseTerrainPosition.z;
-            GoalHole placed = new GoalHole(Main.loaderUsed, Main.terrainChoice, Main.golfGoal, new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, this.getRotY(), 0, 5, true, new Vector3f(6f,6f,6f));
+            GoalHole placed = new GoalHole(Main.loaderUsed, Main.terrainChoice, Main.golfGoal, new Vector3f(mouseTerrainPosition.x, terrain.getHeightOfTerrain(mouseTerrainPosition.x, mouseTerrainPosition.z), mouseTerrainPosition.z), 0, 0, 0, 5, true, new Vector3f(6f,6f,6f));
             Main.holeUsed = placed;
             keyPressed = false;
         }else if (Keyboard.isKeyDown(Keyboard.KEY_9)) {

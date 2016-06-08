@@ -186,9 +186,6 @@ public class GolfBall extends Entity {
 
         Vector2f TopNormal = new Vector2f(-dz, -dx);
         TopNormal.normalise();
-        if (Integer.parseInt(entity.getModel().toString()) == Integer.parseInt(Main.wall.toString())) {
-        	return TopNormal; 
-        }
         //System.out.println("Top Normal" + TopNormal);
         Vector2f RightNormal = new Vector2f(dx, -dz);
         RightNormal.normalise();
@@ -211,16 +208,16 @@ public class GolfBall extends Entity {
         Vector2f.sub(Bottom, ballPosition, subB);
         Vector2f.sub(Left, ballPosition, subL);
 
-        if (Vector2f.dot(subT, TopNormal) < 0) {
+        if (Vector2f.dot(TopNormal,subT) < 0) {
             System.out.println("Top");
             return TopNormal;
-        } else if (Vector2f.dot(subR, RightNormal) < 0) {
+        } else if (Vector2f.dot(RightNormal,subR) < 0) {
             System.out.println("Right");
             return RightNormal;
-        } else if (Vector2f.dot(subB, BottomNormal) < 0) {
+        } else if (Vector2f.dot(BottomNormal,subB) < 0) {
             System.out.println("Bottom");
             return BottomNormal;
-        } else if (Vector2f.dot(subL, LeftNormal) < 0) {
+        } else if (Vector2f.dot(LeftNormal,subL) < 0) {
             System.out.println("Left");
             return LeftNormal;
         } else {
@@ -318,7 +315,7 @@ public class GolfBall extends Entity {
 
             this.velocity.x *= -(coefficientOfRestitution * coefficientOfRestitution);
             this.velocity.z *= -(coefficientOfRestitution * coefficientOfRestitution);
-            //System.out.println("Ball Collision");
+            System.out.println("Ball Collision");
         }
 
     }

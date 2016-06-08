@@ -313,7 +313,7 @@ public class Main extends Objects {
         }
         //System.out.println(guis.size());
         picker = new MousePicker(camera, renderer.getProjectionMatrix(), terrain);
-
+        ArrayList<Entity> collisionAlert = new ArrayList<Entity>();
         while (!Display.isCloseRequested()) {
             picker.update();
             frameCounter++;
@@ -324,10 +324,18 @@ public class Main extends Objects {
                     player = player1;
                     camera = camera1;
                     golfBall = player1.getGolfBall();
+                    if (canCollideBall) {
+                    	System.out.println("1->2");
+                        golfBallUsed1.manageBallCollision(golfBallUsed2);
+                    }
                 } else {
                     player = player2;
                     camera = camera2;
                     golfBall = player2.getGolfBall();
+                    if (canCollideBall) {
+                    	System.out.println("2->1");
+                        golfBallUsed2.manageBallCollision(golfBallUsed1);
+                    }
                 }
 
                 //renderer.processEntity(player1);
@@ -373,22 +381,12 @@ public class Main extends Objects {
                 }
             }
            
-            ArrayList<Entity> collisionAlert = new ArrayList<Entity>();
+            
             for (int i = 0; i < entitiesInitial.size(); i++) {
             	renderer.processEntity(entitiesInitial.get(i));
             	if(detectInRange(golfBallUsed1, entitiesInitial.get(i)) || detectInRange(golfBallUsed2, entitiesInitial.get(i))) {
                 	collisionAlert.add(entitiesInitial.get(i));
                 }
-            	if(entitiesInitial.get(i).getModel() == UFO) {
-            		if (rand.nextDouble()<0.009 || entitiesInitial.get(i).getPosition().x<0 || entitiesInitial.get(i).getPosition().x>400 ) {
-            			vx*=-1;
-            		}
-            		if (rand.nextDouble()<0.009 || entitiesInitial.get(i).getPosition().z>0 || entitiesInitial.get(i).getPosition().z<-400) {
-            			vz*=-1;
-            		}
-            		entitiesInitial.get(i).increasePosition(vx, 0, vz);
-            		entitiesInitial.get(i).increaseRotation(0, 5, 0);
-            	}
             }
             
             for (int i = 0; i < entities.size(); i++) {
@@ -401,16 +399,15 @@ public class Main extends Objects {
             }
             for(int i=0; i<collisionAlert.size(); i++) {
             	if (canCollideOther) {
-            			golfBallUsed1.manageCollision(collisionAlert.get(i));
-            			golfBallUsed2.manageCollision(collisionAlert.get(i));
+            		golfBallUsed1.manageCollision(collisionAlert.get(i));
+            		golfBallUsed2.manageCollision(collisionAlert.get(i));
                 }
             }
             collisionAlert.clear();
                 
-            if (canCollideBall) {
-                golfBallUsed1.manageBallCollision(golfBallUsed2);
-                golfBallUsed2.manageBallCollision(golfBallUsed1);
-            }
+            
+            
+            
             if (frameCounter >= 6) {
                 frameCounter = 0;
                 canCollideBall = true;
