@@ -130,6 +130,8 @@ public class Main extends Objects {
 
     private static MousePicker picker;
 
+    private static boolean debug = false;
+
 
     public static void main(String[] args) {
 
@@ -311,7 +313,7 @@ public class Main extends Objects {
             guis.add(playerPanel);
             guis.add(power);
         }
-        //System.out.println(guis.size());
+        //if(debug) System.out.println(guis.size());
         picker = new MousePicker(camera, renderer.getProjectionMatrix(), terrain);
         ArrayList<Entity> collisionAlert = new ArrayList<Entity>();
         while (!Display.isCloseRequested()) {
@@ -325,7 +327,7 @@ public class Main extends Objects {
                     camera = camera1;
                     golfBall = player1.getGolfBall();
                     if (canCollideBall) {
-                    	System.out.println("1->2");
+                    	if(debug) System.out.println("1->2");
                         golfBallUsed1.manageBallCollision(golfBallUsed2);
                     }
                 } else {
@@ -333,7 +335,7 @@ public class Main extends Objects {
                     camera = camera2;
                     golfBall = player2.getGolfBall();
                     if (canCollideBall) {
-                    	System.out.println("2->1");
+                    	if(debug) System.out.println("2->1");
                         golfBallUsed2.manageBallCollision(golfBallUsed1);
                     }
                 }
@@ -369,7 +371,7 @@ public class Main extends Objects {
 
             renderer.processEntity(holeUsed);
             if (camera == null) {
-                System.out.println("ohno");
+                if(debug) System.out.println("ohno");
             }
             renderer.render(light, camera);
             //SIMULATIOND
@@ -422,11 +424,11 @@ public class Main extends Objects {
         }
         if (!editorMode && !terrainEditorMode) {
             if (player1.getScore() < player2.getScore()) {
-                System.out.println("PLAYER 1 WINS \\(*o*)/");
+                if(debug) System.out.println("PLAYER 1 WINS \\(*o*)/");
             } else if (player2.getScore() < player1.getScore()) {
-                System.out.println("PLAYER 2 WINS \\(*o*)/");
+                if(debug) System.out.println("PLAYER 2 WINS \\(*o*)/");
             } else {
-                System.out.println("ITS A TIE \\_(o.o)_/");
+                if(debug) System.out.println("ITS A TIE \\_(o.o)_/");
             }
         }
         

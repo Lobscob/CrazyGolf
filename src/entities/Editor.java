@@ -163,6 +163,7 @@ public class Editor extends Entity {
         	}
             Entity placed = new Entity(Main.wall, new Vector3f(xConnect , terrain.getHeightOfTerrain(xConnect, zConnect), zConnect), 0, 0, 0, 3.2f, true, new Vector3f(16, 16, 16));
             wallCounter ++;
+                System.out.println("ROT" + placed.getRotY());
             float xN = (float) ((placed.getCollisionZone().x/2) * (Math.cos(Math.toRadians(placed.getRotY())))); 
         	float zN = (float) ((placed.getCollisionZone().x/2) * (Math.sin(Math.toRadians(placed.getRotY()))));
             placed.setPosition(new Vector3f(placed.getPosition().x - xN, placed.getPosition().y, placed.getPosition().z + zN));

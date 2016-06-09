@@ -11,9 +11,14 @@ import terrains.Terrain;
 public class AI {
     private GolfBall ball;
 
+
     private Terrain terrain;
 
     private GoalHole hole;
+    private AiTools tools;
+    private HillCalculator hC;
+
+    private Vector3f velocity;
 
     public Vector3f getBotBallVelocity() {
         return botBallVelocity;
@@ -25,10 +30,15 @@ public class AI {
         ball = b;
         terrain = t;
         hole = h;
+        tools = new AiTools(ball,terrain,hole);
+        hC = new HillCalculator(ball,hole,terrain );
+
     }
     public void runBot(){
-        HillCalculator hC = new HillCalculator(ball,hole,terrain );
-        ball.setVelocity( hC.calculateVelocity());
+        velocity  = hC.calculateVelocity();
+        tools.createShotRotations();
+        botBallVelocity = tools.createVelocity().get(10);
+
     }
 
 

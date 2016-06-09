@@ -56,7 +56,7 @@ public class Objects {
         fern.getTextureModel().setHasTransparency(true);
         fern.getTextureModel().setUseFakeLighting(true);
 
-        RawModel wallModel = OBJLoader.loadObjModel("cubeWall", loader);
+        RawModel wallModel = OBJLoader.loadObjModel("jWall", loader);
         ModelTexture wallTexture = new ModelTexture(loader.loadTexture("simpleWallTexture"));
         wall = new TexturedModel(wallModel, wallTexture,6);
 
