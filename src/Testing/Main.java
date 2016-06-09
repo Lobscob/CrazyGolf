@@ -19,6 +19,7 @@ import terrains.Terrain;
 import textures.TerrainTexture;
 import textures.TerrainTexturePack;
 import toolbox.MousePicker;
+import toolbox.WindNoise;
 
 import javax.swing.*;
 import java.awt.*;
@@ -129,9 +130,7 @@ public class Main extends Objects {
     static float vz = -1;
 
     private static MousePicker picker;
-
-    private static boolean debug = false;
-
+    private static WindNoise wind;
 
     public static void main(String[] args) {
 
@@ -313,13 +312,15 @@ public class Main extends Objects {
             guis.add(playerPanel);
             guis.add(power);
         }
-        //if(debug) System.out.println(guis.size());
+        //System.out.println(guis.size());
         picker = new MousePicker(camera, renderer.getProjectionMatrix(), terrain);
         ArrayList<Entity> collisionAlert = new ArrayList<Entity>();
+        
+        wind = new WindNoise();
         while (!Display.isCloseRequested()) {
             picker.update();
             frameCounter++;
-
+            
             if (!terrainEditorMode && !editorMode) {
 
                 if (!player1.isTurnTaken()) {
@@ -327,7 +328,7 @@ public class Main extends Objects {
                     camera = camera1;
                     golfBall = player1.getGolfBall();
                     if (canCollideBall) {
-                    	if(debug) System.out.println("1->2");
+                    	//System.out.println("1->2");
                         golfBallUsed1.manageBallCollision(golfBallUsed2);
                     }
                 } else {
@@ -335,7 +336,7 @@ public class Main extends Objects {
                     camera = camera2;
                     golfBall = player2.getGolfBall();
                     if (canCollideBall) {
-                    	if(debug) System.out.println("2->1");
+                    	//System.out.println("2->1");
                         golfBallUsed2.manageBallCollision(golfBallUsed1);
                     }
                 }
@@ -345,9 +346,11 @@ public class Main extends Objects {
 
                 renderer.processEntity(golfBallUsed1);
                 renderer.processEntity(golfBallUsed2);
-
+                golfBallUsed1.setWind(wind);
+                golfBallUsed2.setWind(wind);
                 golfBallUsed1.move(terrain);
                 golfBallUsed2.move(terrain);
+                
             } else if (editorMode) {
                 player = editor;
                 camera = editorCamera;
@@ -371,7 +374,7 @@ public class Main extends Objects {
 
             renderer.processEntity(holeUsed);
             if (camera == null) {
-                if(debug) System.out.println("ohno");
+                System.out.println("ohno");
             }
             renderer.render(light, camera);
             //SIMULATIOND
@@ -424,11 +427,11 @@ public class Main extends Objects {
         }
         if (!editorMode && !terrainEditorMode) {
             if (player1.getScore() < player2.getScore()) {
-                if(debug) System.out.println("PLAYER 1 WINS \\(*o*)/");
+                System.out.println("PLAYER 1 WINS \\(*o*)/");
             } else if (player2.getScore() < player1.getScore()) {
-                if(debug) System.out.println("PLAYER 2 WINS \\(*o*)/");
+                System.out.println("PLAYER 2 WINS \\(*o*)/");
             } else {
-                if(debug) System.out.println("ITS A TIE \\_(o.o)_/");
+                System.out.println("ITS A TIE \\_(o.o)_/");
             }
         }
         
