@@ -113,7 +113,7 @@ public class Editor extends Entity {
         Random rand = new Random();
         
         if(Keyboard.isKeyDown(Keyboard.KEY_R)) {
-				Main.entities.get(Main.entities.size()-1).increaseRotation(0, 1, 0);
+				//Main.entities.get(Main.entities.size()-1).increaseRotation(0, 90, 0);
 				keyPressed = false;
 			}
         if(numberOfFrames>=20){keyPressed=true;numberOfFrames=0;}
@@ -161,7 +161,7 @@ public class Editor extends Entity {
         		xConnect = mouseTerrainPosition.x;
         		zConnect = mouseTerrainPosition.z;
         	}
-            Entity placed = new Entity(Main.wall, new Vector3f(xConnect , terrain.getHeightOfTerrain(xConnect, zConnect), zConnect), 0, 0, 0, 3.2f, true, new Vector3f(16, 16, 16));
+            Entity placed = new Entity(Main.wall, new Vector3f(xConnect , terrain.getHeightOfTerrain(xConnect, zConnect), zConnect), 0, 0, 0, 2f, true, new Vector3f(10, 10, 10));
             wallCounter ++;
             float xN = (float) ((placed.getCollisionZone().x/2) * (Math.cos(Math.toRadians(placed.getRotY())))); 
         	float zN = (float) ((placed.getCollisionZone().x/2) * (Math.sin(Math.toRadians(placed.getRotY()))));

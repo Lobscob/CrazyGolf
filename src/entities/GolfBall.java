@@ -7,6 +7,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import renderEngine.DisplayManager;
 import terrains.Terrain;
+import toolbox.WindNoise;
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
@@ -30,9 +31,15 @@ public class GolfBall extends Entity {
     private float az = 0;
 
     private boolean isInHole = false;
-    private float windX;
-    private float windZ;
+    
+    
+    private WindNoise windNoise;
+    public void setWind(WindNoise w) {
+    	this.windNoise = w;
+    }
+    
     private Vector3f normal;
+    
 
 
 
@@ -98,27 +105,16 @@ public class GolfBall extends Entity {
             velocity.z = velocity.z * groundFriction;
         }
         Random rand = new Random();
-        float windx = 0;
-        float windz = 0;
-        if (rand.nextFloat() < 0.01f) {
-            windx += rand.nextFloat() / 5f;
-            windz += rand.nextFloat() / 5f;
-            if (rand.nextFloat() < 0.4) {
-                windx *= -1;
-            }
-            if (rand.nextFloat() < 0.4) {
-                windz *= -1;
-            }
-        }
 
+        Vector3f w = windNoise.wind();
 
-            velocity.x += ax * DisplayManager.getFrameTimeSeconds() - (normal.x * 2) * GRAVITY * groundFriction+ windx;
+            velocity.x += ax * DisplayManager.getFrameTimeSeconds() - (normal.x * 2) * GRAVITY * groundFriction + w.x;
             velocity.y += ay * DisplayManager.getFrameTimeSeconds() + (normal.y) * GRAVITY;
-            velocity.z -= az * DisplayManager.getFrameTimeSeconds() + (normal.z * 2) * GRAVITY * groundFriction+ windz;
+            velocity.z -= az * DisplayManager.getFrameTimeSeconds() + (normal.z * 2) * GRAVITY * groundFriction + w.z;
             //System.out.println(velocity.x + " " +  velocity.y + " " +  velocity.z);
 
-
-
+        w.normalise();    
+            
         x += velocity.x * DisplayManager.getFrameTimeSeconds();
         y += velocity.y * DisplayManager.getFrameTimeSeconds();
         z += velocity.z * DisplayManager.getFrameTimeSeconds();
@@ -326,14 +322,6 @@ public class GolfBall extends Entity {
 
     public float getGravity() {
         return GRAVITY;
-    }
-
-    public float getWindX() {
-        return windX;
-    }
-
-    public float getWindZ() {
-        return windZ;
     }
 
     public Vector3f getNormal() {
