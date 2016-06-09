@@ -35,12 +35,12 @@ public class WindNoise {
          windMagnitude = r.nextFloat();
          if( r.nextFloat() < 0.001f) {
          	windMagnitude *= 100;
-         	System.out.println(windMagnitude);
+         	//System.out.println(windMagnitude);
          }
          windMagnitude *= 0.01;
          windDirection.scale(windMagnitude);
-         System.out.println("X " + windDirection.x);
-         System.out.println("Z " + windDirection.z);
+         //System.out.println("X " + windDirection.x);
+         //System.out.println("Z " + windDirection.z);
          return windDirection;
     }
 
