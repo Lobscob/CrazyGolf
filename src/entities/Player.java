@@ -213,6 +213,8 @@ public class Player extends Entity {
         } else if (Keyboard.isKeyDown(Keyboard.KEY_B) && keyPressed) {
 //				ai1.setAI(true);
             ai1.runBot();
+
+
             keyPressed = false;
         } else if (Keyboard.isKeyDown(Keyboard.KEY_I) && keyPressed && gCounter<10) {
         	gCounter++;

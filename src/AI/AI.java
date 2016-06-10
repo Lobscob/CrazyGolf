@@ -36,9 +36,9 @@ public class AI {
     }
     public void runBot(){
         velocity  = hC.calculateVelocity();
-        tools.createShotRotations();
-        botBallVelocity = tools.createVelocity().get(10);
-
+        botBallVelocity = tools.createVelocity().get(2);
+        System.out.println("Veloc" +botBallVelocity);
+        ball.setVelocity(botBallVelocity);
     }
 
 

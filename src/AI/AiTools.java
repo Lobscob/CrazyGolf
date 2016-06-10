@@ -5,9 +5,12 @@ import entities.GolfBall;
 import org.lwjgl.util.vector.Vector3f;
 import terrains.Terrain;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static java.lang.Math.cos;
 
 /**
  * Created by Jeroen on 08/06/2016.
@@ -16,56 +19,64 @@ public class AiTools {
     private GolfBall ball;
     private Terrain terrain;
     private GoalHole hole;
-    private List<Vector3f> forces = new ArrayList<Vector3f>();
-    private List<Vector3f> velocities = new ArrayList<Vector3f>();
-    private int numberOfRotation = 18;
-    private float factors[][];
+
+
+    private int numberOfRotation = 10;
 
 
     public AiTools(GolfBall b, Terrain t, GoalHole h) {
         ball = b;
         terrain = t;
         hole = h;
+        GoalHole hole;
 
     }
 
-    public void createShotRotations() {
+    public float[][] createShotRotations() {
         float factors[][] = new float[numberOfRotation][numberOfRotation];
         factors[0][0] = 1;
-        factors[0][1] = -1;
+        factors[0][1] = 0;
 
-        float division = (2 / (float) numberOfRotation);
-        System.out.println("division = " + division);
+        double epsilon = (360/numberOfRotation);
+        float angle = 0;
+        System.out.println("angle = " + epsilon);
         System.out.println(0 + " Xfact = " + factors[0][0]);
         System.out.println(0 + " Zfact = " + factors[0][1]);
-        for (int i = 1; i < numberOfRotation; i++) {
+        for (int i =0; i < numberOfRotation; i++) {
 
-            factors[i][0] = factors[i - 1][0] - division;
-            factors[i][1] = factors[i - 1][1] + division;
+            factors[i][0] =  (float) Math.cos(Math.toRadians(angle));
+            factors[i][1] = (float) Math.sin(Math.toRadians(angle));
+            angle+=epsilon;
             System.out.println(i + " Xfact = " + factors[i][0]);
             System.out.println(i + " Zfact = " + factors[i][1]);
         }
+        return factors;
     }
 
-    public void createHitForces() {
+    public ArrayList<Vector3f> createHitForces() {
+        ArrayList<Vector3f> forces = new ArrayList<Vector3f>();
         float xForce;
         float zForce;
 
 
         for (int i = 0; i < numberOfRotation; i++) {
             Random random = new Random();
-            xForce = random.nextFloat();
-            zForce = random.nextFloat();
+            xForce = random.nextFloat() * 10000;
+            zForce = random.nextFloat() * 10000;
             Vector3f force = new Vector3f(xForce, 0, zForce);
             forces.add(force);
         }
 
-
+        return forces;
     }
 
     public List<Vector3f> createVelocity() {
-        createShotRotations();
-        createHitForces();
+       float[][] factors = createShotRotations();
+        ArrayList<Vector3f> forces =  createHitForces();
+        ArrayList<Vector3f>  velocities = new ArrayList<Vector3f>();
+        System.out.print("Last Factor" + factors[2][1]);
+        System.out.print("Last force" + forces.get(2));
+
         for (int i = 0; i < numberOfRotation; i++) {
             Vector3f velocity = new Vector3f();
             float xVelocity = forces.get(i).x * factors[i][0];
