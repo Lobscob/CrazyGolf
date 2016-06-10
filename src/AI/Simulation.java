@@ -3,6 +3,7 @@ package AI;
 import static Testing.Main.staticSphereModel;
 import static Testing.Main.terrainChoice;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.lwjgl.util.vector.Vector3f;
@@ -25,6 +26,9 @@ public class Simulation {
 	private Player AI;
 	
 	private List<Vector3f> predictedHits;
+	private List<GolfBall> allSimulatedShots;
+	
+	private AiTools calculators;
 	
 	public Simulation(Player player) {
 		AI = player;
@@ -32,6 +36,11 @@ public class Simulation {
 		this.HeuristicValues = new Vector3f(0,0,0);
 		this.collided = false;
 		this.rotation = 0;
+		
+		calculators = new AiTools();
+		predictedHits = calculators.createVelocity();
+		allSimulatedShots = new ArrayList<GolfBall>();
+		//System.out.println(predictedHits.size());
 	}
 	
 	public Vector3f calculateHitToGoal(GolfBall golfBall, GoalHole golfHole) {
@@ -50,16 +59,14 @@ public class Simulation {
 	}
 	
 	public void simulateHit(GolfBall golfBall) {
-		float x = golfBall.getPosition().x;
-		float z = golfBall.getPosition().z;
-		GolfBall simulationBall = new GolfBall(staticSphereModel, new Vector3f(x, terrainChoice.getHeightOfTerrain(x, z), z), 0, 0, 0, 2);
-		Main.simulatedBalls.add(simulationBall);
-		for(int i=0; i<Main.simulatedBalls.size(); i++) {
-			if(Main.simulatedBalls.get(i) == simulationBall && debug) {
-				System.out.println("Sim ball present");
-			}
-			Vector3f simHit = calculateHitToGoal(Main.simulatedBalls.get(i), Main.holeUsed);
-			System.out.println(simHit);
+		for (int k=0; k<predictedHits.size(); k++) { 
+			float x = golfBall.getPosition().x;
+			float z = golfBall.getPosition().z;
+			GolfBall simulationBall = new GolfBall(staticSphereModel, new Vector3f(x, terrainChoice.getHeightOfTerrain(x, z), z), 0, 0, 0, 2);
+			Main.simulatedBalls.add(simulationBall);
+			//allSimulatedShots.add(simulationBall);
+			Vector3f simHit = predictedHits.get(k);
+			//System.out.println(simHit);
 			simulationBall.manageSimHit(simHit);
 		}
 	}

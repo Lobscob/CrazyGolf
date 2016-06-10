@@ -379,10 +379,13 @@ public class Main extends Objects {
             renderer.render(light, camera);
             //SIMULATIOND
             for (int i = 0; i < simulatedBalls.size(); i++) {
+            	simulatedBalls.get(i).setWind(wind);
                 simulatedBalls.get(i).move(terrain);
+                
                 renderer.processEntity(simulatedBalls.get(i));
                 for (int j = 0; j < entities.size(); j++) {
                     simulatedBalls.get(i).manageCollision(entities.get(j));
+                    System.out.println(simulatedBalls.get(i).getPosition());
                 }
             }
            
@@ -440,6 +443,7 @@ public class Main extends Objects {
         loader.cleanUp();
         entitiesInitial.clear();
         guis.clear();
+        simulatedBalls.clear();
 
         DisplayManager.closeDisplay();
         frame.setVisible(true);
