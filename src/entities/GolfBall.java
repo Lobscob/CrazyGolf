@@ -205,19 +205,19 @@ public class GolfBall extends Entity {
         Vector2f.sub(Left, ballPosition, subL);
 
         if (Vector2f.dot(TopNormal,subT) < 0) {
-            System.out.println("Top");
+            //System.out.println("Top");
             return TopNormal;
         } else if (Vector2f.dot(RightNormal,subR) < 0) {
-            System.out.println("Right");
+           // System.out.println("Right");
             return RightNormal;
         } else if (Vector2f.dot(BottomNormal,subB) < 0) {
-            System.out.println("Bottom");
+           // System.out.println("Bottom");
             return BottomNormal;
         } else if (Vector2f.dot(LeftNormal,subL) < 0) {
-            System.out.println("Left");
+           // System.out.println("Left");
             return LeftNormal;
         } else {
-            System.out.println("End");
+            //System.out.println("End");
             return TopNormal;
         }
     }
