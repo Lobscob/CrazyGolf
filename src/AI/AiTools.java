@@ -21,34 +21,32 @@ public class AiTools {
     private GoalHole hole;
 
 
-    private int numberOfRotation = 10;
+    private double numberOfRotation = 180.0;
 
 
-    public AiTools(GolfBall b, Terrain t, GoalHole h) {
-        ball = b;
-        terrain = t;
-        hole = h;
-        GoalHole hole;
+    public AiTools() {
+        ball = null;
+        terrain = null;
+        hole = null;
 
     }
 
-    public float[][] createShotRotations() {
-        float factors[][] = new float[numberOfRotation][numberOfRotation];
-        factors[0][0] = 1;
-        factors[0][1] = 0;
-
-        double epsilon = (360/numberOfRotation);
-        float angle = 0;
-        System.out.println("angle = " + epsilon);
-        System.out.println(0 + " Xfact = " + factors[0][0]);
-        System.out.println(0 + " Zfact = " + factors[0][1]);
+    public ArrayList<Vector3f> createShotRotations() {
+       ArrayList<Vector3f> factors = new ArrayList<Vector3f>();
+        double epsilon = (360.0/numberOfRotation);
+        //System.out.println(epsilon);
+        double angle = 0;
         for (int i =0; i < numberOfRotation; i++) {
+        	Vector3f direction = new Vector3f(0,0,0);
 
-            factors[i][0] =  (float) Math.cos(Math.toRadians(angle));
-            factors[i][1] = (float) Math.sin(Math.toRadians(angle));
+            direction.x = (float) Math.cos(Math.toRadians(angle));
+            direction.y = 0;
+            direction.z = (float) Math.sin(Math.toRadians(angle));
             angle+=epsilon;
-            System.out.println(i + " Xfact = " + factors[i][0]);
-            System.out.println(i + " Zfact = " + factors[i][1]);
+            direction.normalise();
+            //System.out.println("Direction: " + direction);
+            
+            factors.add(direction);
         }
         return factors;
     }
@@ -71,16 +69,16 @@ public class AiTools {
     }
 
     public List<Vector3f> createVelocity() {
-       float[][] factors = createShotRotations();
+    	ArrayList<Vector3f> factors = createShotRotations();
         ArrayList<Vector3f> forces =  createHitForces();
-        ArrayList<Vector3f>  velocities = new ArrayList<Vector3f>();
-        System.out.print("Last Factor" + factors[2][1]);
-        System.out.print("Last force" + forces.get(2));
+        ArrayList<Vector3f> velocities = new ArrayList<Vector3f>();
+        //System.out.print("Last Factor" + factors[2][1]);
+        //System.out.print("Last force" + forces.get(2));
 
         for (int i = 0; i < numberOfRotation; i++) {
             Vector3f velocity = new Vector3f();
-            float xVelocity = forces.get(i).x * factors[i][0];
-            float zVelocity = forces.get(i).x * factors[i][1];
+            float xVelocity = forces.get(i).x * factors.get(i).x;
+            float zVelocity = forces.get(i).z * factors.get(i).z;
             velocity.x = xVelocity;
             velocity.z = zVelocity;
             velocities.add(velocity);

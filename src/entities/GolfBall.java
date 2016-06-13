@@ -113,7 +113,7 @@ public class GolfBall extends Entity {
             velocity.z -= az * DisplayManager.getFrameTimeSeconds() + (normal.z * 2) * GRAVITY * groundFriction + w.z;
             //System.out.println(velocity.x + " " +  velocity.y + " " +  velocity.z);
 
-        w.normalise();    
+        //w.normalise();    
             
         x += velocity.x * DisplayManager.getFrameTimeSeconds();
         y += velocity.y * DisplayManager.getFrameTimeSeconds();
@@ -278,7 +278,6 @@ public class GolfBall extends Entity {
         this.velocity.y += dvy * DisplayManager.getFrameTimeSeconds();
         this.velocity.z += dvz * DisplayManager.getFrameTimeSeconds();
     }
-
 
 
     public void manageSimHit(Vector3f forces) {

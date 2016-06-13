@@ -30,7 +30,7 @@ public class AI {
         ball = b;
         terrain = t;
         hole = h;
-        tools = new AiTools(ball,terrain,hole);
+        tools = new AiTools();
         hC = new HillCalculator(ball,hole,terrain );
 
     }
