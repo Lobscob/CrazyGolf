@@ -31,7 +31,9 @@ public class WindNoise {
                  windDirection.z *= -1;
              }
          }
-         windDirection.normalise();
+    	 if(windDirection.x != 0.0 && windDirection.y !=0.0 && windDirection.z != 0.0) {
+    		 windDirection.normalise();
+    	 }
          windMagnitude = r.nextFloat();
          if( r.nextFloat() < 0.001f) {
          	windMagnitude *= 100;

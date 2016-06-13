@@ -64,7 +64,7 @@ public class Simulation {
 			float z = golfBall.getPosition().z;
 			GolfBall simulationBall = new GolfBall(staticSphereModel, new Vector3f(x, terrainChoice.getHeightOfTerrain(x, z), z), 0, 0, 0, 2);
 			Main.simulatedBalls.add(simulationBall);
-			//allSimulatedShots.add(simulationBall);
+			allSimulatedShots.add(simulationBall);
 			Vector3f simHit = predictedHits.get(k);
 			//System.out.println(simHit);
 			simulationBall.manageSimHit(simHit);
