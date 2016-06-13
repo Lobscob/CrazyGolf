@@ -61,8 +61,8 @@ public class AiTools {
 
         for (int i = 0; i < numberOfRotation; i++) {
             Random random = new Random();
-            xForce = random.nextFloat() * 10000;
-            zForce = random.nextFloat() * 10000;
+            xForce = random.nextFloat() * 1000;
+            zForce = random.nextFloat() * 1000;
             Vector3f force = new Vector3f(xForce, 0, zForce);
             forces.add(force);
         }
