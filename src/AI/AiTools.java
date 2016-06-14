@@ -21,7 +21,7 @@ public class AiTools {
     private GoalHole hole;
 
 
-    private double numberOfRotation = 180.0;
+    private double numberOfRotation = 10;
 
 
     public AiTools() {

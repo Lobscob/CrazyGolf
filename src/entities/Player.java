@@ -67,8 +67,8 @@ public class Player extends Entity {
 
 //    private BotMover ai1 = new BotMover(Main.getPlayer1(), Main.golfBallUsed1, Main.holeUsed);
     private BotMover ai21 = new BotMover(Main.getPlayer2(), Main.golfBallUsed2, Main.holeUsed);
-    AI ai1 = new AI(Main.golfBallUsed1, Main.terrainChoice, Main.holeUsed);
-    AI ai2= new AI(Main.golfBallUsed2, Main.terrainChoice, Main.holeUsed);
+    AI ai1 = new AI(Main.golfBallUsed1, Main.terrainChoice, Main.holeUsed,Main.getPlayer1());
+    AI ai2= new AI(Main.golfBallUsed2, Main.terrainChoice, Main.holeUsed,Main.getPlayer2());
 
     /**
      * @param model         a textured model of what the editor will look like in 3D
