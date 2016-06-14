@@ -20,8 +20,7 @@ public class AiTools {
     private Terrain terrain;
     private GoalHole hole;
 
-
-    private double numberOfRotation = 90.0;
+    private double numberOfRotation = 10.0;
 
 
     public AiTools() {
