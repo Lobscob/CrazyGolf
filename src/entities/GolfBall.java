@@ -310,7 +310,7 @@ public class GolfBall extends Entity {
 
             this.velocity.x *= -(coefficientOfRestitution * coefficientOfRestitution);
             this.velocity.z *= -(coefficientOfRestitution * coefficientOfRestitution);
-            System.out.println("Ball Collision");
+            //System.out.println("Ball Collision");
         }
 
     }
