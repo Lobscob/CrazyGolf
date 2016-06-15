@@ -14,12 +14,15 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Area;
 import java.util.Random;
 
-import static Testing.Main.golfBallUsed1;
 import static Testing.Main.holeUsed;
 
 /**
  * This class represents the golf ball
  */
+
+import static Testing.Main.entities;
+
+
 public class GolfBall extends Entity {
 
     private static final float GRAVITY = -9.80665f;
@@ -31,16 +34,26 @@ public class GolfBall extends Entity {
     private float az = 0;
 
     private boolean isInHole = false;
-    
-    
-    private WindNoise windNoise;
-    public void setWind(WindNoise w) {
-    	this.windNoise = w;
-    }
-    
-    private Vector3f normal;
-    
 
+
+    private WindNoise windNoise;
+
+    public void setWind(WindNoise w) {
+        this.windNoise = w;
+    }
+
+    private Vector3f normal;
+
+    public boolean doneRolling() {
+        boolean done = false;
+        if ((float) Math.sqrt(Math.pow(velocity.x, 2) + Math.pow(velocity.z, 2)) < 0.1) {
+            velocity.x = 0;
+            velocity.z = 0;
+            velocity.y = 10000;
+            done = true;
+        }
+        return done;
+    }
 
 
     public void setIsInHole(boolean b) {
@@ -72,12 +85,12 @@ public class GolfBall extends Entity {
 
 
     public void move(Terrain terrain) {
-    	if(this.getPosition().z>0 || this.getPosition().z<-1000) {
-    		this.velocity.z *= -1;
-    	}
-    	if(this.getPosition().x<0 || this.getPosition().x>1000) {
-    		this.velocity.x *= -1;
-    	}
+        if (this.getPosition().z > 0 || this.getPosition().z < -1000) {
+            this.velocity.z *= -1;
+        }
+        if (this.getPosition().x < 0 || this.getPosition().x > 1000) {
+            this.velocity.x *= -1;
+        }
 
         float x = 0;
         float y = 0;
@@ -108,13 +121,13 @@ public class GolfBall extends Entity {
 
         Vector3f w = windNoise.wind();
 
-            velocity.x += ax * DisplayManager.getFrameTimeSeconds() - (normal.x * 2) * GRAVITY * groundFriction + w.x;
-            velocity.y += ay * DisplayManager.getFrameTimeSeconds() + (normal.y) * GRAVITY;
-            velocity.z -= az * DisplayManager.getFrameTimeSeconds() + (normal.z * 2) * GRAVITY * groundFriction + w.z;
-            //System.out.println(velocity.x + " " +  velocity.y + " " +  velocity.z);
+        velocity.x += ax * DisplayManager.getFrameTimeSeconds() - (normal.x * 2) * GRAVITY * groundFriction + w.x;
+        velocity.y += ay * DisplayManager.getFrameTimeSeconds() + (normal.y) * GRAVITY;
+        velocity.z -= az * DisplayManager.getFrameTimeSeconds() + (normal.z * 2) * GRAVITY * groundFriction + w.z;
+        //System.out.println(velocity.x + " " +  velocity.y + " " +  velocity.z);
 
         //w.normalise();    
-            
+
         x += velocity.x * DisplayManager.getFrameTimeSeconds();
         y += velocity.y * DisplayManager.getFrameTimeSeconds();
         z += velocity.z * DisplayManager.getFrameTimeSeconds();
@@ -162,8 +175,8 @@ public class GolfBall extends Entity {
     }
 
     private Vector2f normalOfImpact(Entity entity) {
-    	//System.out.println(entity.getModel().toString());
-    	//System.out.println(Main.wall.toString());
+        //System.out.println(entity.getModel().toString());
+        //System.out.println(Main.wall.toString());
         float theta = entity.getRotY();
 
         float dz = (float) Math.sin(Math.toRadians(theta));
@@ -204,17 +217,17 @@ public class GolfBall extends Entity {
         Vector2f.sub(Bottom, ballPosition, subB);
         Vector2f.sub(Left, ballPosition, subL);
 
-        if (Vector2f.dot(TopNormal,subT) < 0) {
+        if (Vector2f.dot(TopNormal, subT) < 0) {
             //System.out.println("Top");
             return TopNormal;
-        } else if (Vector2f.dot(RightNormal,subR) < 0) {
-           // System.out.println("Right");
+        } else if (Vector2f.dot(RightNormal, subR) < 0) {
+            // System.out.println("Right");
             return RightNormal;
-        } else if (Vector2f.dot(BottomNormal,subB) < 0) {
-           // System.out.println("Bottom");
+        } else if (Vector2f.dot(BottomNormal, subB) < 0) {
+            // System.out.println("Bottom");
             return BottomNormal;
-        } else if (Vector2f.dot(LeftNormal,subL) < 0) {
-           // System.out.println("Left");
+        } else if (Vector2f.dot(LeftNormal, subL) < 0) {
+            // System.out.println("Left");
             return LeftNormal;
         } else {
             //System.out.println("End");
@@ -222,11 +235,11 @@ public class GolfBall extends Entity {
         }
     }
 
-    
 
     public float getGroundFriction() {
         return groundFriction;
     }
+
     private float groundFriction = 0.975f;
     private float coefficientOfRestitution = 0.450f;
 
@@ -282,8 +295,8 @@ public class GolfBall extends Entity {
 
     public void manageSimHit(Vector3f forces) {
 
-        float dvx = (float) (forces.x); 
-        float dvz = (float) (forces.z); 
+        float dvx = (float) (forces.x);
+        float dvz = (float) (forces.z);
         float dvy = forces.y;
 
         this.velocity.x -= dvx * DisplayManager.getFrameTimeSeconds();
@@ -325,5 +338,64 @@ public class GolfBall extends Entity {
 
     public Vector3f getNormal() {
         return normal;
+    }
+
+    public Vector3f calculateHeuristics() {
+        Vector3f heuristicsVec = new Vector3f(0, 0, 0);
+        if (getIsInHole()) {
+            return heuristicsVec;
+        }
+        heuristicsVec.x = distanceFromHole(holeUsed);
+        heuristicsVec.z = obstaclesBlocking(holeUsed);
+        return heuristicsVec;
+
+    }
+
+    public float distanceFromHole(GoalHole h) {
+        Vector3f holePosition = h.getPosition();
+        Vector3f ballPosition = this.getPosition();
+        float xDistance = Math.abs(holePosition.x - ballPosition.x);
+        float zDistance = Math.abs(holePosition.z - ballPosition.z);
+        float distance = (float) Math.sqrt(Math.pow(xDistance, 2) + Math.pow(zDistance, 2));
+        return distance;
+    }
+
+    public float obstaclesBlocking(GoalHole h) {
+        Vector3f holePosition = h.getPosition();
+        Vector3f ballPosition = this.getPosition();
+        float numberOfObstacles = 0;
+        if (holePosition.x < ballPosition.x && holePosition.z < ballPosition.z) {
+            for (int i = 0; i < entities.size(); i++) {
+                Vector3f entityPos = entities.get(i).getPosition();
+                if (entityPos.x > holePosition.x && entityPos.x < ballPosition.x && entityPos.z > holePosition.z && entityPos.z < ballPosition.z) {
+                    numberOfObstacles++;
+                }
+            }
+        }
+        if (holePosition.x < ballPosition.x && holePosition.z > ballPosition.z) {
+            for (int i = 0; i < entities.size(); i++) {
+                Vector3f entityPos = entities.get(i).getPosition();
+                if (entityPos.x > holePosition.x && entityPos.x < ballPosition.x && entityPos.z < holePosition.z && entityPos.z > ballPosition.z) {
+                    numberOfObstacles++;
+                }
+            }
+        }
+        if (holePosition.x > ballPosition.x && holePosition.z < ballPosition.z) {
+            for (int i = 0; i < entities.size(); i++) {
+                Vector3f entityPos = entities.get(i).getPosition();
+                if (entityPos.x < holePosition.x && entityPos.x > ballPosition.x && entityPos.z > holePosition.z && entityPos.z < ballPosition.z) {
+                    numberOfObstacles++;
+                }
+            }
+        }
+        if (holePosition.x > ballPosition.x && holePosition.z > ballPosition.z) {
+            for (int i = 0; i < entities.size(); i++) {
+                Vector3f entityPos = entities.get(i).getPosition();
+                if (entityPos.x < holePosition.x && entityPos.x > ballPosition.x && entityPos.z < holePosition.z && entityPos.z > ballPosition.z) {
+                    numberOfObstacles++;
+                }
+            }
+        }
+        return numberOfObstacles;
     }
 }

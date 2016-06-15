@@ -91,6 +91,9 @@ public class Main extends Objects {
     private static Camera editorCamera;
     private static Camera terrainEditorCamera;
 
+    public static int heuristicsCalculated = 0;
+    public static GolfBall best;
+
     public static Player getPlayer2() {
         return player2;
     }
@@ -125,7 +128,7 @@ public class Main extends Objects {
     private static Light light2;
     private static Light light3;
     private static Light light4;
-    
+
     static float vx = 1;
     static float vz = -1;
 
@@ -295,15 +298,15 @@ public class Main extends Objects {
         }
 
         //entities.add(new Entity(wall,new Vector3f(350, terrain.getHeightOfTerrain(350, -300) ,-300),0,0,0,3.2f, true, new Vector3f(42,5,3)));
-        entitiesInitial.add(new Entity(castle,new Vector3f(440,terrain.getHeightOfTerrain(300, -300),-300),0,180,0,10, false, new Vector3f(0,0,0)));
+        entitiesInitial.add(new Entity(castle, new Vector3f(440, terrain.getHeightOfTerrain(300, -300), -300), 0, 180, 0, 10, false, new Vector3f(0, 0, 0)));
         //entitiesInitial.add(new Entity(crate, new Vector3f(330, terrain.getHeightOfTerrain(330, -330), -330), 0, 0, 0, 10, true, new Vector3f(14, 14, 14)));
         //entitiesInitial.add(new Entity(UFO, new Vector3f(0,terrain.getHeightOfTerrain(0,0) + 10,0),0,0,0,10,false,new Vector3f(0,0,0)));
-        
-       
+
+
         if (editorMode) {
             GuiTexture editorPanel = new GuiTexture(loader.loadTexture("editor_menu"), new Vector2f(0.135f, -0.14f), new Vector2f(1.14f, 1.14f));
             guis.add(editorPanel);
-        }else if (terrainEditorMode) {
+        } else if (terrainEditorMode) {
             GuiTexture terrainEditorPanel = new GuiTexture(loader.loadTexture("terrain"), new Vector2f(0.135f, -0.14f), new Vector2f(1.14f, 1.14f));
             guis.add(terrainEditorPanel);
         } else {
@@ -315,12 +318,12 @@ public class Main extends Objects {
         //System.out.println(guis.size());
         picker = new MousePicker(camera, renderer.getProjectionMatrix(), terrain);
         ArrayList<Entity> collisionAlert = new ArrayList<Entity>();
-        
+
         wind = new WindNoise();
         while (!Display.isCloseRequested()) {
             picker.update();
             frameCounter++;
-            
+
             if (!terrainEditorMode && !editorMode) {
 
                 if (!player1.isTurnTaken()) {
@@ -328,7 +331,7 @@ public class Main extends Objects {
                     camera = camera1;
                     golfBall = player1.getGolfBall();
                     if (canCollideBall) {
-                    	//System.out.println("1->2");
+                        //System.out.println("1->2");
                         golfBallUsed1.manageBallCollision(golfBallUsed2);
                     }
                 } else {
@@ -336,7 +339,7 @@ public class Main extends Objects {
                     camera = camera2;
                     golfBall = player2.getGolfBall();
                     if (canCollideBall) {
-                    	//System.out.println("2->1");
+                        //System.out.println("2->1");
                         golfBallUsed2.manageBallCollision(golfBallUsed1);
                     }
                 }
@@ -350,7 +353,7 @@ public class Main extends Objects {
                 golfBallUsed2.setWind(wind);
                 golfBallUsed1.move(terrain);
                 golfBallUsed2.move(terrain);
-                
+
             } else if (editorMode) {
                 player = editor;
                 camera = editorCamera;
@@ -379,42 +382,66 @@ public class Main extends Objects {
             renderer.render(light, camera);
             //SIMULATIOND
             for (int i = 0; i < simulatedBalls.size(); i++) {
-            	simulatedBalls.get(i).setWind(wind);
+                simulatedBalls.get(i).setWind(wind);
                 simulatedBalls.get(i).move(terrain);
-                
+
                 renderer.processEntity(simulatedBalls.get(i));
                 for (int j = 0; j < entities.size(); j++) {
-                    simulatedBalls.get(i).manageCollision(entities.get(j)); 
+
+                    simulatedBalls.get(i).manageCollision(entities.get(j));
+                    //System.out.println(simulatedBalls.get(i).getPosition());
+
+                    simulatedBalls.get(i).manageCollision(entities.get(j));
+
+                }
+                if (simulatedBalls.get(i).doneRolling() && heuristicsCalculated < 10) {
+                    Vector3f heuristicsVec = simulatedBalls.get(i).calculateHeuristics();
+                    System.out.println("Heuristics ball " + i + " : " + heuristicsVec + " " + heuristicsCalculated);
+                    //System.out.println("Best heuristics: " + bestHeuristics);
+                    best = simulatedBalls.get(0);
+                    for (int j = 0; j < simulatedBalls.size(); j++) {
+                        int bestIndex = 0;
+                        if (simulatedBalls.get(j).calculateHeuristics().x < best.calculateHeuristics().x) {
+                            best = simulatedBalls.get(j);
+                        }
+                        heuristicsCalculated++;
+                    }
                 }
             }
-           
-            
+
+            if (best != null) {
+                renderer.processEntity(best);
+                best.setScale(5);
+                simulatedBalls.clear();
+            } else {
+                System.out.println("There is no good");
+            }
+
+
             for (int i = 0; i < entitiesInitial.size(); i++) {
-            	renderer.processEntity(entitiesInitial.get(i));
-            	if(detectInRange(golfBallUsed1, entitiesInitial.get(i)) || detectInRange(golfBallUsed2, entitiesInitial.get(i))) {
-                	collisionAlert.add(entitiesInitial.get(i));
+                renderer.processEntity(entitiesInitial.get(i));
+                if (detectInRange(golfBallUsed1, entitiesInitial.get(i)) || detectInRange(golfBallUsed2, entitiesInitial.get(i))) {
+                    collisionAlert.add(entitiesInitial.get(i));
                 }
             }
-            
+
             for (int i = 0; i < entities.size(); i++) {
                 renderer.processEntity(entities.get(i));
-            	
-                if(detectInRange(golfBallUsed1, entities.get(i)) || detectInRange(golfBallUsed2, entities.get(i))) {
-                	collisionAlert.add(entities.get(i));
+
+                if (detectInRange(golfBallUsed1, entities.get(i)) || detectInRange(golfBallUsed2, entities.get(i))) {
+                    collisionAlert.add(entities.get(i));
                 }
-            	player.manageCollision(entities.get(i));
+                player.manageCollision(entities.get(i));
             }
-            for(int i=0; i<collisionAlert.size(); i++) {
-            	if (canCollideOther) {
-            		golfBallUsed1.manageCollision(collisionAlert.get(i));
-            		golfBallUsed2.manageCollision(collisionAlert.get(i));
+            for (int i = 0; i < collisionAlert.size(); i++) {
+                if (canCollideOther) {
+                    golfBallUsed1.manageCollision(collisionAlert.get(i));
+                    golfBallUsed2.manageCollision(collisionAlert.get(i));
                 }
             }
             collisionAlert.clear();
-                
-            
-            
-            
+
+
             if (frameCounter >= 6) {
                 frameCounter = 0;
                 canCollideBall = true;
@@ -436,11 +463,12 @@ public class Main extends Objects {
                 System.out.println("ITS A TIE \\_(o.o)_/");
             }
         }
-        
+
         guiRenderer.cleanUP();
         renderer.cleanUp();
         loader.cleanUp();
         entitiesInitial.clear();
+        best = null;
         guis.clear();
         simulatedBalls.clear();
 
@@ -524,14 +552,14 @@ public class Main extends Objects {
     public static boolean getPlayerMode() {
         return playerMode;
     }
-    
+
     private static boolean detectInRange(GolfBall golfBall, Entity entity) {
-		float dx = entity.getPosition().x - golfBall.getPosition().x;
-		float dz = entity.getPosition().z - golfBall.getPosition().z;
-		
-		float distance = (float)Math.sqrt(dx*dx + dz*dz);
-		boolean alert = distance < 200;
-		
-		return alert;
-	}
+        float dx = entity.getPosition().x - golfBall.getPosition().x;
+        float dz = entity.getPosition().z - golfBall.getPosition().z;
+
+        float distance = (float) Math.sqrt(dx * dx + dz * dz);
+        boolean alert = distance < 200;
+
+        return alert;
+    }
 }
