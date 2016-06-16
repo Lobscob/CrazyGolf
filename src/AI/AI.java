@@ -66,10 +66,10 @@ public class AI {
     public void evaluate(){
         evaluator = new Evaluator(simulation.getPredictedHits(),simulation.getAllSimulatedShots(),hole , ball);
         evaluator.evaluate();
-        useVelocity();
+        //useVelocity();
     }
     public void useVelocity(){
-        ball.manageHit(predictedHits.get(Main.bestIndex));
+        ball.manageSimHit(predictedHits.get(Main.bestIndex));
     }
 
 

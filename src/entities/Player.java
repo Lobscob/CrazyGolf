@@ -212,7 +212,7 @@ public class Player extends Entity {
             keyPressed = false;
         } else if (Keyboard.isKeyDown(Keyboard.KEY_B) && keyPressed) {
 //				ai1.setAI(true);
-            ai1.runBot();
+            
 
 
             keyPressed = false;
@@ -267,12 +267,7 @@ public class Player extends Entity {
             jump();
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_X) && keyPressed) {
-            Simulation sim = new Simulation(this);
-            //sim.calculateHitToGoal(this.getGolfBall(), Main.holeUsed);
-            //System.out.println("Xforce: " + HIT_FORCE_X);
-            //System.out.println("Yforce: " + HIT_FORCE_Y);
-            //System.out.println("Zforce: " + HIT_FORCE_Z);
-//            sim.simulateHit(this.getGolfBall());
+            ai1.runBot();
             ai1.evaluate();
             keyPressed = false;
 

@@ -401,7 +401,7 @@ public class Main extends Objects {
 
                     simulatedBalls.get(i).manageCollision(entities.get(j));
 
-                }
+                }/*
                 if (simulatedBalls.get(i).doneRolling() && heuristicsCalculated < 10) {
                     Vector3f heuristicsVec = simulatedBalls.get(i).calculateHeuristics();
                     System.out.println("Heuristics ball " + i + " : " + heuristicsVec + " " + heuristicsCalculated);
@@ -416,7 +416,7 @@ public class Main extends Objects {
                         heuristicsCalculated++;
                     }
 
-                }
+                }*/
 
             }
             if((AI.predictedHits ) != null   ){
