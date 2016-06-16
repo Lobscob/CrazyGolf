@@ -14,8 +14,7 @@ import static Testing.Main.*;
 public class Evaluator {
 
 
-
-    private  int heuristicsCalculated = 0;
+    private int heuristicsCalculated = 0;
 
     private List<Vector3f> predictedHits;
     private List<GolfBall> simulatedBalls;
@@ -114,13 +113,11 @@ public class Evaluator {
     }
 
     public void evaluate() {
-
+    System.out.println("EVALUATING...");
 
         //SIMULATIOND
         for (int i = 0;
-             i < simulatedBalls.size(); i++)
-
-        {
+             i < simulatedBalls.size(); i++) {
 //            simulatedBalls.get(i).setWind(wind);
 //            simulatedBalls.get(i).move(terrain);
 
@@ -139,10 +136,12 @@ public class Evaluator {
                 //System.out.println("Best heuristics: " + bestHeuristics);
                 best = simulatedBalls.get(0);
                 for (int j = 0; j < simulatedBalls.size(); j++) {
-
+                    best.setScale(1);
                     if (simulatedBalls.get(j).calculateHeuristics().x < best.calculateHeuristics().x) {
                         best = simulatedBalls.get(j);
                         bestIndex = j;
+                        best.setScale(5);
+
                     }
                     heuristicsCalculated++;
                 }
@@ -150,6 +149,9 @@ public class Evaluator {
             }
 
         }
+        if(best!=null)best.setScale(10);
+
+        System.out.println("FINISHED EVALUATION");
 
     }
 

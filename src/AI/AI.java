@@ -55,13 +55,18 @@ public class AI {
 //            for(int i =0; i<simulation.getAllSimulatedShots().size();i++)
 //            simulation.getAllSimulatedShots().get(i).move(terrain);
         }*/
-        evaluator = new Evaluator(simulation.getPredictedHits(),simulation.getAllSimulatedShots(),hole , ball);
-        evaluator.evaluate();
 
-        useVelocity();
+//        evaluator.evaluate();
+
+//        useVelocity();
 //        System.out.println("Veloc" +botBallVelocity);
         System.out.println("Velocity " + ball.velocity);
 //        System.out.println("VelocitySIm " +simulation.getPredictedHits().get(evaluator.evaluateShot()));
+    }
+    public void evaluate(){
+        evaluator = new Evaluator(simulation.getPredictedHits(),simulation.getAllSimulatedShots(),hole , ball);
+        evaluator.evaluate();
+//        useVelocity();
     }
     public void useVelocity(){
         ball.manageHit(predictedHits.get(Main.bestIndex));

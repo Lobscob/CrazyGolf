@@ -273,7 +273,7 @@ public class Player extends Entity {
             //System.out.println("Yforce: " + HIT_FORCE_Y);
             //System.out.println("Zforce: " + HIT_FORCE_Z);
 //            sim.simulateHit(this.getGolfBall());
-            ai1.runBot();
+            ai1.evaluate();
             keyPressed = false;
 
         }
