@@ -108,9 +108,10 @@ public class Player extends Entity {
         //System.out.println("AI1 " + ai1.getAI());
         //System.out.println("AI2 " + ai2.getAI());
 
-        if(runAI1 &&!golfBall.getIsInHole() &&!Main.botRunning&&golfBall.doneRolling()){
+        if(runAI1 && !golfBall.getIsInHole() && !Main.botRunning && golfBall.doneRolling()){
+        	score++;
             ai1.runBot();
-            Main.botRunning=true;
+            Main.botRunning = true;
         }
 
 
