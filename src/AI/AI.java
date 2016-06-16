@@ -48,6 +48,7 @@ public class AI {
         velocity  = hC.calculateVelocity();
 //        botBallVelocity = tools.createVelocity().get(2);
         predictedHits = simulation.getPredictedHits();
+        simulation.getPredictedHits().add(velocity);
         simulation.simulateHit(ball);
         
         allSimulatedShots = simulation.getAllSimulatedShots();
@@ -62,7 +63,7 @@ public class AI {
 
 //        useVelocity();
 //        System.out.println("Veloc" +botBallVelocity);
-        System.out.println("Velocity " + ball.velocity);
+//        System.out.println("Velocity " + ball.velocity);
 //        System.out.println("VelocitySIm " +simulation.getPredictedHits().get(evaluator.evaluateShot()));
     }
     public void evaluate(){
@@ -75,7 +76,7 @@ public class AI {
         
     }
     public void useVelocity(){
-        ball.manageSimHit(predictedHits.get(Main.bestIndex));
+        ball.setVelocity(predictedHits.get(Main.bestIndex));
     }
 
 

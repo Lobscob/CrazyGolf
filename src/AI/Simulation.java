@@ -80,7 +80,7 @@ public class Simulation {
             allSimulatedShots.add(simulationBall);
             Vector3f simHit = predictedHits.get(k);
             //System.out.println(simHit);
-            simulationBall.manageSimHit(simHit);
+            simulationBall.setVelocity(simHit);
         }
 
     }

@@ -216,6 +216,7 @@ float sum2 =0;
         //if(debug) System.out.println("velocity1 " + new Vector3f(axd, 0, azd));
        // if(debug) System.out.println("x" + (holePos.x - ball.getPosition().x) * 1.6);
        // if(debug) System.out.println("z" + (holePos.y - ball.getPosition().z) * 1.6);
+        System.out.println("HC " + new Vector3f(sum,ay,sum2));
         return new Vector3f(sum, ay, sum2);
     }
 

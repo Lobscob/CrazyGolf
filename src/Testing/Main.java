@@ -410,6 +410,7 @@ public class Main extends Objects {
 
                 }
                 if (simulatedBalls.get(i).doneRolling()) {
+
                 	((Player) player).getAI1().evaluate();
                 	simulatedBalls.clear();
                 	best = null;
