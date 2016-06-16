@@ -54,6 +54,17 @@ public class GolfBall extends Entity {
         }
         return done;
     }
+    public boolean BallDoneRolling() {
+        boolean done = false;
+        if ((float) Math.sqrt(Math.pow(velocity.x, 2) + Math.pow(velocity.z, 2)) < 0.4) {
+            velocity.x = 0;
+            velocity.z = 0;
+            velocity.y = 0;
+            done = true;
+        }
+        return done;
+    }
+
 
 
     public void setIsInHole(boolean b) {
@@ -91,6 +102,7 @@ public class GolfBall extends Entity {
         if (this.getPosition().x < 0 || this.getPosition().x > 1000) {
             this.velocity.x *= -1;
         }
+        if(Math.abs(this.getPosition().x) == Math.abs(holeUsed.getPosition().x) && Math.abs(this.getPosition().z)==Math.abs(holeUsed.getPosition().z))setIsInHole(true);
 
         float x = 0;
         float y = 0;

@@ -8,6 +8,7 @@ import actionListeners.ModeListener;
 import actionListeners.SaveLoadListener;
 import actionListeners.TerrainListener;
 import entities.*;
+import fileManager.gameLoader;
 import models.TexturedModel;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector2f;
@@ -24,6 +25,7 @@ import toolbox.WindNoise;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -215,7 +217,11 @@ public class Main extends Objects {
 
             if (terrainChoice == null) {
                 currentTerrain.setText("Select a terrain");
-                terrainChoice = terrain1;
+                try {
+                    gameLoader.loadEntities("demoMap");
+                } catch (FileNotFoundException e) {
+                    terrainChoice=terrain1;
+                }
                 lightChoice = light1;
             } else {
                 currentTerrain.setText("Current terrain: " + terrainChoice.getID());

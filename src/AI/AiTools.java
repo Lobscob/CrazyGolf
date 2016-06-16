@@ -20,7 +20,9 @@ public class AiTools {
     private Terrain terrain;
     private GoalHole hole;
 
-    private double numberOfRotation = 52.0;
+    private double numberOfRotation = 20.0;
+
+    public int staticForce=20000;
 
 
     public AiTools() {
@@ -58,8 +60,8 @@ public class AiTools {
 
         for (int i = 0; i < numberOfRotation; i++) {
             Random random = new Random();
-            xForce = random.nextFloat() * 10000;
-            zForce = random.nextFloat() * 10000;
+            xForce = random.nextFloat() * staticForce;
+            zForce = random.nextFloat() * staticForce;
             Vector3f force = new Vector3f(xForce, 0, zForce);
             forces.add(force);
         }
