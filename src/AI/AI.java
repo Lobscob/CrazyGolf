@@ -41,9 +41,10 @@ public class AI {
         hole = h;
         tools = new AiTools();
         hC = new HillCalculator(ball,hole,terrain );
-        simulation= new Simulation(p);
+        
     }
     public void runBot(){
+    	simulation= new Simulation();
         velocity  = hC.calculateVelocity();
 //        botBallVelocity = tools.createVelocity().get(2);
         predictedHits = simulation.getPredictedHits();

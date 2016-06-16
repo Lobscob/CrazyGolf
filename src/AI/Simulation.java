@@ -24,7 +24,6 @@ public class Simulation {
     private Vector3f HeuristicValues;
     private boolean collided;
     private float rotation;
-    private Player AI;
 
 
     private  List<Vector3f> predictedHits;
@@ -32,8 +31,8 @@ public class Simulation {
 
     private AiTools calculators;
 
-    public Simulation(Player player) {
-        AI = player;
+    public Simulation() {
+     
         this.HitPower = new Vector3f(0, 0, 0);
         this.HeuristicValues = new Vector3f(0, 0, 0);
         this.collided = false;
