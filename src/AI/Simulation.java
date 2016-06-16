@@ -1,5 +1,6 @@
 package AI;
 
+import static Testing.Main.simulatedBalls;
 import static Testing.Main.staticSphereModel;
 import static Testing.Main.terrainChoice;
 
@@ -60,6 +61,20 @@ public class Simulation {
 
     }
 
+    public boolean rollingBalls(){
+       float totalVelocityX = 0;
+       float totalVelocityZ = 0;
+        for(int i =0;i<allSimulatedShots.size();i++){
+            totalVelocityX+= allSimulatedShots.get(i).velocity.x;
+            totalVelocityZ+= allSimulatedShots.get(i).velocity.z;
+
+        }
+        if(Math.abs(totalVelocityX)==0 && Math.abs(totalVelocityZ)==0)return false;
+        else return true;
+    }
+
+
+
     public void simulateHit(GolfBall golfBall) {
         for (int k = 0; k < predictedHits.size(); k++) {
             float x = golfBall.getPosition().x;
@@ -71,6 +86,7 @@ public class Simulation {
             //System.out.println(simHit);
             simulationBall.manageSimHit(simHit);
         }
+
     }
 
     public void clearSim() {
