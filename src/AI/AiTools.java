@@ -19,8 +19,10 @@ public class AiTools {
     private GolfBall ball;
     private Terrain terrain;
     private GoalHole hole;
+    
 
-    private double numberOfRotation = 10.0;
+
+    private double numberOfRotation = 100.0;
 
 
     public AiTools() {
