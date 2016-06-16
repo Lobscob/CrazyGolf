@@ -1,10 +1,13 @@
 package AI;
 
+import Testing.Main;
 import entities.GoalHole;
 import entities.GolfBall;
 import entities.Player;
 import org.lwjgl.util.vector.Vector3f;
 import terrains.Terrain;
+
+import java.util.List;
 
 /**
  * Created by Jeroen on 19/05/2016.
@@ -29,6 +32,9 @@ public class AI {
 
     private Vector3f botBallVelocity;
 
+    public static List<Vector3f> predictedHits;
+    public static List<GolfBall> allSimulatedShots;
+
     public AI(GolfBall b,  Terrain t, GoalHole h, Player p) {
         ball = b;
         terrain = t;
@@ -43,12 +49,14 @@ public class AI {
         velocity  = hC.calculateVelocity();
 //        botBallVelocity = tools.createVelocity().get(2);
         simulation.simulateHit(ball);
-        evaluator = new Evaluator(simulation.getPredictedHits(),simulation.getAllSimulatedShots(),hole);
+        predictedHits = simulation.getPredictedHits();
+        allSimulatedShots = simulation.getAllSimulatedShots();
+        evaluator = new Evaluator(simulation.getPredictedHits(),simulation.getAllSimulatedShots(),hole , ball);
 
 //        System.out.println("Veloc" +botBallVelocity);
-        ball.setVelocity(simulation.getPredictedHits().get(evaluator.evaluateShot()));
+//        ball.setVelocity(simulation.getPredictedHits().get(Main.bestIndex));
         System.out.println("Velocity " + ball.velocity);
-        System.out.println("VelocitySIm " +simulation.getPredictedHits().get(evaluator.evaluateShot()));
+//        System.out.println("VelocitySIm " +simulation.getPredictedHits().get(evaluator.evaluateShot()));
     }
 
 

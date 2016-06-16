@@ -93,6 +93,9 @@ public class Main extends Objects {
 
     public static int heuristicsCalculated = 0;
     public static GolfBall best;
+    public static Vector3f bestVelocity;
+
+    public static Boolean bestHit =false;
 
     public static Player getPlayer2() {
         return player2;
@@ -134,6 +137,10 @@ public class Main extends Objects {
 
     private static MousePicker picker;
     private static WindNoise wind;
+
+    public static int bestIndex = 0;
+
+
 
     public static void main(String[] args) {
 
@@ -380,6 +387,7 @@ public class Main extends Objects {
                 System.out.println("ohno");
             }
             renderer.render(light, camera);
+
             //SIMULATIOND
             for (int i = 0; i < simulatedBalls.size(); i++) {
                 simulatedBalls.get(i).setWind(wind);
@@ -400,21 +408,33 @@ public class Main extends Objects {
                     //System.out.println("Best heuristics: " + bestHeuristics);
                     best = simulatedBalls.get(0);
                     for (int j = 0; j < simulatedBalls.size(); j++) {
-                        int bestIndex = 0;
+
                         if (simulatedBalls.get(j).calculateHeuristics().x < best.calculateHeuristics().x) {
                             best = simulatedBalls.get(j);
+                            bestIndex = j;
                         }
                         heuristicsCalculated++;
                     }
+
                 }
+
+            }
+            if((AI.predictedHits ) != null   ){
+                if(bestHit){
+                System.out.println("BestHit Velocity = " + AI.predictedHits.get(bestIndex));
+                golfBallUsed1.manageHit(AI.predictedHits.get(bestIndex));
+                bestHit = false;}
             }
 
             if (best != null) {
                 renderer.processEntity(best);
                 best.setScale(5);
                 simulatedBalls.clear();
+                if(bestHit)golfBallUsed1.manageHit(AI.predictedHits.get(bestIndex));
+                bestHit = false;
+
             } else {
-                System.out.println("There is no good");
+//                System.out.println("There is no good");
             }
 
 

@@ -26,7 +26,7 @@ public class Simulation {
     private Player AI;
 
 
-    private List<Vector3f> predictedHits;
+    private  List<Vector3f> predictedHits;
     private List<GolfBall> allSimulatedShots;
 
     private AiTools calculators;
