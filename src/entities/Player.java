@@ -118,7 +118,7 @@ public class Player extends Entity {
 
 
 //       if (ai1.getAI()) ai1.shootBall();
-        if (ai21.getAI()) ai21.shootBall();
+//        if (ai21.getAI()) ai21.shootBall();
         numberOfFrames++;
         fCounter++;
         checkInputs();

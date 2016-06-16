@@ -39,18 +39,20 @@ public class AI {
         ball = b;
         terrain = t;
         hole = h;
-        tools = new AiTools();
+        tools = new AiTools(0);
+
         hC = new HillCalculator(ball,hole,terrain );
         
     }
     public void runBot(){
-    	simulation= new Simulation();
-        velocity  = hC.calculateVelocity();
+        velocity = hC.calculateVelocity();
+
+        simulation= new Simulation(velocity.x+velocity.z);
 //        botBallVelocity = tools.createVelocity().get(2);
         predictedHits = simulation.getPredictedHits();
         simulation.getPredictedHits().add(velocity);
         simulation.simulateHit(ball);
-        
+
         allSimulatedShots = simulation.getAllSimulatedShots();
         System.out.println("ROLLING... " +simulation.rollingBalls());
 /*        while(simulation.rollingBalls()){
@@ -63,17 +65,17 @@ public class AI {
 
 //        useVelocity();
 //        System.out.println("Veloc" +botBallVelocity);
-//        System.out.println("Velocity " + ball.velocity);
+        System.out.println("Velocity " + ball.velocity);
 //        System.out.println("VelocitySIm " +simulation.getPredictedHits().get(evaluator.evaluateShot()));
     }
     public void evaluate(){
         evaluator = new Evaluator(simulation.getPredictedHits(),simulation.getAllSimulatedShots(),hole , ball);
-        
+
         if(evaluator.evaluate()) {
         	useVelocity();
             Main.botRunning=false;
         }
-        
+
     }
     public void useVelocity(){
         ball.setVelocity(predictedHits.get(Main.bestIndex));

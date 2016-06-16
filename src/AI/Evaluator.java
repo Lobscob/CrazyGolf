@@ -113,7 +113,7 @@ public class Evaluator {
     }
 
     public boolean evaluate() {
-    System.out.println("EVALUATING...");
+        System.out.println("EVALUATING...");
 
         //SIMULATIOND
         for (int i = 0;
@@ -149,16 +149,15 @@ public class Evaluator {
             }
 
         }
-        if(best!=null) {
-        	best.setScale(10);
-        	return true;
+        if (best != null) {
+            best.setScale(10);
+            return true;
         }
 
         System.out.println("FINISHED EVALUATION");
         return false;
 
     }
-    
 
 
 }

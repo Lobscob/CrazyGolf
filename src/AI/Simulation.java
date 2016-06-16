@@ -31,14 +31,14 @@ public class Simulation {
 
     private AiTools calculators;
 
-    public Simulation() {
+    public Simulation(float staticForce) {
      
         this.HitPower = new Vector3f(0, 0, 0);
         this.HeuristicValues = new Vector3f(0, 0, 0);
         this.collided = false;
         this.rotation = 0;
 
-        calculators = new AiTools();
+        calculators = new AiTools(staticForce);
         predictedHits = calculators.createVelocity();
         allSimulatedShots = new ArrayList<GolfBall>();
         //System.out.println(predictedHits.size());
@@ -80,7 +80,7 @@ public class Simulation {
             allSimulatedShots.add(simulationBall);
             Vector3f simHit = predictedHits.get(k);
             //System.out.println(simHit);
-            simulationBall.setVelocity(simHit);
+            simulationBall.manageSimHit(simHit);
         }
 
     }

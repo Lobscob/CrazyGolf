@@ -20,16 +20,16 @@ public class AiTools {
     private Terrain terrain;
     private GoalHole hole;
 
-    private double numberOfRotation = 2.0;
+    private double numberOfRotation = 10.0;
 
-    public int staticForce=500;
+    public int staticForce=200;
 
 
-    public AiTools() {
+    public AiTools(float staticForce) {
         ball = null;
         terrain = null;
         hole = null;
-
+        this.staticForce = (int) staticForce;
     }
 
     public ArrayList<Vector3f> createShotRotations() {

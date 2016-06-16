@@ -311,9 +311,9 @@ public class GolfBall extends Entity {
         float dvz = (float) (forces.z);
         float dvy = forces.y;
 
-        this.velocity.x -= dvx * DisplayManager.getFrameTimeSeconds();
-        this.velocity.y += dvy * DisplayManager.getFrameTimeSeconds();
-        this.velocity.z += dvz * DisplayManager.getFrameTimeSeconds();
+        this.velocity.x += dvx ;
+        this.velocity.y += dvy ;
+        this.velocity.z += dvz ;
     }
 
     private boolean checkCollision(GolfBall golfBall) {
