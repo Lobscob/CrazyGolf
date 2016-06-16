@@ -50,11 +50,11 @@ public class AI {
         predictedHits = simulation.getPredictedHits();
         allSimulatedShots = simulation.getAllSimulatedShots();
         System.out.println("ROLLING... " +simulation.rollingBalls());
-        while(simulation.rollingBalls()){
+/*        while(simulation.rollingBalls()){
             System.out.println("ROLLING... " +simulation.rollingBalls());
 //            for(int i =0; i<simulation.getAllSimulatedShots().size();i++)
 //            simulation.getAllSimulatedShots().get(i).move(terrain);
-        }
+        }*/
         evaluator = new Evaluator(simulation.getPredictedHits(),simulation.getAllSimulatedShots(),hole , ball);
         evaluator.evaluate();
 
