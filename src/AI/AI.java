@@ -46,8 +46,9 @@ public class AI {
     public void runBot(){
         velocity  = hC.calculateVelocity();
 //        botBallVelocity = tools.createVelocity().get(2);
-        simulation.simulateHit(ball);
         predictedHits = simulation.getPredictedHits();
+        simulation.simulateHit(ball);
+        
         allSimulatedShots = simulation.getAllSimulatedShots();
         System.out.println("ROLLING... " +simulation.rollingBalls());
 /*        while(simulation.rollingBalls()){

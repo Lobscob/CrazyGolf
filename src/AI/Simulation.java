@@ -57,9 +57,6 @@ public class Simulation {
         return HitPower;
     }
 
-    public void calculateHeuristics() {
-
-    }
 
     public boolean rollingBalls(){
        float totalVelocityX = 0;
@@ -87,10 +84,6 @@ public class Simulation {
             simulationBall.manageSimHit(simHit);
         }
 
-    }
-
-    public void clearSim() {
-        Main.simulatedBalls.clear();
     }
 
     public float angleAvoid(Entity entity, GolfBall golfBall) {

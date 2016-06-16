@@ -401,28 +401,19 @@ public class Main extends Objects {
 
                     simulatedBalls.get(i).manageCollision(entities.get(j));
 
-                }/*
-                if (simulatedBalls.get(i).doneRolling() && heuristicsCalculated < 10) {
-                    Vector3f heuristicsVec = simulatedBalls.get(i).calculateHeuristics();
-                    System.out.println("Heuristics ball " + i + " : " + heuristicsVec + " " + heuristicsCalculated);
-                    //System.out.println("Best heuristics: " + bestHeuristics);
-                    best = simulatedBalls.get(0);
-                    for (int j = 0; j < simulatedBalls.size(); j++) {
-
-                        if (simulatedBalls.get(j).calculateHeuristics().x < best.calculateHeuristics().x) {
-                            best = simulatedBalls.get(j);
-                            bestIndex = j;
-                        }
-                        heuristicsCalculated++;
-                    }
-
-                }*/
+                }
+                if (simulatedBalls.get(i).doneRolling()) {
+                	((Player) player).getAI1().evaluate();
+                	simulatedBalls.clear();
+                	best = null;
+                	((Player) player).getAI1().predictedHits.clear();
+                }
 
             }
             if((AI.predictedHits ) != null   ){
                 if(bestHit){
                 System.out.println("BestHit Velocity = " + AI.predictedHits.get(bestIndex));
-                golfBallUsed1.manageHit(AI.predictedHits.get(bestIndex));
+                //golfBallUsed1.manageHit(AI.predictedHits.get(bestIndex));
                 bestHit = false;}
             }
 
@@ -430,7 +421,7 @@ public class Main extends Objects {
                 renderer.processEntity(best);
                 best.setScale(5);
                 simulatedBalls.clear();
-                if(bestHit)golfBallUsed1.manageHit(AI.predictedHits.get(bestIndex));
+                if(bestHit)//golfBallUsed1.manageHit(AI.predictedHits.get(bestIndex));
                 bestHit = false;
 
             } else {
