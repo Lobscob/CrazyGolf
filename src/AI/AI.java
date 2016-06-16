@@ -70,6 +70,7 @@ public class AI {
         
         if(evaluator.evaluate()) {
         	useVelocity();
+            Main.botRunning=false;
         }
         
     }

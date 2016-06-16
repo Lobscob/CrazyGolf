@@ -35,6 +35,8 @@ public class Player extends Entity {
     
     private int gCounter;
 
+    public Boolean runAI1 = false;
+
 
     public Vector3f getHitPower() {
         Vector3f hitVec = new Vector3f(HIT_FORCE_X, HIT_FORCE_Y, HIT_FORCE_Z);
@@ -105,6 +107,11 @@ public class Player extends Entity {
     public void move(Terrain terrain) {
         //System.out.println("AI1 " + ai1.getAI());
         //System.out.println("AI2 " + ai2.getAI());
+
+        if(runAI1 &&!golfBall.getIsInHole() &&!Main.botRunning&&golfBall.doneRolling()){
+            ai1.runBot();
+            Main.botRunning=true;
+        }
 
 
 //        ai.runBot();
@@ -271,8 +278,11 @@ public class Player extends Entity {
             jump();
         }
         if (Keyboard.isKeyDown(Keyboard.KEY_X) && keyPressed) {
-            ai1.runBot();
+//            ai1.runBot();
             //ai1.evaluate();
+
+            if(runAI1)runAI1=false;
+            else runAI1=true;
             keyPressed = false;
 
         }

@@ -37,6 +37,7 @@ public class Main extends Objects {
     public static JTextField loadTF;
 
     private static boolean editorMode = true;
+    public static boolean botRunning=false;
 
     public static void setEditorMode(boolean b) {
         editorMode = b;
@@ -406,10 +407,12 @@ public class Main extends Objects {
                 	((Player) player).getAI1().evaluate();
                 	simulatedBalls.clear();
                 	best = null;
+//                    botRunning=false;
                 	((Player) player).getAI1().predictedHits.clear();
                 }
 
             }
+
             if((AI.predictedHits ) != null   ){
                 if(bestHit){
                 System.out.println("BestHit Velocity = " + AI.predictedHits.get(bestIndex));
