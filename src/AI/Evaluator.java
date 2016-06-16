@@ -26,11 +26,12 @@ public class Evaluator {
     public int evaluateShot() {
         int bestBall = 0;
         float bestDistance = Float.MAX_VALUE;
-        Vector3f currentPosition = allSimulatedShots.get(0).getPosition();
 
         for (int i = 0; i < allSimulatedShots.size(); i++) {
-            float distanceToHoleX = Math.abs(currentPosition.getX() - hole.getPosition().getX());
-            float distanceToHoleZ = Math.abs(currentPosition.getZ() - hole.getPosition().getZ());
+            Vector3f currentPosition = allSimulatedShots.get(0).getPosition();
+
+            float distanceToHoleX = currentPosition.getX() - hole.getPosition().getX();
+            float distanceToHoleZ = currentPosition.getZ() - hole.getPosition().getZ();
             float distanceToHole = (float)Math.sqrt(distanceToHoleX*distanceToHoleX + distanceToHoleZ*distanceToHoleZ);
             if (distanceToHole<bestDistance){
                 bestBall = i;
@@ -40,6 +41,7 @@ public class Evaluator {
         }
         System.out.println("BestBall: " + bestBall);
         System.out.println("bestDistance: " + bestDistance);
+        allSimulatedShots.get(bestBall).setScale(5);
         return bestBall;
     }
 

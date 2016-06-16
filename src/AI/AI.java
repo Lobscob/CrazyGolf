@@ -46,7 +46,7 @@ public class AI {
         evaluator = new Evaluator(simulation.getPredictedHits(),simulation.getAllSimulatedShots(),hole);
 
 //        System.out.println("Veloc" +botBallVelocity);
-        ball.setVelocity(simulation.getPredictedHits().get(evaluator.evaluateShot()));
+        //ball.setVelocity(simulation.getPredictedHits().get(evaluator.evaluateShot()));
         System.out.println("Velocity " + ball.velocity);
         System.out.println("VelocitySIm " +simulation.getPredictedHits().get(evaluator.evaluateShot()));
     }
