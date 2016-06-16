@@ -112,7 +112,7 @@ public class Evaluator {
         return numberOfObstacles;
     }
 
-    public void evaluate() {
+    public boolean evaluate() {
     System.out.println("EVALUATING...");
 
         //SIMULATIOND
@@ -149,11 +149,16 @@ public class Evaluator {
             }
 
         }
-        if(best!=null)best.setScale(10);
+        if(best!=null) {
+        	best.setScale(10);
+        	return true;
+        }
 
         System.out.println("FINISHED EVALUATION");
+        return false;
 
     }
+    
 
 
 }
