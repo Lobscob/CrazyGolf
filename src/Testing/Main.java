@@ -217,11 +217,13 @@ public class Main extends Objects {
 
             if (terrainChoice == null) {
                 currentTerrain.setText("Select a terrain");
-                try {
+  /*              try {
                     gameLoader.loadEntities("demoMap");
                 } catch (FileNotFoundException e) {
                     terrainChoice=terrain1;
-                }
+                    Main.entities.clear();
+                }*/
+                terrainChoice=terrain1;
                 lightChoice = light1;
             } else {
                 currentTerrain.setText("Current terrain: " + terrainChoice.getID());

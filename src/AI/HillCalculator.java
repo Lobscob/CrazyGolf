@@ -29,6 +29,9 @@ public class HillCalculator {
         hole = h;
         terrain = t;
         holePos = hole.getPosition();
+        holePos.x +=0.05;
+        holePos.z -=0.05;
+
     }
 
     private Vector3f normalCalculator(float x, float z) {
