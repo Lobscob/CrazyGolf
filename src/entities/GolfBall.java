@@ -34,6 +34,8 @@ public class GolfBall extends Entity {
     private float az = 0;
 
     private boolean isInHole = false;
+    private float ballHeuristics;
+    private boolean collidingBall;
 
 
     private WindNoise windNoise;
@@ -183,6 +185,9 @@ public class GolfBall extends Entity {
         Area ra = a.createTransformedArea(af);//ra is the rotated a, a is unchanged
         Area rb = b.createTransformedArea(bf);//rb is the rotated b, b is unchanged
         collision = ra.intersects(rb.getBounds2D()) && rb.intersects(ra.getBounds2D());
+        if(collision){
+        	collidingBall = true;
+        }
         return collision;
     }
 
@@ -358,6 +363,9 @@ public class GolfBall extends Entity {
             return heuristicsVec;
         }
         heuristicsVec.x = distanceFromHole(holeUsed);
+        if(collidingBall){
+        	heuristicsVec.y = 10;
+        }
         heuristicsVec.z = obstaclesBlocking(holeUsed);
         return heuristicsVec;
 
@@ -409,5 +417,17 @@ public class GolfBall extends Entity {
             }
         }
         return numberOfObstacles;
+    }
+    
+    public void setHeuristics(float heuristics){
+    	ballHeuristics = heuristics;
+    }
+    
+    public float getHeuristics(){
+    	return ballHeuristics;
+    }
+    
+    public void noMoreCollision(){
+    	collidingBall = true;
     }
 }

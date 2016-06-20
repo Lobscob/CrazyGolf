@@ -137,11 +137,20 @@ public class Evaluator {
                 best = simulatedBalls.get(0);
                 for (int j = 0; j < simulatedBalls.size(); j++) {
                     best.setScale(1);
-                    if (simulatedBalls.get(j).calculateHeuristics().x < best.calculateHeuristics().x) {
+                    /*if (simulatedBalls.get(j).calculateHeuristics().x < best.calculateHeuristics().x) {
                         best = simulatedBalls.get(j);
                         bestIndex = j;
                         best.setScale(5);
 
+                    }*/
+                    float heuristics = simulatedBalls.get(j).calculateHeuristics().x + simulatedBalls.get(j).calculateHeuristics().y * 100 + simulatedBalls.get(j).calculateHeuristics().z * 5;
+                    simulatedBalls.get(j).noMoreCollision();
+                    System.out.println(heuristics);
+                    simulatedBalls.get(j).setHeuristics(heuristics);
+                    if(heuristics < best.getHeuristics()){
+                    	best = simulatedBalls.get(j);
+                    	bestIndex = j;
+                    	best.setScale(5);
                     }
                     heuristicsCalculated++;
                 }
@@ -151,6 +160,7 @@ public class Evaluator {
         }
         if (best != null) {
             best.setScale(10);
+            System.out.println("Best Heuristics: " + best.getHeuristics());
             return true;
         }
 
