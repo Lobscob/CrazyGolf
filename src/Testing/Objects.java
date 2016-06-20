@@ -18,7 +18,7 @@ public class Objects {
 
     public static void loadBalls(Loader loader) {
         GolfBall golfBall1 = new GolfBall(staticSphereModel, new Vector3f(Main.startX, terrainChoice.getHeightOfTerrain(Main.startX, Main.startZ), Main.startZ), 0, 0, 0, 1);
-        GolfBall golfBall2 = new GolfBall(staticSphereModel, new Vector3f(Main.startX + 10, terrainChoice.getHeightOfTerrain(Main.startX + 10, Main.startZ + 10), Main.startZ + 10), 0, 0, 0, 1);
+        GolfBall golfBall2 = new GolfBall(staticSphereModel, new Vector3f(Main.startX + 10, terrainChoice.getHeightOfTerrain(Main.startX + 10, Main.startZ - 10), Main.startZ - 10), 0, 0, 0, 1);
         Main.setGolfBall1(golfBall1);
         Main.setGolfBall2(golfBall2);
 

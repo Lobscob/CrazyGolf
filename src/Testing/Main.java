@@ -406,9 +406,6 @@ public class Main extends Objects {
                 for (int j = 0; j < entities.size(); j++) {
 
                     simulatedBalls.get(i).manageCollision(entities.get(j));
-                    //System.out.println(simulatedBalls.get(i).getPosition());
-
-                    simulatedBalls.get(i).manageCollision(entities.get(j));
 
                 }
                 if (simulatedBalls.get(i).doneRolling()) {

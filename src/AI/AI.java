@@ -47,10 +47,14 @@ public class AI {
     public void runBot(){
         velocity = hC.calculateVelocity();
 
-        simulation= new Simulation(velocity.x+velocity.z);
+        
+        simulation= new Simulation((velocity.x+velocity.z)/3);
 //        botBallVelocity = tools.createVelocity().get(2);
         predictedHits = simulation.getPredictedHits();
-        simulation.getPredictedHits().add(velocity);
+        if (velocity.x+velocity.z < 200) {
+        	simulation.getPredictedHits().add(velocity);
+        }
+        
         simulation.simulateHit(ball);
 
         allSimulatedShots = simulation.getAllSimulatedShots();
