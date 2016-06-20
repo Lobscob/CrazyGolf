@@ -32,7 +32,7 @@ public class Player extends Entity {
     private static float HIT_FORCE_X = 5000;
     private static float HIT_FORCE_Y = 00;
     private static float HIT_FORCE_Z = 5000;
-
+    
     private int gCounter;
 
     public Boolean runAI1 = false;
@@ -67,13 +67,13 @@ public class Player extends Entity {
     private Player opponent;
 
 
-    //    private BotMover ai1 = new BotMover(Main.getPlayer1(), Main.golfBallUsed1, Main.holeUsed);
+//    private BotMover ai1 = new BotMover(Main.getPlayer1(), Main.golfBallUsed1, Main.holeUsed);
     private BotMover ai21 = new BotMover(Main.getPlayer2(), Main.golfBallUsed2, Main.holeUsed);
-    AI ai1 = new AI(Main.golfBallUsed1, Main.terrainChoice, Main.holeUsed, Main.getPlayer1());
-    AI ai2 = new AI(Main.golfBallUsed2, Main.terrainChoice, Main.holeUsed, Main.getPlayer2());
-
+    AI ai1 = new AI(Main.golfBallUsed1, Main.terrainChoice, Main.holeUsed,Main.getPlayer1());
+    AI ai2= new AI(Main.golfBallUsed2, Main.terrainChoice, Main.holeUsed,Main.getPlayer2());
+    
     public AI getAI1() {
-        return ai1;
+    	return ai1;
     }
 
     /**
@@ -108,9 +108,9 @@ public class Player extends Entity {
         //System.out.println("AI1 " + ai1.getAI());
         //System.out.println("AI2 " + ai2.getAI());
 
-        if (runAI1 && !golfBall.getIsInHole() && !Main.botRunning && golfBall.BallDoneRolling()) {
+        if(runAI1 &&!golfBall.getIsInHole() &&!Main.botRunning && golfBall.BallDoneRolling()){
             ai1.runBot();
-            Main.botRunning = true;
+            Main.botRunning=true;
         }
 
 
@@ -211,26 +211,25 @@ public class Player extends Entity {
             keyPressed = true;
             numberOfFrames = 0;
         }
-        if (fCounter >= 120) {
-            hitAllowed = true;
-            fCounter = 0;
+        if(fCounter >= 120) {
+        	hitAllowed = true;
+        	fCounter = 0;
         }
-
+        		
         if (Keyboard.isKeyDown(Keyboard.KEY_Z) && keyPressed) {
-            ai21.setAI(true);
+				ai21.setAI(true);
 //             ai2.runBot();
 
             keyPressed = false;
         } else if (Keyboard.isKeyDown(Keyboard.KEY_B) && keyPressed) {
 //				ai1.setAI(true);
-
-
+            
 
 
             keyPressed = false;
-        } else if (Keyboard.isKeyDown(Keyboard.KEY_I) && keyPressed && gCounter < 10) {
-            gCounter++;
-            String s = Integer.toString(gCounter);
+        } else if (Keyboard.isKeyDown(Keyboard.KEY_I) && keyPressed && gCounter<10) {
+        	gCounter++;
+        	String s = Integer.toString(gCounter);
             increaseHitPower();
             //System.out.println("Xforce: " + HIT_FORCE_X);
             //System.out.println("Yforce: " + HIT_FORCE_Y);
@@ -239,16 +238,16 @@ public class Player extends Entity {
             Main.guis.add(power);
             keyPressed = false;
 
-        } else if (Keyboard.isKeyDown(Keyboard.KEY_O) && keyPressed && gCounter > 0) {
-            gCounter--;
-            if (Main.guis.size() > 2) {
-                Main.guis.remove(Main.guis.size() - 1);
-                decreaseHitPower();
-                //System.out.println("Xforce: " + HIT_FORCE_X);
+        } else if (Keyboard.isKeyDown(Keyboard.KEY_O) && keyPressed && gCounter>0) {
+        	gCounter--;
+        	if(Main.guis.size()>2) {
+        		Main.guis.remove(Main.guis.size()-1);
+        		decreaseHitPower();
+        		//System.out.println("Xforce: " + HIT_FORCE_X);
                 //System.out.println("Yforce: " + HIT_FORCE_Y);
                 //System.out.println("Zforce: " + HIT_FORCE_Z);
-            }
-
+        	}
+            
             keyPressed = false;
         } else if (Keyboard.isKeyDown(Keyboard.KEY_H) && keyPressed && hitAllowed) {
             hit();
@@ -282,8 +281,8 @@ public class Player extends Entity {
 //            ai1.runBot();
             //ai1.evaluate();
 
-            if (runAI1) runAI1 = false;
-            else runAI1 = true;
+            if(runAI1)runAI1=false;
+            else runAI1=true;
             keyPressed = false;
 
         }
@@ -313,7 +312,7 @@ public class Player extends Entity {
 
     private int numberOfFrames = 0;
     private boolean keyPressed = true;
-    private int fCounter = 0;
+    private int fCounter= 0;
     private boolean hitAllowed = true;
 
     public void hit() {

@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class HillCalculator {
 
-    private float percision = 360;
+    private float percision = 60;
     private float phycicsPercision = 60;
     private GolfBall ball;
     private GoalHole hole;
@@ -33,7 +33,7 @@ public class HillCalculator {
         float z = hole.getPosition().z;
         holePos = new Vector3f(x,y,z);
         holePos.x -= 0.02f;
-        holePos.z -= 0.025f;
+        holePos.z -= 0.5f;
 
         
 

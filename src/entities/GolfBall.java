@@ -46,7 +46,7 @@ public class GolfBall extends Entity {
 
     public boolean doneRolling() {
         boolean done = false;
-        if ((float) Math.sqrt(Math.pow(velocity.x, 2) + Math.pow(velocity.z, 2)) < 0.1) {
+        if ((float) Math.sqrt(velocity.x*velocity.x + velocity.z*velocity.z) < 0.0001f) {
             velocity.x = 0;
             velocity.z = 0;
             velocity.y = 0;
