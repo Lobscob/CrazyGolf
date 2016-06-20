@@ -50,7 +50,7 @@ public class AI {
         velocity = hC.calculateVelocity();
 
         
-        simulation= new Simulation((velocity.x+velocity.z)/3);
+        simulation= new Simulation((velocity.x+velocity.z)/2.5f);
 //        botBallVelocity = tools.createVelocity().get(2);
         predictedHits = simulation.getPredictedHits();
         if (velocity.x+velocity.z < 200) {
