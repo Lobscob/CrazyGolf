@@ -16,7 +16,7 @@ import static Testing.Main.terrainChoice;
  * Created by Jeroen on 16-3-2016.
  */
 public class gameSaver {
-
+    private Boolean debug = true;
     public static void saveEntities(String courseName) throws FileNotFoundException  {
        /* public Entity(TexturedModel model, Vector3f position, float rotX,
         float rotY, float rotZ, float scale, boolean isObstacle, Vector3f collisionSize) {*/
@@ -27,6 +27,13 @@ public class gameSaver {
         File inputFile = new File(courseName);
 
         PrintWriter out = new PrintWriter(courseName);
+        PrintWriter outShot = new PrintWriter(courseName + "bestShots");
+
+        for(int i = 0; i<Main.bestVelocities.size();i++){
+            outShot.println(Main.bestVelocities.get(i).x +"" + Main.bestVelocities.get(i).y + Main.bestVelocities.get(i).z );
+            System.out.println(Main.bestVelocities.get(i).x +"" + Main.bestVelocities.get(i).y + Main.bestVelocities.get(i).z );
+
+        }
         out.println(Main.terrainChoice.getID().substring(0,1));
         out.println(Main.goalXPos);
         out.println(Main.goalZPos);
@@ -54,6 +61,18 @@ public class gameSaver {
         }
 //        System.out.println("SAVING FINISHED");
         out.close();
+    }
+
+    public static void saveShots() throws FileNotFoundException {
+//        courseName = "crs/" + courseName + ".txt";
+        File inputFile = new File("bestShots/bestShots.txt");
+        PrintWriter outShot = new PrintWriter("bestShots/bestShots.txt");
+
+        for(int i = 0; i<Main.bestVelocities.size();i++){
+            outShot.println(Main.bestVelocities.get(i).x +" " + Main.bestVelocities.get(i).y + " "+ Main.bestVelocities.get(i).z );
+            System.out.println("Savingballs" + Main.bestVelocities.get(i).x +" " + Main.bestVelocities.get(i).y + Main.bestVelocities.get(i).z );
+            outShot.flush();
+        }
     }
 
 }
