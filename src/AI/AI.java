@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class AI {
     private GolfBall ball;
-
+    public int score = 0;
 
     private Terrain terrain;
 
@@ -37,30 +37,31 @@ public class AI {
     public static List<Vector3f> predictedHits;
     public static List<GolfBall> allSimulatedShots;
 
-    public AI(GolfBall b,  Terrain t, GoalHole h, Player p) {
+    public AI(GolfBall b, Terrain t, GoalHole h, Player p) {
         ball = b;
         terrain = t;
         hole = h;
         tools = new AiTools(0);
 
-        hC = new HillCalculator(ball,hole,terrain );
-        
+        hC = new HillCalculator(ball, hole, terrain);
+
     }
-    public void runBot(){
+
+    public void runBot() {
         velocity = hC.calculateVelocity();
 
         
         simulation= new Simulation((velocity.x+velocity.z)/2.5f);
+
+        simulation = new Simulation(velocity.x + velocity.z);
+
 //        botBallVelocity = tools.createVelocity().get(2);
         predictedHits = simulation.getPredictedHits();
-        if (velocity.x+velocity.z < 200) {
-        	simulation.getPredictedHits().add(velocity);
-        }
-        
+        simulation.getPredictedHits().add(velocity);
         simulation.simulateHit(ball);
 
         allSimulatedShots = simulation.getAllSimulatedShots();
-        System.out.println("ROLLING... " +simulation.rollingBalls());
+        System.out.println("ROLLING... " + simulation.rollingBalls());
 /*        while(simulation.rollingBalls()){
             System.out.println("ROLLING... " +simulation.rollingBalls());
 //            for(int i =0; i<simulation.getAllSimulatedShots().size();i++)
@@ -74,24 +75,34 @@ public class AI {
         System.out.println("Velocity " + ball.velocity);
 //        System.out.println("VelocitySIm " +simulation.getPredictedHits().get(evaluator.evaluateShot()));
     }
-    public void evaluate(){
-        evaluator = new Evaluator(simulation.getPredictedHits(),simulation.getAllSimulatedShots(),hole , ball);
 
-        if(evaluator.evaluate()) {
-        	useVelocity();
-            Main.botRunning=false;
+    public void evaluate() {
+        evaluator = new Evaluator(simulation.getPredictedHits(), simulation.getAllSimulatedShots(), hole, ball);
+
+        if (evaluator.evaluate()) {
+            useVelocity();
+            Main.botRunning = false;
         }
 
     }
-    public void useVelocity(){
-        ball.setVelocity(predictedHits.get(Main.bestIndex));
-        Main.bestVelocities.add(predictedHits.get(Main.bestIndex));
-        try {
-            gameSaver.saveShots();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
 
+    public void useVelocity() {
+        if (!ball.getIsInHole()) {
+            ball.setVelocity(predictedHits.get(Main.bestIndex));
+            score++;
+            Main.bestVelocities.add(predictedHits.get(Main.bestIndex));
+        }
+        System.out.println("Ã�NHOLE" + ball.getIsInHole());
+        System.out.println("SCORE" + score);
+        if (ball.getIsInHole()) {
+            System.out.println("SAVING BESTSHOTS");
+            try {
+                gameSaver.saveShots(score);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 
 

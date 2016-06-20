@@ -104,8 +104,12 @@ public class GolfBall extends Entity {
         if (this.getPosition().x < 0 || this.getPosition().x > 1000) {
             this.velocity.x *= -1;
         }
-        if(Math.abs(this.getPosition().x) == Math.abs(holeUsed.getPosition().x) && Math.abs(this.getPosition().z)==Math.abs(holeUsed.getPosition().z))setIsInHole(true);
+        //if(Math.abs(this.getPosition().x) == Math.abs(holeUsed.getPosition().x-0.02f) && Math.abs(this.getPosition().z-0.5)==Math.abs(holeUsed.getPosition().z))setIsInHole(true);
+        //if((Math.abs(this.getPosition().x) - Math.abs(holeUsed.getPosition().x-0.02f))==0f && (Math.abs(this.getPosition().z-0.5)-Math.abs(holeUsed.getPosition().z))==0)setIsInHole(true);
 
+        if(Math.abs(this.getPosition().x) == Math.abs(holeUsed.getPosition().x-0.02f) && Math.abs(this.getPosition().z-0.5)==Math.abs(holeUsed.getPosition().z))setIsInHole(true);
+        if((Math.abs(this.getPosition().x) - Math.abs(holeUsed.getPosition().x-0.02f))<0.1f && (Math.abs(this.getPosition().z-0.5)-Math.abs(holeUsed.getPosition().z))<0.1)setIsInHole(true);
+        System.out.println("INHOLE INHOLE IN HOLE" + isInHole);
         float x = 0;
         float y = 0;
         float z = 0;

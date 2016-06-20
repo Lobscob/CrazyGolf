@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Scanner;
 
 import static Testing.Main.terrainChoice;
 
@@ -63,17 +64,23 @@ public class gameSaver {
         out.close();
     }
 
-    public static void saveShots() throws FileNotFoundException {
+    public static void saveShots(int score) throws FileNotFoundException {
 //        courseName = "crs/" + courseName + ".txt";
+
+        Scanner s = new Scanner(new File("bestShots/bestShots.txt"));
+        int fileScore = Integer.MAX_VALUE;
+        fileScore =Integer.parseInt(s.next());
+        if(score<fileScore){
         File inputFile = new File("bestShots/bestShots.txt");
         PrintWriter outShot = new PrintWriter("bestShots/bestShots.txt");
-
+//        if
         for(int i = 0; i<Main.bestVelocities.size();i++){
+            outShot.println(score);
             outShot.println(Main.bestVelocities.get(i).x +" " + Main.bestVelocities.get(i).y + " "+ Main.bestVelocities.get(i).z );
             System.out.println("Savingballs" + Main.bestVelocities.get(i).x +" " + Main.bestVelocities.get(i).y + Main.bestVelocities.get(i).z );
             outShot.flush();
         }
-    }
+    }}
 
 }
 
