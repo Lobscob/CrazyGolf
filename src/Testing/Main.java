@@ -9,8 +9,10 @@ import actionListeners.SaveLoadListener;
 import actionListeners.TerrainListener;
 import entities.*;
 import fileManager.gameLoader;
+import fileManager.gameSaver;
 import models.TexturedModel;
 import org.lwjgl.opengl.Display;
+import org.lwjgl.util.vector.Vector;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 import renderEngine.DisplayManager;
@@ -37,6 +39,8 @@ import java.util.Random;
 public class Main extends Objects {
     public static JTextField saveTF;
     public static JTextField loadTF;
+
+    public static List<Vector3f> bestVelocities = new ArrayList<Vector3f>();
 
     private static boolean editorMode = true;
     public static boolean botRunning=false;
@@ -268,9 +272,12 @@ public class Main extends Objects {
                     run(lightChoice, camera1, player1, loaderUsed, terrainChoice, golfBallUsed1);
                 }
             } else {
+
                 Display.destroy();
             }
         }
+
+
     }
 
     private static int frameCounter = 0;

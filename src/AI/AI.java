@@ -4,9 +4,11 @@ import Testing.Main;
 import entities.GoalHole;
 import entities.GolfBall;
 import entities.Player;
+import fileManager.gameSaver;
 import org.lwjgl.util.vector.Vector3f;
 import terrains.Terrain;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 /**
@@ -83,6 +85,13 @@ public class AI {
     }
     public void useVelocity(){
         ball.setVelocity(predictedHits.get(Main.bestIndex));
+        Main.bestVelocities.add(predictedHits.get(Main.bestIndex));
+        try {
+            gameSaver.saveShots();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
     }
 
 
