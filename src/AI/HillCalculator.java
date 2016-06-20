@@ -32,8 +32,8 @@ public class HillCalculator {
         float y = hole.getPosition().y;
         float z = hole.getPosition().z;
         holePos = new Vector3f(x,y,z);
-        //holePos.x += 0.01f;
-        //holePos.z += 0.02f;
+        holePos.x -= 0.02f;
+        holePos.z -= 0.5f;
 
         
 
