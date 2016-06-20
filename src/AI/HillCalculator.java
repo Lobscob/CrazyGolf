@@ -28,9 +28,14 @@ public class HillCalculator {
         ball = b;
         hole = h;
         terrain = t;
-        holePos = hole.getPosition();
-        holePos.x +=0.05;
-        holePos.z -=0.05;
+        float x = hole.getPosition().x;
+        float y = hole.getPosition().y;
+        float z = hole.getPosition().z;
+        holePos = new Vector3f(x,y,z);
+        holePos.x += 0.01f;
+        holePos.z += 0.02f;
+
+        
 
     }
 
