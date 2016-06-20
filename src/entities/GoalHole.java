@@ -57,12 +57,8 @@ public class GoalHole extends Entity{
 		
 		float distance = (float) Math.sqrt(dx*dx + dz*dz);
 		boolean collision = distance + golfBall.getRadius() < this.getCollisionZone().x;
-		float v = (float) Math.sqrt(golfBall.velocity.x * golfBall.velocity.x + golfBall.velocity.z * golfBall.velocity.z);
-		if(v < scoreThreshold && collision)  {
-			golfBall.setIsInHole(true);
-			golfBall.velocity.x *= 0.9f;
-			golfBall.velocity.z *= 0.9f;
-		}
+		//float v = (float) Math.sqrt(golfBall.velocity.x * golfBall.velocity.x + golfBall.velocity.z * golfBall.velocity.z);
+		
 
 		return collision;
 	}
